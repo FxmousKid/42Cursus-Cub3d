@@ -1,0 +1,10 @@
+[submodule "includes/mlx_linux"]
+	path = includes/mlx_linux
+	url = https://github.com/42Paris/minilibx-linux.git
+[submodule "mlx_linux"]
+	path = mlx_linux
+	url = https://github.com/42Paris/minilibx-linux.git
+[submodule "libft"]
+	path = libft
+	url = https://github.com/FxmousKid/42Cursus-libft.git
+	branch = uptodate
