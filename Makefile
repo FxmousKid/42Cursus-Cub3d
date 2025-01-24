@@ -6,7 +6,7 @@
 #    By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 15:32:50 by inazaria          #+#    #+#              #
-#    Updated: 2025/01/20 15:54:31 by inazaria         ###   ########.fr        #
+#    Updated: 2025/01/24 16:35:21 by inazaria         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ DEP_FILES = $(patsubst $(SRC_DIR)%.c, $(BUILD_DIR)%.d, $(SRC_FILES))
 #<><><><><><><> Variables <><><><><><><><><><><><><><><><><>
 
 NAME := cub3d
-CC := cc
+CC := clang
 CFLAGS := -gdwarf-4 -Wall -Wextra -Werror -I $(INC_DIR) -MMD -MP
 LFLAGS := libft/libft.a -Lmlx_linux -lXext -lX11 -lm -lz
 MLX_DIR := ./mlx_linux/
