@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+         #
+#    By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 15:32:50 by inazaria          #+#    #+#              #
-#    Updated: 2025/01/24 16:35:21 by inazaria         ###   ########.fr        #
+#    Updated: 2025/01/24 21:00:35 by ptheo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ DEP_FILES = $(patsubst $(SRC_DIR)%.c, $(BUILD_DIR)%.d, $(SRC_FILES))
 NAME := cub3d
 CC := clang
 CFLAGS := -gdwarf-4 -Wall -Wextra -Werror -I $(INC_DIR) -MMD -MP
-LFLAGS := libft/libft.a -Lmlx_linux -lXext -lX11 -lm -lz
+LFLAGS := libft/libft.a -Lmlx_linux -lmlx -lXext -lX11 -lm -lz
 MLX_DIR := ./mlx_linux/
 MKDIR := mkdir -p
 RM_RF := rm -rf

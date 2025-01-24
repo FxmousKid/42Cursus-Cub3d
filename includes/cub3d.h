@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:31:08 by inazaria          #+#    #+#             */
-/*   Updated: 2025/01/20 15:56:51 by inazaria         ###   ########.fr       */
+/*   Updated: 2025/01/24 21:42:33 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,44 @@
 # define GREEN_ARGB	0x0000FF00
 # define BLUE_ARGB	0x000000FF
 # define COLOR_MAX  0xFFFFFFFF
+
+# define SCREEN_WIDTH 1080
+# define SCREEN_HEIGHT 720
+
+typedef struct s_pos
+{
+	double	x;
+	double	y;
+	double	z;
+}				t_pos;
+
+typedef struct s_pixel
+{
+	void	*pixel;
+	char	*addr;
+	int		bits;
+	int		length;
+	int		endian;
+}				t_pixel;
+
+typedef struct s_data
+{
+	void	*mlx;
+	void	*win;
+	int		size;
+	t_pixel	pixel;
+}				t_data;
+
+/* PIXEL */
+int		init_pixel(t_pixel *pixel, void *mlx);
+void	my_mlx_pixel_put(t_pixel *pixel, int x, int y, int color);
+void	put_pixel(t_data *data, int x, int y, int color);
+
+/* RENDER */
+int		render_next_frame(t_data *data);
+
+/* FIGURE */
+void	put_line(t_data *data, t_pos pos0, t_pos pos1);
+void	put_square(t_data *data, t_pos top_left);
 
 #endif
