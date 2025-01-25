@@ -6,7 +6,7 @@
 #    By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 15:32:50 by inazaria          #+#    #+#              #
-#    Updated: 2025/01/24 21:00:35 by ptheo            ###   ########.fr        #
+#    Updated: 2025/01/25 22:22:41 by ptheo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,11 @@ DEBUG_FILE_PATH = ./src/error_manager/debugging_functions
 DEBUG_BUILD_PATH = ./build/error_manager/debugging_functions
 
 # .c files for source code
-SRC_FILES_NAMES = main.c
+SRC_FILES_NAMES  = main.c
+SRC_FILES_NAMES += figure.c
+SRC_FILES_NAMES += render.c
+SRC_FILES_NAMES += parsing.c
+SRC_FILES_NAMES += pixel.c
 
 # to add for example src/map/map.c
 # SRC_FILES_NAMES += map/map.c

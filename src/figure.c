@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 21:13:40 by ptheo             #+#    #+#             */
-/*   Updated: 2025/01/24 21:42:31 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/01/25 22:46:09 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,22 @@ void	put_square(t_data *data, t_pos top_left)
 	put_line(data, top_left, bot_left);
 	put_line(data, top_right, bot_right);
 	put_line(data, bot_left, bot_right);
+}
+
+void	fill_square(t_data *data, t_pos top_left, int color)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < data->size)
+	{
+		j = 0;
+		while (j < data->size)
+		{
+			put_pixel(data, top_left.x + i, top_left.y + j, color);
+			j++;
+		}
+		i++;
+	}
 }
