@@ -6,13 +6,13 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 21:13:40 by ptheo             #+#    #+#             */
-/*   Updated: 2025/01/25 22:46:09 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/01/26 17:20:47 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	put_line(t_data *data, t_pos pos0, t_pos pos1)
+void	draw_line(t_data *data, t_pos pos0, t_pos pos1, int color)
 {
 	double	x;
 	double	y;
@@ -30,14 +30,14 @@ void	put_line(t_data *data, t_pos pos0, t_pos pos1)
 	}
 	while (n <= max)
 	{
-		put_pixel(data, pos0.x, pos0.y, WHITE_ARGB);
+		put_pixel(data, pos0.x, pos0.y, color);
 		pos0.x += x;
 		pos0.y += y;
 		n++;
 	}
 }
 
-void	put_square(t_data *data, t_pos top_left)
+void	draw_square(t_data *data, t_pos top_left, int color)
 {
 	t_pos	top_right;
 	t_pos	bot_left;
@@ -49,10 +49,10 @@ void	put_square(t_data *data, t_pos top_left)
 	bot_left.y = top_left.y + data->size;
 	bot_right.x = top_left.x + data->size;
 	bot_right.y = top_left.y + data->size;
-	put_line(data, top_left, top_right);
-	put_line(data, top_left, bot_left);
-	put_line(data, top_right, bot_right);
-	put_line(data, bot_left, bot_right);
+	draw_line(data, top_left, top_right, color);
+	draw_line(data, top_left, bot_left, color);
+	draw_line(data, top_right, bot_right, color);
+	draw_line(data, bot_left, bot_right, color);
 }
 
 void	fill_square(t_data *data, t_pos top_left, int color)

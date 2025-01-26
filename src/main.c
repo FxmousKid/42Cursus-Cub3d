@@ -6,17 +6,11 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:28:06 by inazaria          #+#    #+#             */
-/*   Updated: 2025/01/25 19:37:58 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/01/26 17:09:01 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	render_loop(t_data *data)
-{
-	mlx_loop_hook(data->mlx, &render_next_frame, data);
-	mlx_loop(data->mlx);
-}
 
 int	init_data(t_data *data)
 {
@@ -28,6 +22,7 @@ int	init_data(t_data *data)
 		return (-1);
 	if (init_pixel(&data->pixel, data->mlx) == -1)
 		return (-1);
+	data->size = 50;
 	return (0);
 }
 
@@ -39,6 +34,9 @@ int main(int argc, char *argv[])
 	(void)argv;
 	if (init_data(&data) == -1)
 		return (-1);
+	parsing_map(&data, argv[1]);
+	print_map(&data);
+	draw_map(&data);
 	render_loop(&data);
 	return (0);
 }

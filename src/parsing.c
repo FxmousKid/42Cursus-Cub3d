@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 20:11:34 by ptheo             #+#    #+#             */
-/*   Updated: 2025/01/25 23:04:01 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/01/26 17:25:14 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,7 @@ int	parsing_map(t_data *data, char *file_map)
 
 int	parse_file(t_data *data, int fd)
 {
-	int		i;
-
-	i = 0;
-	while (i < MAX_SIZE_MAP)
-	{
-		ft_bzero(data->map[i], MAX_SIZE_MAP);
-		i++;
-	}
+	ft_bzero(data->map, MAX_SIZE_MAP);
 	if (get_texture(data, fd) == -1)
 		return (-1);
 	if (fill_map(data, fd) == -1)
@@ -53,13 +46,48 @@ int	parse_file(t_data *data, int fd)
 
 int	get_texture(t_data *data, int fd)
 {
-	char	**line_texture;
+	//char	**line_texture;
 	char	*line;
 
-	line = get_next_line(fd);
-	line_texture = ft_split(line, ' ');
-	free(line);
-	if (line_texture == NULL)
-		return (-1);
+	for (int i = 0; i < 8; i++)
+	{
+		line = get_next_line(fd);
+		free(line);
+	}
+	(void)data;
 	return (0);
+}
+
+int	fill_map(t_data *data, int fd)
+{
+	t_tile	current;
+	t_pos	pos;
+	char	*line;
+	int		x;
+	int		y;
+
+	line = get_next_line(fd);
+	x = 0;
+	while (line)
+	{
+		y = 0;
+		while (line[y] != '\n' && line[y])
+		{
+			current.type = line[y];
+			pos.x = x;
+			pos.y = y;
+			current.pos = pos;
+			data->map[x][y] = current;
+			if (current.type == 'N')
+				data->center_pos = current.pos;
+			y++;
+		}
+		data->map[x][y].type = '\0';
+		x++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	data->height_map = x;
+	ft_printf("pos_x : %d pos_y : %d\n", data->center_pos.x, data->center_pos.y);
+	return (-1);
 }

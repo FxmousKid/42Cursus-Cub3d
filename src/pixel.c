@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 21:04:46 by ptheo             #+#    #+#             */
-/*   Updated: 2025/01/24 21:09:54 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/01/26 16:09:02 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int	init_pixel(t_pixel *pixel, void *mlx)
 {
-	if (pixel == NULL)
-		return (NULL);
 	pixel->pixel = mlx_new_image(mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (pixel->pixel == NULL)
 		return (free(pixel), pixel = NULL, -1);

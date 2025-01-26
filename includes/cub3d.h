@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:31:08 by inazaria          #+#    #+#             */
-/*   Updated: 2025/01/25 22:46:46 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/01/26 17:25:07 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,18 @@
 # define GREEN_ARGB	0x0000FF00
 # define BLUE_ARGB	0x000000FF
 # define COLOR_MAX  0xFFFFFFFF
+# define GREY_ARGB  0x80808080
 
 # define SCREEN_WIDTH 1080
 # define SCREEN_HEIGHT 720
 
-# define MAX_SIZE_MAP 1000
+# define MAX_SIZE_MAP 200
 
 typedef struct s_pos
 {
-	double	x;
-	double	y;
-	double	z;
+	int	x;
+	int	y;
+	int	z;
 }				t_pos;
 
 typedef struct s_tile
@@ -95,6 +96,8 @@ typedef struct s_data
 	void	*mlx;
 	void	*win;
 	int		size;
+	int		height_map;
+	t_pos	center_pos;
 	t_tile	map[MAX_SIZE_MAP][MAX_SIZE_MAP];
 	t_texture texture;
 	t_pixel	pixel;
@@ -107,10 +110,11 @@ void	put_pixel(t_data *data, int x, int y, int color);
 
 /* RENDER */
 int		render_next_frame(t_data *data);
+void	render_loop(t_data *data);
 
 /* FIGURE */
-void	put_line(t_data *data, t_pos pos0, t_pos pos1);
-void	put_square(t_data *data, t_pos top_left);
+void	draw_line(t_data *data, t_pos pos0, t_pos pos1, int color);
+void	draw_square(t_data *data, t_pos top_left, int color);
 void	fill_square(t_data *data, t_pos top_left, int color);
 
 /* PARSING */
@@ -118,5 +122,10 @@ int		check_file_name(char *file);
 int		parsing_map(t_data *data, char *file_map);
 int		parse_file(t_data *data, int fd);
 int		get_texture(t_data *data, int fd);
+int		fill_map(t_data *data, int fd);
+
+/* MAP */
+void	print_map(t_data *data);
+void	draw_map(t_data *data);
 
 #endif
