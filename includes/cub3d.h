@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:31:08 by inazaria          #+#    #+#             */
-/*   Updated: 2025/01/26 17:25:07 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/01/26 19:51:04 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@
 
 typedef struct s_pos
 {
-	int	x;
-	int	y;
-	int	z;
+	double	x;
+	double	y;
+	double	z;
 }				t_pos;
 
 typedef struct s_tile
@@ -62,6 +62,12 @@ typedef struct s_tile
 	char	type;
 	t_pos	pos;
 }				t_tile;
+
+typedef struct s_player
+{
+	t_pos	direction;
+	t_pos	pos;
+}				t_player;
 
 typedef struct s_pixel
 {
@@ -93,14 +99,15 @@ typedef struct s_texture
 
 typedef struct s_data
 {
-	void	*mlx;
-	void	*win;
-	int		size;
-	int		height_map;
-	t_pos	center_pos;
-	t_tile	map[MAX_SIZE_MAP][MAX_SIZE_MAP];
-	t_texture texture;
-	t_pixel	pixel;
+	void		*mlx;
+	void		*win;
+	int			size;
+	int			height_map;
+	t_player	player;
+	t_pos		center_pos;
+	t_tile		map[MAX_SIZE_MAP][MAX_SIZE_MAP];
+	t_texture	texture;
+	t_pixel		pixel;
 }				t_data;
 
 /* PIXEL */
@@ -116,6 +123,7 @@ void	render_loop(t_data *data);
 void	draw_line(t_data *data, t_pos pos0, t_pos pos1, int color);
 void	draw_square(t_data *data, t_pos top_left, int color);
 void	fill_square(t_data *data, t_pos top_left, int color);
+void	draw_circle(t_data *data, t_pos pos, int rayon, int color);
 
 /* PARSING */
 int		check_file_name(char *file);
@@ -127,5 +135,11 @@ int		fill_map(t_data *data, int fd);
 /* MAP */
 void	print_map(t_data *data);
 void	draw_map(t_data *data);
+
+/* CLOSE */
+int	close_window(t_data *data);
+
+/* KEY */
+int	key_listener(int keycode, t_data *data);
 
 #endif

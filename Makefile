@@ -6,7 +6,7 @@
 #    By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 15:32:50 by inazaria          #+#    #+#              #
-#    Updated: 2025/01/26 16:54:52 by ptheo            ###   ########.fr        #
+#    Updated: 2025/01/26 19:51:15 by ptheo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,8 @@ SRC_FILES_NAMES += render.c
 SRC_FILES_NAMES += parsing.c
 SRC_FILES_NAMES += pixel.c
 SRC_FILES_NAMES += map.c
+SRC_FILES_NAMES += close.c
+SRC_FILES_NAMES += key.c
 
 # to add for example src/map/map.c
 # SRC_FILES_NAMES += map/map.c

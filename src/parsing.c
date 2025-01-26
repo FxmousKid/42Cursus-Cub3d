@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 20:11:34 by ptheo             #+#    #+#             */
-/*   Updated: 2025/01/26 17:25:14 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/01/26 18:30:59 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,27 +67,26 @@ int	fill_map(t_data *data, int fd)
 	int		y;
 
 	line = get_next_line(fd);
-	x = 0;
+	y = 0;
 	while (line)
 	{
-		y = 0;
-		while (line[y] != '\n' && line[y])
+		x = 0;
+		while (line[x] != '\n' && line[x])
 		{
-			current.type = line[y];
+			current.type = line[x];
 			pos.x = x;
 			pos.y = y;
 			current.pos = pos;
-			data->map[x][y] = current;
+			data->map[y][x] = current;
 			if (current.type == 'N')
 				data->center_pos = current.pos;
-			y++;
+			x++;
 		}
-		data->map[x][y].type = '\0';
-		x++;
+		data->map[y][x].type = '\0';
+		y++;
 		free(line);
 		line = get_next_line(fd);
 	}
-	data->height_map = x;
-	ft_printf("pos_x : %d pos_y : %d\n", data->center_pos.x, data->center_pos.y);
+	data->height_map = y;
 	return (-1);
 }

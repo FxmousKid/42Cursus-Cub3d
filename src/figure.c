@@ -6,11 +6,20 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 21:13:40 by ptheo             #+#    #+#             */
-/*   Updated: 2025/01/26 17:20:47 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/01/26 19:40:22 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+t_pos	get_pos(int x, int y)
+{
+	t_pos	pos;
+
+	pos.x = x;
+	pos.y = y;
+	return (pos);
+}
 
 void	draw_line(t_data *data, t_pos pos0, t_pos pos1, int color)
 {
@@ -70,5 +79,38 @@ void	fill_square(t_data *data, t_pos top_left, int color)
 			j++;
 		}
 		i++;
+	}
+}
+
+void	draw_circle(t_data *data, t_pos pos, int rayon, int color)
+{
+	int		x;
+	int		y;
+	int		d;
+
+	x = 0;
+	y = rayon;
+	d = 5 - 4 * rayon;
+	while (x <= y)
+	{
+		draw_line(data, pos, get_pos(x + pos.x, y + pos.y), color);
+		draw_line(data, pos, get_pos(x + pos.x, y + pos.y), color);
+		draw_line(data, pos, get_pos(y + pos.x, x + pos.y), color);
+		draw_line(data, pos, get_pos(-x + pos.x, y + pos.y), color);
+		draw_line(data, pos, get_pos(-y + pos.x, x + pos.y), color);
+		draw_line(data, pos, get_pos(x + pos.x, -y + pos.y), color);
+		draw_line(data, pos, get_pos(y + pos.x, -x + pos.y), color);
+		draw_line(data, pos, get_pos(-x + pos.x, -y + pos.y), color);
+		draw_line(data, pos, get_pos(-y + pos.x, -x + pos.y), color);
+		if (d > 0)
+		{
+			y--;
+			d = d - 8 * y;
+		}
+		else
+		{
+			x++;
+			d = d + 8 * x + 4;
+		}
 	}
 }
