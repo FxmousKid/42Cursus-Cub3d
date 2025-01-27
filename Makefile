@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: theo <theo@student.42.fr>                  +#+  +:+       +#+         #
+#    By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 15:32:50 by inazaria          #+#    #+#              #
-#    Updated: 2025/01/27 03:47:48 by theo             ###   ########.fr        #
+#    Updated: 2025/01/27 17:41:06 by ptheo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,9 @@ SRC_FILES_NAMES += close.c
 SRC_FILES_NAMES += key.c
 SRC_FILES_NAMES += player.c
 SRC_FILES_NAMES += movement.c
+SRC_FILES_NAMES += camera.c
+SRC_FILES_NAMES += rotation.c
+
 
 # to add for example src/map/map.c
 # SRC_FILES_NAMES += map/map.c

@@ -3,37 +3,71 @@
 /*                                                        :::      ::::::::   */
 /*   key.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 19:50:23 by ptheo             #+#    #+#             */
-/*   Updated: 2025/01/27 04:04:04 by theo             ###   ########.fr       */
+/*   Updated: 2025/01/27 17:12:08 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	key_listener(int keycode, t_data *data)
+int	key_pressed(int keycode, t_data *data)
 {
-	ft_printf("key touch : %d\n", keycode);
-	if (keycode == K_W)
+	ft_printf("key pressed : %d\n", keycode);
+	if (keycode == XK_w)
 	{
-		move_front(data);
-		ft_printf("touch W\n");
+		data->movement.front = true;
 	}
-	if (keycode == K_S)
+	if (keycode == XK_s)
 	{
-		move_back(data);
-		ft_printf("touch S\n");
+		data->movement.back = true;
 	}
-	if (keycode == K_A)
+	if (keycode == XK_a)
 	{
-		look_left(data);
-		ft_printf("touch A\n");
+		data->movement.left = true;
 	}
-	if (keycode == K_D)
+	if (keycode == XK_d)
 	{
-		look_right(data);
-		ft_printf("touch D\n");
+		data->movement.right = true;
+	}
+	if (keycode == XK_Left)
+	{
+		data->movement.look_left = true;
+	}
+	if (keycode == XK_Right)
+	{
+		data->movement.look_right = true;
+	}
+	return (0);
+}
+
+int	key_released(int keycode, t_data *data)
+{
+	ft_printf("key released : %d\n", keycode);
+	if (keycode == XK_w)
+	{
+		data->movement.front = false;
+	}
+	if (keycode == XK_s)
+	{
+		data->movement.back = false;
+	}
+	if (keycode == XK_a)
+	{
+		data->movement.left = false;
+	}
+	if (keycode == XK_d)
+	{
+		data->movement.right = false;
+	}
+	if (keycode == XK_Left)
+	{
+		data->movement.look_left = false;
+	}
+	if (keycode == XK_Right)
+	{
+		data->movement.look_right = false;
 	}
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:31:08 by inazaria          #+#    #+#             */
-/*   Updated: 2025/01/27 04:06:48 by theo             ###   ########.fr       */
+/*   Updated: 2025/01/27 17:12:31 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # include <math.h>
 # include <string.h>
 # include <unistd.h>
+# include <stdbool.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 
 # include "../mlx_linux/mlx.h"
 # include "../libft/includes/libft.h"
@@ -53,11 +56,6 @@
 
 # define MAX_SIZE_MAP 200
 
-# define K_W 119
-# define K_S 115
-# define K_A 97
-# define K_D 100
-
 typedef struct s_vect
 {
 	double	x;
@@ -74,6 +72,7 @@ typedef struct s_tile
 typedef struct s_player
 {
 	int		speed;
+	double	camera_speed;
 	double	angle;
 	t_vect	direction;
 	t_vect	pos;
@@ -107,6 +106,18 @@ typedef struct s_texture
 	int		c_color;
 }				t_texture;
 
+typedef struct s_move
+{
+	bool	front;
+	bool	back;
+	bool	left;
+	bool	right;
+	bool	look_left;
+	bool	look_right;
+	bool	look_up;
+	bool	look_down;
+}				t_move;
+
 typedef struct s_data
 {
 	void		*mlx;
@@ -115,6 +126,7 @@ typedef struct s_data
 	int			height_map;
 	t_player	player;
 	t_vect		center_pos;
+	t_move		movement;
 	t_tile		map[MAX_SIZE_MAP][MAX_SIZE_MAP];
 	t_texture	texture;
 	t_pixel		pixel;
@@ -151,16 +163,25 @@ void	draw_map(t_data *data);
 int		close_window(t_data *data);
 
 /* KEY */
-int		key_listener(int keycode, t_data *data);
+int		key_pressed(int keycode, t_data *data);
+int		key_released(int keycode, t_data *data);
 
 /* PLAYER */
 void	draw_player(t_data *data);
 int		init_player(t_data *data);
 
-/* MOVEMENT */
+/* PLAYER MOVEMENT */
+int		key_movement(t_data *data);
 int		move_front(t_data *data);
 int		move_back(t_data *data);
+int		move_right(t_data *data);
+int		move_left(t_data *data);
+
+/* CAMERA MOVEMENT */
+int		camera_movement(t_data *data);
 int		look_right(t_data *data);
 int		look_left(t_data *data);
+int		look_up(t_data *data);
+int		look_down(t_data *data);
 
 #endif
