@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:31:08 by inazaria          #+#    #+#             */
-/*   Updated: 2025/01/26 19:51:04 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/01/27 04:06:48 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include "../libft/includes/libft.h"
 # include "error_manager.h"
 
+# define PI 3.14159265359
+
 # define RED_TXT		"\e[0;31m"
 # define GREEN_TXT		"\e[0;32m"
 # define YELLOW_TXT		"\e[0;33m"
@@ -39,6 +41,7 @@
 # define END_TXT		"\e[0m"
 
 # define WHITE_ARGB 0x00FFFFFF
+# define BLACK_ARGB 0x00000000
 # define RED_ARGB	0x00FF0000
 # define GREEN_ARGB	0x0000FF00
 # define BLUE_ARGB	0x000000FF
@@ -50,23 +53,30 @@
 
 # define MAX_SIZE_MAP 200
 
-typedef struct s_pos
+# define K_W 119
+# define K_S 115
+# define K_A 97
+# define K_D 100
+
+typedef struct s_vect
 {
 	double	x;
 	double	y;
 	double	z;
-}				t_pos;
+}				t_vect;
 
 typedef struct s_tile
 {
 	char	type;
-	t_pos	pos;
+	t_vect	pos;
 }				t_tile;
 
 typedef struct s_player
 {
-	t_pos	direction;
-	t_pos	pos;
+	int		speed;
+	double	angle;
+	t_vect	direction;
+	t_vect	pos;
 }				t_player;
 
 typedef struct s_pixel
@@ -104,7 +114,7 @@ typedef struct s_data
 	int			size;
 	int			height_map;
 	t_player	player;
-	t_pos		center_pos;
+	t_vect		center_pos;
 	t_tile		map[MAX_SIZE_MAP][MAX_SIZE_MAP];
 	t_texture	texture;
 	t_pixel		pixel;
@@ -120,10 +130,11 @@ int		render_next_frame(t_data *data);
 void	render_loop(t_data *data);
 
 /* FIGURE */
-void	draw_line(t_data *data, t_pos pos0, t_pos pos1, int color);
-void	draw_square(t_data *data, t_pos top_left, int color);
-void	fill_square(t_data *data, t_pos top_left, int color);
-void	draw_circle(t_data *data, t_pos pos, int rayon, int color);
+void	draw_line(t_data *data, t_vect pos0, t_vect pos1, int color);
+void	draw_square(t_data *data, t_vect top_left, int color);
+void	fill_square(t_data *data, t_vect top_left, int color);
+void	draw_circle(t_data *data, t_vect pos, int rayon, int color);
+t_vect	get_vect(double x, double y, double z);
 
 /* PARSING */
 int		check_file_name(char *file);
@@ -137,9 +148,19 @@ void	print_map(t_data *data);
 void	draw_map(t_data *data);
 
 /* CLOSE */
-int	close_window(t_data *data);
+int		close_window(t_data *data);
 
 /* KEY */
-int	key_listener(int keycode, t_data *data);
+int		key_listener(int keycode, t_data *data);
+
+/* PLAYER */
+void	draw_player(t_data *data);
+int		init_player(t_data *data);
+
+/* MOVEMENT */
+int		move_front(t_data *data);
+int		move_back(t_data *data);
+int		look_right(t_data *data);
+int		look_left(t_data *data);
 
 #endif

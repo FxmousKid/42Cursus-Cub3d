@@ -3,25 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   figure.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 21:13:40 by ptheo             #+#    #+#             */
-/*   Updated: 2025/01/26 19:40:22 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/01/27 04:06:28 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_pos	get_pos(int x, int y)
+t_vect	get_vect(double x, double y, double z)
 {
-	t_pos	pos;
+	t_vect	vec;
 
-	pos.x = x;
-	pos.y = y;
-	return (pos);
+	vec.x = x;
+	vec.y = y;
+	vec.z = z;
+	return (vec);
 }
 
-void	draw_line(t_data *data, t_pos pos0, t_pos pos1, int color)
+void	draw_line(t_data *data, t_vect pos0, t_vect pos1, int color)
 {
 	double	x;
 	double	y;
@@ -46,11 +47,11 @@ void	draw_line(t_data *data, t_pos pos0, t_pos pos1, int color)
 	}
 }
 
-void	draw_square(t_data *data, t_pos top_left, int color)
+void	draw_square(t_data *data, t_vect top_left, int color)
 {
-	t_pos	top_right;
-	t_pos	bot_left;
-	t_pos	bot_right;
+	t_vect	top_right;
+	t_vect	bot_left;
+	t_vect	bot_right;
 
 	top_right.x = top_left.x + data->size;
 	top_right.y = top_left.y;
@@ -64,7 +65,7 @@ void	draw_square(t_data *data, t_pos top_left, int color)
 	draw_line(data, bot_left, bot_right, color);
 }
 
-void	fill_square(t_data *data, t_pos top_left, int color)
+void	fill_square(t_data *data, t_vect top_left, int color)
 {
 	int	i;
 	int	j;
@@ -82,7 +83,7 @@ void	fill_square(t_data *data, t_pos top_left, int color)
 	}
 }
 
-void	draw_circle(t_data *data, t_pos pos, int rayon, int color)
+void	draw_circle(t_data *data, t_vect pos, int rayon, int color)
 {
 	int		x;
 	int		y;
@@ -93,15 +94,15 @@ void	draw_circle(t_data *data, t_pos pos, int rayon, int color)
 	d = 5 - 4 * rayon;
 	while (x <= y)
 	{
-		draw_line(data, pos, get_pos(x + pos.x, y + pos.y), color);
-		draw_line(data, pos, get_pos(x + pos.x, y + pos.y), color);
-		draw_line(data, pos, get_pos(y + pos.x, x + pos.y), color);
-		draw_line(data, pos, get_pos(-x + pos.x, y + pos.y), color);
-		draw_line(data, pos, get_pos(-y + pos.x, x + pos.y), color);
-		draw_line(data, pos, get_pos(x + pos.x, -y + pos.y), color);
-		draw_line(data, pos, get_pos(y + pos.x, -x + pos.y), color);
-		draw_line(data, pos, get_pos(-x + pos.x, -y + pos.y), color);
-		draw_line(data, pos, get_pos(-y + pos.x, -x + pos.y), color);
+		draw_line(data, pos, get_vect(x + pos.x, y + pos.y, 0), color);
+		draw_line(data, pos, get_vect(x + pos.x, y + pos.y, 0), color);
+		draw_line(data, pos, get_vect(y + pos.x, x + pos.y, 0), color);
+		draw_line(data, pos, get_vect(-x + pos.x, y + pos.y, 0), color);
+		draw_line(data, pos, get_vect(-y + pos.x, x + pos.y, 0), color);
+		draw_line(data, pos, get_vect(x + pos.x, -y + pos.y, 0), color);
+		draw_line(data, pos, get_vect(y + pos.x, -x + pos.y, 0), color);
+		draw_line(data, pos, get_vect(-x + pos.x, -y + pos.y, 0), color);
+		draw_line(data, pos, get_vect(-y + pos.x, -x + pos.y, 0), color);
 		if (d > 0)
 		{
 			y--;
