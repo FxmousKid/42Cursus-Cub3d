@@ -6,7 +6,7 @@
 #    By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 15:32:50 by inazaria          #+#    #+#              #
-#    Updated: 2025/01/27 17:41:06 by ptheo            ###   ########.fr        #
+#    Updated: 2025/01/27 21:23:17 by ptheo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC_FILES_NAMES += player.c
 SRC_FILES_NAMES += movement.c
 SRC_FILES_NAMES += camera.c
 SRC_FILES_NAMES += rotation.c
+SRC_FILES_NAMES += background.c
 
 
 # to add for example src/map/map.c

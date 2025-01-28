@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:28:06 by inazaria          #+#    #+#             */
-/*   Updated: 2025/01/27 04:06:06 by theo             ###   ########.fr       */
+/*   Updated: 2025/01/27 20:16:23 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int main(int argc, char *argv[])
 	if (init_data(&data) == -1)
 		return (-1);
 	parsing_map(&data, argv[1]);
+	init_map(&data);
 	init_player(&data);
 	print_map(&data);
 	render_loop(&data);

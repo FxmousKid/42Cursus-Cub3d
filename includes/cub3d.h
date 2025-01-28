@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:31:08 by inazaria          #+#    #+#             */
-/*   Updated: 2025/01/27 17:12:31 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/01/27 21:22:42 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ int		fill_map(t_data *data, int fd);
 /* MAP */
 void	print_map(t_data *data);
 void	draw_map(t_data *data);
+void	init_map(t_data *data);
 
 /* CLOSE */
 int		close_window(t_data *data);
@@ -183,5 +184,8 @@ int		look_right(t_data *data);
 int		look_left(t_data *data);
 int		look_up(t_data *data);
 int		look_down(t_data *data);
+
+/* BACKGROUND */
+void	draw_background(t_data *data);
 
 #endif

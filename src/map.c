@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 16:52:08 by ptheo             #+#    #+#             */
-/*   Updated: 2025/01/27 04:00:38 by theo             ###   ########.fr       */
+/*   Updated: 2025/01/27 20:15:51 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_map(t_data *data)
+void	init_map(t_data *data)
 {
-	t_vect	current;
 	int		x;
 	int		y;
 	
@@ -24,17 +23,34 @@ void	draw_map(t_data *data)
 		x = 0;
 		while (data->map[y][x].type != '\0')
 		{
-			current.x = (x - data->center_pos.x) * data->size + (SCREEN_WIDTH / 2 - data->size / 2);
-			current.y = (y - data->center_pos.y) * data->size + (SCREEN_HEIGHT / 2 - data->size / 2);
+			data->map[y][x].pos.x = (x - data->center_pos.x) * data->size + (SCREEN_WIDTH / 2 - data->size / 2);
+			data->map[y][x].pos.y = (y - data->center_pos.y) * data->size + (SCREEN_HEIGHT / 2 - data->size / 2);
+			x++;
+		}
+		y++;
+	}
+}
+
+void	draw_map(t_data *data)
+{
+	int		x;
+	int		y;
+	
+	y = 0;
+	while (y < data->height_map)
+	{
+		x = 0;
+		while (data->map[y][x].type != '\0')
+		{
 			if (data->map[y][x].type == '0')
 			{
-				fill_square(data, current, BLACK_ARGB);
-				draw_square(data, current, GREY_ARGB);
+				fill_square(data, data->map[y][x].pos, BLACK_ARGB);
+				draw_square(data, data->map[y][x].pos, GREY_ARGB);
 			}
 			else if (data->map[y][x].type == '1')
 			{
-				fill_square(data, current, BLUE_ARGB);
-				draw_square(data, current, GREY_ARGB);
+				fill_square(data, data->map[y][x].pos, BLUE_ARGB);
+				draw_square(data, data->map[y][x].pos, GREY_ARGB);
 			}
 			x++;
 		}

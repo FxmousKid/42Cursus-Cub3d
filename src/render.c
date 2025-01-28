@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 21:38:32 by ptheo             #+#    #+#             */
-/*   Updated: 2025/01/27 17:10:20 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/01/27 21:18:35 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	render_loop(t_data *data)
 int	render_next_frame(t_data *data)
 {
 	update_frame(data);
+	draw_background(data);
 	draw_map(data);
 	draw_player(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->pixel.pixel, 0, 0);
