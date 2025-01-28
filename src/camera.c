@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:38:21 by ptheo             #+#    #+#             */
-/*   Updated: 2025/01/27 17:38:34 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/01/28 03:17:52 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,37 @@ int	camera_movement(t_data *data)
 	return (0);
 }
 
+int	look_left(t_data *data)
+{
+	data->player.angle += data->player.camera_speed;
+	if (data->player.angle > 2 * PI)
+		data->player.angle -= 2 * PI;
+	applie_rotation(data, data->player.camera_speed);
+	return (0);
+}
+
+int	look_right(t_data *data)
+{
+	data->player.angle -= data->player.camera_speed;
+	if (data->player.angle < 0)
+		data->player.angle += 2 * PI;
+	applie_rotation(data, -data->player.camera_speed);
+	return (0);
+}
+
+int	look_up(t_data *data)
+{
+	(void)data;
+	return (0);
+}
+
+int	look_down(t_data *data)
+{
+	(void)data;
+	return (0);
+}
+
+/*
 int	look_right(t_data *data)
 {
 	t_player	player;
@@ -41,8 +72,9 @@ int	look_right(t_data *data)
 	player.angle += player.camera_speed;
 	if (player.angle > 2 * PI)
 		player.angle -= 2 * PI;
-	player.direction.x = cos(player.angle);
-	player.direction.y = sin(player.angle);
+	//player.direction.x = cos(player.angle);
+	//player.direction.y = sin(player.angle);
+	player.direction = rotation_yaw(data, player.direction);
 	data->player = player;
 	return (0);
 }
@@ -55,8 +87,9 @@ int	look_left(t_data *data)
 	player.angle -= player.camera_speed;
 	if (player.angle < 0)
 		player.angle += 2 * PI;
-	player.direction.x = cos(player.angle);
-	player.direction.y = sin(player.angle);
+	//player.direction.x = cos(player.angle);
+	//player.direction.y = sin(player.angle);
+	player.direction = rotation_yaw(data, player.direction);
 	data->player = player;
 	return (0);
 }
@@ -72,3 +105,4 @@ int	look_down(t_data *data)
 	(void)data;
 	return (0);
 }
+*/

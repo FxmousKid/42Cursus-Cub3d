@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:28:06 by inazaria          #+#    #+#             */
-/*   Updated: 2025/01/27 20:16:23 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/01/28 02:35:36 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ int	init_data(t_data *data)
 	if (init_pixel(&data->pixel, data->mlx) == -1)
 		return (-1);
 	data->size = 50;
+	data->loop.delta = 0;
+	data->loop.fps = 60;
+	data->loop.interval = 1000 / data->loop.fps;
+	data->loop.last_time = get_current_time();
 	return (0);
 }
 

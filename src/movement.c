@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 03:45:38 by theo              #+#    #+#             */
-/*   Updated: 2025/01/27 20:13:05 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/01/28 04:33:22 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,14 @@ int	move_front(t_data *data)
 		x = 0;
 		while (data->map[y][x].type != '\0')
 		{
-
-			data->map[y][x].pos.x -= data->player.direction.x * data->player.speed;
-			data->map[y][x].pos.y -= data->player.direction.y * data->player.speed;
+			data->map[y][x].top_left.x -= data->player.direction.x * data->player.speed;
+			data->map[y][x].top_left.y -= data->player.direction.y * data->player.speed;
+			data->map[y][x].top_right.x -= data->player.direction.x * data->player.speed;
+			data->map[y][x].top_right.y -= data->player.direction.y * data->player.speed;
+			data->map[y][x].bot_left.x -= data->player.direction.x * data->player.speed;
+			data->map[y][x].bot_left.y -= data->player.direction.y * data->player.speed;
+			data->map[y][x].bot_right.x -= data->player.direction.x * data->player.speed;
+			data->map[y][x].bot_right.y -= data->player.direction.y * data->player.speed;
 			x++;
 		}
 		y++;
@@ -66,9 +71,14 @@ int	move_back(t_data *data)
 		x = 0;
 		while (data->map[y][x].type != '\0')
 		{
-
-			data->map[y][x].pos.x += data->player.direction.x * data->player.speed;
-			data->map[y][x].pos.y += data->player.direction.y * data->player.speed;
+			data->map[y][x].top_left.x += data->player.direction.x * data->player.speed;
+			data->map[y][x].top_left.y += data->player.direction.y * data->player.speed;
+			data->map[y][x].top_right.x += data->player.direction.x * data->player.speed;
+			data->map[y][x].top_right.y += data->player.direction.y * data->player.speed;
+			data->map[y][x].bot_left.x += data->player.direction.x * data->player.speed;
+			data->map[y][x].bot_left.y += data->player.direction.y * data->player.speed;
+			data->map[y][x].bot_right.x += data->player.direction.x * data->player.speed;
+			data->map[y][x].bot_right.y += data->player.direction.y * data->player.speed;
 			x++;
 		}
 		y++;
@@ -87,8 +97,10 @@ int	move_left(t_data *data)
 		x = 0;
 		while (data->map[y][x].type != '\0')
 		{
-			data->map[y][x].pos.x += cos(data->player.angle + PI / 2) * data->player.speed;
-			data->map[y][x].pos.y += sin(data->player.angle + PI / 2) * data->player.speed;
+			data->map[y][x].top_left.x += data->player.speed;
+			data->map[y][x].top_right.x += data->player.speed;
+			data->map[y][x].bot_left.x += data->player.speed;
+			data->map[y][x].bot_right.x += data->player.speed;
 			x++;
 		}
 		y++;
@@ -107,8 +119,10 @@ int	move_right(t_data *data)
 		x = 0;
 		while (data->map[y][x].type != '\0')
 		{
-			data->map[y][x].pos.x -= cos(data->player.angle + PI / 2) * data->player.speed;
-			data->map[y][x].pos.y -= sin(data->player.angle + PI / 2) * data->player.speed;
+			data->map[y][x].top_left.x -= data->player.speed;
+			data->map[y][x].top_right.x -= data->player.speed;
+			data->map[y][x].bot_left.x -= data->player.speed;
+			data->map[y][x].bot_right.x -= data->player.speed;
 			x++;
 		}
 		y++;

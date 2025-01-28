@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:31:08 by inazaria          #+#    #+#             */
-/*   Updated: 2025/01/27 21:22:42 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/01/28 04:34:55 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdbool.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
+# include <sys/time.h>
 
 # include "../mlx_linux/mlx.h"
 # include "../libft/includes/libft.h"
@@ -66,7 +67,10 @@ typedef struct s_vect
 typedef struct s_tile
 {
 	char	type;
-	t_vect	pos;
+	t_vect	top_left;
+	t_vect	top_right;
+	t_vect	bot_left;
+	t_vect	bot_right;
 }				t_tile;
 
 typedef struct s_player
@@ -118,6 +122,14 @@ typedef struct s_move
 	bool	look_down;
 }				t_move;
 
+typedef struct s_loop
+{
+	int			fps;
+	double		interval;
+	long int	last_time;
+	double		delta;
+}				t_loop;
+
 typedef struct s_data
 {
 	void		*mlx;
@@ -125,6 +137,7 @@ typedef struct s_data
 	int			size;
 	int			height_map;
 	t_player	player;
+	t_loop		loop;
 	t_vect		center_pos;
 	t_move		movement;
 	t_tile		map[MAX_SIZE_MAP][MAX_SIZE_MAP];
@@ -143,8 +156,8 @@ void	render_loop(t_data *data);
 
 /* FIGURE */
 void	draw_line(t_data *data, t_vect pos0, t_vect pos1, int color);
-void	draw_square(t_data *data, t_vect top_left, int color);
-void	fill_square(t_data *data, t_vect top_left, int color);
+void	draw_square(t_data *data, t_tile square, int color);
+void	fill_square(t_data *data, t_tile square, int color);
 void	draw_circle(t_data *data, t_vect pos, int rayon, int color);
 t_vect	get_vect(double x, double y, double z);
 
@@ -185,7 +198,14 @@ int		look_left(t_data *data);
 int		look_up(t_data *data);
 int		look_down(t_data *data);
 
+/* ROTATION */
+t_vect	rotation_yaw(t_data *data, t_vect pos, double angle);
+void	applie_rotation(t_data *data, double angle);
+
 /* BACKGROUND */
 void	draw_background(t_data *data);
+
+/* UTILS */
+long int	get_current_time(void);
 
 #endif
