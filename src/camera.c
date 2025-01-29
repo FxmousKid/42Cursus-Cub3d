@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:38:21 by ptheo             #+#    #+#             */
-/*   Updated: 2025/01/28 03:17:52 by theo             ###   ########.fr       */
+/*   Updated: 2025/01/28 16:51:34 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	look_right(t_data *data)
 int	look_left(t_data *data)
 {
 	t_player	player;
-	
+
 	player = data->player;
 	player.angle -= player.camera_speed;
 	if (player.angle < 0)

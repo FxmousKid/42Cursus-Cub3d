@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:28:06 by inazaria          #+#    #+#             */
-/*   Updated: 2025/01/28 02:35:36 by theo             ###   ########.fr       */
+/*   Updated: 2025/01/28 19:22:20 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	init_data(t_data *data)
 	return (0);
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	t_data	data;
 
@@ -42,6 +42,7 @@ int main(int argc, char *argv[])
 	init_map(&data);
 	init_player(&data);
 	print_map(&data);
+	init_ray(&data);
 	render_loop(&data);
 	return (0);
 }

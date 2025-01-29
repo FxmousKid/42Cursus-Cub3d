@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 20:11:34 by ptheo             #+#    #+#             */
-/*   Updated: 2025/01/28 04:33:32 by theo             ###   ########.fr       */
+/*   Updated: 2025/01/28 16:51:57 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	parsing_map(t_data *data, char *file_map)
 	if (check_file_name(file_map) == -1 || fd_map <= 0)
 		return (-1);
 	if (parse_file(data, fd_map) == -1)
-		return (-1);	
+		return (-1);
 	return (0);
 }
 
@@ -46,9 +46,9 @@ int	parse_file(t_data *data, int fd)
 
 int	get_texture(t_data *data, int fd)
 {
-	//char	**line_texture;
 	char	*line;
 
+	// char	**line_texture;
 	for (int i = 0; i < 8; i++)
 	{
 		line = get_next_line(fd);
@@ -80,7 +80,8 @@ int	fill_map(t_data *data, int fd)
 			current.top_left = pos;
 			current.top_right = get_vect(pos.x + data->size, pos.y, 0);
 			current.bot_left = get_vect(pos.x, pos.y + data->size, 0);
-			current.bot_right = get_vect(pos.x + data->size, pos.y + data->size, 0);
+			current.bot_right = get_vect(pos.x + data->size, pos.y + data->size,
+					0);
 			data->map[y][x] = current;
 			if (current.type == 'N')
 			{

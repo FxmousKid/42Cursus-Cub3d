@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: theo <theo@student.42.fr>                  +#+  +:+       +#+         #
+#    By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 15:32:50 by inazaria          #+#    #+#              #
-#    Updated: 2025/01/28 02:48:31 by theo             ###   ########.fr        #
+#    Updated: 2025/01/28 19:22:11 by ptheo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,8 @@ SRC_FILES_NAMES += rotation.c
 SRC_FILES_NAMES += background.c
 SRC_FILES_NAMES += utils.c
 SRC_FILES_NAMES += rotation.c
+SRC_FILES_NAMES += collision.c
+SRC_FILES_NAMES += raycasting.c
 
 
 # to add for example src/map/map.c

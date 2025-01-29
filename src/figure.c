@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   figure.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 21:13:40 by ptheo             #+#    #+#             */
-/*   Updated: 2025/01/28 04:44:01 by theo             ###   ########.fr       */
+/*   Updated: 2025/01/28 16:51:50 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void	draw_square(t_data *data, t_tile square, int color)
 	draw_line(data, square.bot_left, square.bot_right, color);
 }
 
-void	fill_half_square(t_data *data, t_vect pos0, t_vect pos1, t_vect pos3, int color)
+void	fill_half_square(t_data *data, t_vect pos0, t_vect pos1, t_vect pos3,
+		int color)
 {
 	double	x;
 	double	y;
@@ -82,15 +83,17 @@ void	fill_half_square(t_data *data, t_vect pos0, t_vect pos1, t_vect pos3, int c
 
 void	fill_square(t_data *data, t_tile square, int color)
 {
-	fill_half_square(data, square.top_left, square.bot_left, square.top_right, color);
-	fill_half_square(data, square.bot_right, square.bot_left, square.top_right, color);
+	fill_half_square(data, square.top_left, square.bot_left, square.top_right,
+		color);
+	fill_half_square(data, square.bot_right, square.bot_left, square.top_right,
+		color);
 }
 
 void	draw_circle(t_data *data, t_vect pos, int rayon, int color)
 {
-	int		x;
-	int		y;
-	int		d;
+	int	x;
+	int	y;
+	int	d;
 
 	x = 0;
 	y = rayon;

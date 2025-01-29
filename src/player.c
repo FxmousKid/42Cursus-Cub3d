@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 02:53:23 by theo              #+#    #+#             */
-/*   Updated: 2025/01/28 04:18:04 by theo             ###   ########.fr       */
+/*   Updated: 2025/01/28 19:35:29 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@ int	init_player(t_data *data)
 {
 	t_player	player;
 
-	player.pos = get_vect(SCREEN_WIDTH / 2 - data->size / 2, SCREEN_HEIGHT / 2 - data->size / 2, 0);
+	player.pos = get_vect(SCREEN_WIDTH / 2 - data->size / 2, SCREEN_HEIGHT / 2
+			- data->size / 2, 0);
 	player.angle = 3 * PI / 2;
 	player.speed = 5;
 	player.camera_speed = 0.05;
+	player.fov = 90;
 	player.direction = get_vect(cos(player.angle), sin(player.angle), 0);
 	data->player = player;
 	return (0);
@@ -27,8 +29,9 @@ int	init_player(t_data *data)
 
 void	draw_player(t_data *data)
 {
-	draw_circle(data, data->player.pos, data->size / 3, GREEN_ARGB);\
-	draw_line(data, get_vect(data->player.pos.x + (data->player.direction.x * 25), 
-		data->player.pos.y + (data->player.direction.y * 25),
-		0), data->player.pos, RED_ARGB);
+	draw_circle(data, data->player.pos, data->size / 3, GREEN_ARGB);
+	// draw_line(data, get_vect(data->player.pos.x + (data->player.direction.x
+	//			* 25), data->player.pos.y + (data->player.direction.y * 25), 0),
+	//	data->player.pos, RED_ARGB);
+	raycasting(data);
 }
