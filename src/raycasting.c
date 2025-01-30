@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 19:01:54 by ptheo             #+#    #+#             */
-/*   Updated: 2025/01/28 20:11:23 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/01/30 01:12:08 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ double	cast_ray(t_data *data, double angle)
 	double	s_x;
 
 	step = 1;
-	s_y = data->size * -cos(angle);
-	s_x = data->size * sin(angle);
+	(void)angle;
+	s_y = ((int)data->player.index.y % data->size);
+	s_x = ((int)data->player.index.x % data->size);
 	t_x = data->player.pos.x;
 	t_y = data->player.pos.y;
 	while (step < 5)
@@ -50,6 +51,8 @@ double	cast_ray(t_data *data, double angle)
 		t_x += s_x;
 		t_y += s_y;
 		draw_circle(data, get_vect(t_x, t_y, 0), 5, RED_ARGB);
+		s_y = ((int)data->player.index.y % data->size);
+		s_x = ((int)data->player.index.x % data->size);
 		step++;
 	}
 	return (step);

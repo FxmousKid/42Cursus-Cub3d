@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:31:08 by inazaria          #+#    #+#             */
-/*   Updated: 2025/01/28 19:48:56 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/01/30 00:55:50 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct s_player
 	double		fov;
 	t_vect		direction;
 	t_vect		pos;
+	t_vect		index;
 }				t_player;
 
 typedef struct s_ray
@@ -145,6 +146,7 @@ typedef struct s_data
 	void		*win;
 	int			size;
 	int			height_map;
+	double		rotation;
 	t_player	player;
 	t_loop		loop;
 	t_vect		center_pos;
