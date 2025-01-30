@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+         #
+#    By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 15:32:50 by inazaria          #+#    #+#              #
-#    Updated: 2025/01/24 16:35:21 by inazaria         ###   ########.fr        #
+#    Updated: 2025/01/30 19:16:10 by ptheo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,25 @@ DEBUG_BUILD_PATH = ./build/error_manager/debugging_functions
 
 # .c files for source code
 SRC_FILES_NAMES = main.c
+
+# ACTION
+SRC_FILES_NAMES += action/exit.c
+SRC_FILES_NAMES += action/keyhandler.c
+
+# SHAPES
+SRC_FILES_NAMES += shapes/pixel.c
+SRC_FILES_NAMES += shapes/vector.c
+SRC_FILES_NAMES += shapes/draw_shapes.c
+
+# PARSING
+SRC_FILES_NAMES += parser/parsing.c
+
+# RENDER
+SRC_FILES_NAMES += render/render.c
+SRC_FILES_NAMES += render/map.c
+
+# UTILS
+SRC_FILES_NAMES += utils/utils.c
 
 # to add for example src/map/map.c
 # SRC_FILES_NAMES += map/map.c
@@ -42,7 +61,7 @@ DEP_FILES = $(patsubst $(SRC_DIR)%.c, $(BUILD_DIR)%.d, $(SRC_FILES))
 NAME := cub3d
 CC := clang
 CFLAGS := -gdwarf-4 -Wall -Wextra -Werror -I $(INC_DIR) -MMD -MP
-LFLAGS := libft/libft.a -Lmlx_linux -lXext -lX11 -lm -lz
+LFLAGS := libft/libft.a -Lmlx_linux -lmlx -lXext -lX11 -lm -lz
 MLX_DIR := ./mlx_linux/
 MKDIR := mkdir -p
 RM_RF := rm -rf
