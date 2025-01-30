@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 19:01:54 by ptheo             #+#    #+#             */
-/*   Updated: 2025/01/30 01:12:08 by theo             ###   ########.fr       */
+/*   Updated: 2025/01/30 10:18:16 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,22 @@ double	cast_ray(t_data *data, double angle)
 	double	s_x;
 
 	step = 1;
-	(void)angle;
-	s_y = ((int)data->player.index.y % data->size);
-	s_x = ((int)data->player.index.x % data->size);
-	t_x = data->player.pos.x;
+	s_y = 0;
+	s_x = 0;
 	t_y = data->player.pos.y;
+	t_x = data->player.pos.x;
+	draw_circle(data, get_vect(t_x, t_y, 0), 5, RED_ARGB);
+	printf("angle : %f\n", angle);
 	while (step < 5)
 	{
-		t_x += s_x;
-		t_y += s_y;
+		s_y = ((t_y - (data->size + ((int)data->player.index.y % data->size)))
+				/ data->size) * data->size;
+		s_x = (t_x - (data->size - ((int)data->player.index.x % data->size)))
+			+ (s_y - t_y - ((int)data->player.index.y % data->size))
+			/ tan(angle);
+		t_x = s_x;
+		t_y = s_y;
 		draw_circle(data, get_vect(t_x, t_y, 0), 5, RED_ARGB);
-		s_y = ((int)data->player.index.y % data->size);
-		s_x = ((int)data->player.index.x % data->size);
 		step++;
 	}
 	return (step);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 20:11:34 by ptheo             #+#    #+#             */
-/*   Updated: 2025/01/30 01:11:02 by theo             ###   ########.fr       */
+/*   Updated: 2025/01/30 09:57:16 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ int	fill_map(t_data *data, int fd)
 			{
 				data->map[y][x].type = '0';
 				data->center_pos = current.top_left;
-				data->player.index.x = x + data->size / 2;
-				data->player.index.y = y + data->size / 2;
+				// data->player.index.x = x + data->size / 2;
+				// data->player.index.y = y + data->size / 2;
 			}
 			x++;
 		}

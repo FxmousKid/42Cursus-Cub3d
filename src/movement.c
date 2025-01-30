@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 03:45:38 by theo              #+#    #+#             */
-/*   Updated: 2025/01/30 01:01:16 by theo             ###   ########.fr       */
+/*   Updated: 2025/01/30 09:58:27 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,6 @@ int	move_left(t_data *data)
 		y++;
 	}
 	data->player.index.x -= data->player.speed;
-	data->player.index.y -= data->player.speed;
 	return (0);
 }
 
@@ -157,6 +156,5 @@ int	move_right(t_data *data)
 		y++;
 	}
 	data->player.index.x += data->player.speed;
-	data->player.index.y += data->player.speed;
 	return (0);
 }

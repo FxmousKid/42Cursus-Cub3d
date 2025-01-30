@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 02:53:23 by theo              #+#    #+#             */
-/*   Updated: 2025/01/28 19:35:29 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/01/30 09:46:56 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	init_player(t_data *data)
 	player.speed = 5;
 	player.camera_speed = 0.05;
 	player.fov = 90;
+	player.index = get_vect(0, 0, 0);
 	player.direction = get_vect(cos(player.angle), sin(player.angle), 0);
 	data->player = player;
 	return (0);
