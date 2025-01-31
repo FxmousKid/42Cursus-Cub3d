@@ -6,7 +6,7 @@
 /*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:25:20 by ptheo             #+#    #+#             */
-/*   Updated: 2025/01/31 04:54:31 by theo             ###   ########.fr       */
+/*   Updated: 2025/01/31 17:18:40 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_pixel
 typedef struct s_tile
 {
 	char		type;
+	double		height;
 	t_vect		index;
 	t_vect		pos;
 }				t_tile;
@@ -78,6 +79,8 @@ typedef struct s_loop
 
 typedef struct s_ray
 {
+	int			w_side;
+	int			index;
 	double		angle;
 	t_vect		ray;
 	t_vect		side;
@@ -91,7 +94,7 @@ typedef struct s_data
 	void		*mlx;
 	void		*win;
 	int			map_height;
-	int			size;
+	double		size;
 	double		fov;
 	t_player	player;
 	t_pixel		pixel;

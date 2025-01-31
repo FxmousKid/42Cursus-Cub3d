@@ -6,7 +6,7 @@
 /*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 02:22:40 by theo              #+#    #+#             */
-/*   Updated: 2025/01/31 03:53:31 by theo             ###   ########.fr       */
+/*   Updated: 2025/01/31 17:14:12 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int	init_player(t_data *data)
 	t_player	player;
 
 	player.angle = 3 * PI / 2;
-	player.speed = 5;
+	player.speed = 2;
 	player.camera_speed = 0.1;
 	player.direction = get_vect(cos(player.angle), sin(player.angle), 0);
-	player.plane = get_vect(0, 0.66, 0);
+	player.plane = get_vect(0, 0.90, 0);
 	data->player = player;
 	init_bool_move(data);
 	return (0);

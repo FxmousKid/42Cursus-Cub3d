@@ -6,7 +6,7 @@
 /*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:31:08 by inazaria          #+#    #+#             */
-/*   Updated: 2025/01/31 03:48:49 by theo             ###   ########.fr       */
+/*   Updated: 2025/01/31 17:07:24 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,6 @@ void		raycasting(t_data *data);
 t_vect		init_length(t_vect *ray);
 void		cast_ray(t_data *data, t_ray *ray);
 void		dda_algo(t_data *data, t_ray *ray, t_vect *map_pos);
+void		draw_wall(t_data *data, t_ray *ray);
+
 #endif
