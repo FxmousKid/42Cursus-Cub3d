@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+         #
+#    By: theo <theo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 15:32:50 by inazaria          #+#    #+#              #
-#    Updated: 2025/01/30 19:16:10 by ptheo            ###   ########.fr        #
+#    Updated: 2025/01/31 03:42:59 by theo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,12 +32,22 @@ SRC_FILES_NAMES += shapes/pixel.c
 SRC_FILES_NAMES += shapes/vector.c
 SRC_FILES_NAMES += shapes/draw_shapes.c
 
+# PLAYER
+SRC_FILES_NAMES += player/player.c
+SRC_FILES_NAMES += player/player_move.c
+SRC_FILES_NAMES += player/camera_move.c
+SRC_FILES_NAMES += player/collision.c
+
+# RAYCASTING
+SRC_FILES_NAMES += raycasting/raycasting.c
+
 # PARSING
 SRC_FILES_NAMES += parser/parsing.c
 
 # RENDER
 SRC_FILES_NAMES += render/render.c
 SRC_FILES_NAMES += render/map.c
+SRC_FILES_NAMES += render/background.c
 
 # UTILS
 SRC_FILES_NAMES += utils/utils.c

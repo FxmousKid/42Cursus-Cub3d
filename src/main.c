@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:28:06 by inazaria          #+#    #+#             */
-/*   Updated: 2025/01/30 19:42:21 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/01/31 04:53:57 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	init_data(t_data *data)
+int	init_data(t_data *data, char *argv[])
 {
 	data->mlx = mlx_init();
 	if (data->mlx == NULL)
@@ -26,7 +26,11 @@ int	init_data(t_data *data)
 	data->loop.fps = 60;
 	data->loop.interval = 1000 / data->loop.fps;
 	data->loop.last_time = get_current_time();
-	data->size = 50;
+	data->size = 30;
+	data->fov = 90;
+	init_player(data);
+	parsing_map(data, argv[1]);
+	print_map(data);
 	return (0);
 }
 
@@ -35,9 +39,7 @@ int	main(int argc, char *argv[])
 	t_data	data;
 
 	(void)argc;
-	init_data(&data);
-	parsing_map(&data, argv[1]);
-	print_map(&data);
+	init_data(&data, argv);
 	render_loop(&data);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:59:37 by ptheo             #+#    #+#             */
-/*   Updated: 2025/01/30 19:42:43 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/01/31 02:56:12 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	draw_map(t_data *data)
 		x = 0;
 		while (data->map[y][x].type != '\0')
 		{
-			v = get_vect(x * data->size, y * data->size, 0);
+			v = data->map[y][x].pos;
 			if (data->map[y][x].type == '0' || data->map[y][x].type == 'N')
 			{
 				draw_square(data, get_square(v, get_vect(v.x + data->size, v.y,

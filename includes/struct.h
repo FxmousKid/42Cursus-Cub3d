@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:25:20 by ptheo             #+#    #+#             */
-/*   Updated: 2025/01/30 19:38:36 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/01/31 04:54:31 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ typedef struct s_move
 	bool		right;
 	bool		look_left;
 	bool		look_right;
-	bool		look_up;
-	bool		look_down;
 }				t_move;
 
 typedef struct s_vect
@@ -55,8 +53,20 @@ typedef struct s_pixel
 typedef struct s_tile
 {
 	char		type;
+	t_vect		index;
 	t_vect		pos;
 }				t_tile;
+
+typedef struct s_player
+{
+	int			speed;
+	double		camera_speed;
+	double		angle;
+	t_vect		plane;
+	t_vect		direction;
+	t_vect		pos;
+	t_vect		index;
+}				t_player;
 
 typedef struct s_loop
 {
@@ -69,6 +79,10 @@ typedef struct s_loop
 typedef struct s_ray
 {
 	double		angle;
+	t_vect		ray;
+	t_vect		side;
+	t_vect		delta;
+	t_vect		step;
 	t_tile		wall;
 }				t_ray;
 
@@ -78,6 +92,8 @@ typedef struct s_data
 	void		*win;
 	int			map_height;
 	int			size;
+	double		fov;
+	t_player	player;
 	t_pixel		pixel;
 	t_loop		loop;
 	t_move		movement;

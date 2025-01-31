@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:19:42 by ptheo             #+#    #+#             */
-/*   Updated: 2025/01/30 19:43:49 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/01/31 03:42:36 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,14 @@ int	fill_map(t_data *data, int fd)
 		while (line[x] != '\n' && line[x])
 		{
 			data->map[y][x].type = line[x];
-			data->map[y][x].pos = get_vect(x, y, 0);
+			data->map[y][x].index = get_vect(x, y, 0);
+			data->map[y][x].pos = get_vect(x * data->size, y * data->size, 0);
+			if (line[x] == 'N')
+			{
+				data->player.index = get_vect(x, y, 0);
+				data->player.pos = get_vect(x * data->size + data->size / 2, y
+						* data->size + data->size / 2, 20);
+			}
 			x++;
 		}
 		data->map[y][x].type = '\0';
