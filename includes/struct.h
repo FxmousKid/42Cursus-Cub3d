@@ -6,7 +6,7 @@
 /*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:25:20 by ptheo             #+#    #+#             */
-/*   Updated: 2025/01/31 17:18:40 by theo             ###   ########.fr       */
+/*   Updated: 2025/02/01 14:30:55 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_tile
 
 typedef struct s_player
 {
-	int			speed;
+	double		speed;
 	double		camera_speed;
 	double		angle;
 	t_vect		plane;

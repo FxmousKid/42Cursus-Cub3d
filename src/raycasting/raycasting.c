@@ -6,7 +6,7 @@
 /*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 03:08:32 by theo              #+#    #+#             */
-/*   Updated: 2025/01/31 17:24:13 by theo             ###   ########.fr       */
+/*   Updated: 2025/02/01 14:49:51 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,35 +59,30 @@ void	cast_ray(t_data *data, t_ray *ray)
 {
 	t_vect	map_pos;
 
-	map_pos.x = (int)(data->player.pos.x / data->size);
-	map_pos.y = (int)(data->player.pos.y / data->size);
-	printf("px : %f py : %f\n", (data->player.pos.x / data->size),
-		(data->player.pos.y / data->size));
+	map_pos.x = (int)(data->player.index.x);
+	map_pos.y = (int)(data->player.index.y);
+	printf("px : %f py : %f\n", (data->player.index.x), (data->player.index.y));
 	printf("wx : %f wy : %f\n", map_pos.x, map_pos.y);
 	ray->delta = init_length(&ray->ray);
 	if (ray->ray.x < 0)
 	{
 		ray->step.x = -1;
-		ray->side.x = ((data->player.pos.x / data->size) - map_pos.x)
-			* ray->delta.x;
+		ray->side.x = ((data->player.index.x - map_pos.x)) * ray->delta.x;
 	}
 	else
 	{
 		ray->step.x = 1;
-		ray->side.x = (map_pos.x + 1.0 - (data->player.pos.x / data->size))
-			* ray->delta.x;
+		ray->side.x = (map_pos.x + 1.0 - (data->player.index.x)) * ray->delta.x;
 	}
 	if (ray->ray.y < 0)
 	{
 		ray->step.y = -1;
-		ray->side.y = ((data->player.pos.y / data->size) - map_pos.y)
-			* ray->delta.y;
+		ray->side.y = ((data->player.index.y) - map_pos.y) * ray->delta.y;
 	}
 	else
 	{
 		ray->step.y = 1;
-		ray->side.y = (map_pos.y + 1.0 - (data->player.pos.y / data->size))
-			* ray->delta.y;
+		ray->side.y = (map_pos.y + 1.0 - (data->player.index.y)) * ray->delta.y;
 	}
 	dda_algo(data, ray, &map_pos);
 }
@@ -143,7 +138,7 @@ void	draw_wall(t_data *data, t_ray *ray)
 		proj = ray->side.y - ray->delta.y;
 	else
 		proj = ray->side.x - ray->delta.x;
-	line_h = ray->wall.height / proj * 3;
+	line_h = ray->wall.height * 3 / proj;
 	min_h = -line_h / 2 + ray->wall.height / 2;
 	if (min_h < 0)
 		min_h = 0;
@@ -154,6 +149,8 @@ void	draw_wall(t_data *data, t_ray *ray)
 		color = RED_ARGB;
 	else
 		color = BLUE_ARGB;
-	draw_line(data, get_vect(ray->index, min_h, 0), get_vect(ray->index, max_h,
-			0), color);
+	draw_line(data, get_vect(ray->index, min_h + SCREEN_HEIGHT / 2 - line_h / 2
+			- data->player.index.z * 10, 0), get_vect(ray->index, max_h
+			+ SCREEN_HEIGHT / 2 - line_h / 2 - data->player.index.z * 10, 0),
+		color);
 }
