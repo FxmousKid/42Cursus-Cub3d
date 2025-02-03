@@ -6,7 +6,7 @@
 /*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 02:22:40 by theo              #+#    #+#             */
-/*   Updated: 2025/02/01 14:54:12 by theo             ###   ########.fr       */
+/*   Updated: 2025/02/03 03:40:26 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,24 @@ int	init_player(t_data *data)
 {
 	t_player	player;
 
-	player.angle = 3 * PI / 2;
+	player.angle = 0;
 	player.speed = 0.2;
-	player.camera_speed = 0.1;
+	player.camera_speed = 0.07;
 	player.direction = get_vect(-1, 0, 0);
 	player.plane = get_vect(0, 0.66, 0);
 	data->player = player;
 	init_bool_move(data);
 	return (0);
+}
+
+void	first_view_player(t_data *data, char d)
+{
+	if (d == 'N')
+		data->player.angle = PI / 2;
+	else if (d == 'E')
+		data->player.angle = PI;
+	else if (d == 'S')
+		data->player.angle = -PI / 2;
 }
 
 void	player_update(t_data *data)
@@ -44,8 +54,5 @@ void	player_update(t_data *data)
 
 void	draw_player(t_data *data)
 {
-	draw_circle(data, data->player.pos, data->size / 3, GREEN_ARGB);
-	draw_line(data, data->player.pos, get_vect(data->player.pos.x
-			+ data->player.direction.x * 20, data->player.pos.y
-			+ data->player.direction.y * 20, 0), RED_ARGB);
+	(void)data;
 }

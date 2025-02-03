@@ -6,7 +6,7 @@
 /*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:41:13 by ptheo             #+#    #+#             */
-/*   Updated: 2025/01/31 17:07:08 by theo             ###   ########.fr       */
+/*   Updated: 2025/02/03 01:15:40 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	render_next_frame(t_data *data)
 		update_frame(data);
 		draw_background(data);
 		raycasting(data);
-		draw_map(data);
-		draw_player(data);
+		// draw_map(data);
+		// draw_player(data);
 		mlx_put_image_to_window(data->mlx, data->win, data->pixel.pixel, 0, 0);
 		data->loop.delta--;
 	}

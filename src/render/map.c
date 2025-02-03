@@ -6,7 +6,7 @@
 /*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:59:37 by ptheo             #+#    #+#             */
-/*   Updated: 2025/01/31 02:56:12 by theo             ###   ########.fr       */
+/*   Updated: 2025/02/03 02:19:05 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 void	draw_map(t_data *data)
 {
-	t_vect	v;
-	int		y;
-	int		x;
+	int	y;
+	int	x;
 
 	y = 0;
 	while (y < data->map_height)
@@ -24,23 +23,10 @@ void	draw_map(t_data *data)
 		x = 0;
 		while (data->map[y][x].type != '\0')
 		{
-			v = data->map[y][x].pos;
-			if (data->map[y][x].type == '0' || data->map[y][x].type == 'N')
-			{
-				draw_square(data, get_square(v, get_vect(v.x + data->size, v.y,
-							0), get_vect(v.x, v.y + data->size, 0), get_vect(v.x
-							+ data->size, v.y + data->size, 0)), GREY_ARGB);
-			}
-			else if (data->map[y][x].type == '1')
-			{
-				fill_square(data, get_square(v, get_vect(v.x + data->size, v.y,
-							0), get_vect(v.x, v.y + data->size, 0), get_vect(v.x
-							+ data->size, v.y + data->size, 0)), BLUE_ARGB);
-			}
-			x++;
 		}
-		y++;
+		x++;
 	}
+	y++;
 }
 
 void	print_map(t_data *data)

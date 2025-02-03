@@ -6,7 +6,7 @@
 /*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:34:35 by ptheo             #+#    #+#             */
-/*   Updated: 2025/01/31 00:52:15 by theo             ###   ########.fr       */
+/*   Updated: 2025/02/03 02:59:30 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	key_pressed(int keycode, t_data *data)
 {
-	ft_printf("key pressed : %d\n", keycode);
+	// ft_printf("key pressed : %d\n", keycode);
 	if (keycode == XK_w)
 	{
 		data->movement.front = true;
@@ -39,12 +39,16 @@ int	key_pressed(int keycode, t_data *data)
 	{
 		data->movement.look_right = true;
 	}
+	if (keycode == XK_Escape)
+	{
+		close_window(data);
+	}
 	return (0);
 }
 
 int	key_released(int keycode, t_data *data)
 {
-	ft_printf("key released : %d\n", keycode);
+	// ft_printf("key released : %d\n", keycode);
 	if (keycode == XK_w)
 	{
 		data->movement.front = false;

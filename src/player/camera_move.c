@@ -6,7 +6,7 @@
 /*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 02:42:22 by theo              #+#    #+#             */
-/*   Updated: 2025/02/01 14:38:25 by theo             ###   ########.fr       */
+/*   Updated: 2025/02/03 02:54:43 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,50 +25,41 @@ int	camera_movement(t_data *data)
 	return (0);
 }
 
+void	rotate_camera(t_data *data, double angle)
+{
+	t_vect	d;
+	t_vect	p;
+
+	d = data->player.direction;
+	p = data->player.plane;
+	data->player.direction.x = d.x * cos(angle) - d.y * sin(angle);
+	data->player.direction.y = d.x * sin(angle) + d.y * cos(angle);
+	data->player.plane.x = p.x * cos(angle) - p.y * sin(angle);
+	data->player.plane.y = p.x * sin(angle) + p.y * cos(angle);
+}
+
 int	look_right(t_data *data)
 {
 	t_player	player;
-	double		old_dir;
-	double		old_plane;
 
 	player = data->player;
-	old_dir = player.direction.x;
-	old_plane = player.plane.x;
-	player.angle += player.camera_speed;
-	if (player.angle > 2 * PI)
-		player.angle -= 2 * PI;
-	player.direction.x = player.direction.x * cos(-player.camera_speed)
-		- player.direction.y * sin(-player.camera_speed);
-	player.direction.y = old_dir * sin(-player.camera_speed)
-		+ player.direction.y * cos(-player.camera_speed);
-	player.plane.x = player.plane.x * cos(-player.camera_speed) - player.plane.y
-		* sin(-player.camera_speed);
-	player.plane.y = old_plane * sin(-player.camera_speed) + player.direction.y
-		* cos(-player.camera_speed);
+	player.angle -= player.camera_speed;
+	if (player.angle < 0)
+		player.angle += 2 * PI;
 	data->player = player;
+	rotate_camera(data, -player.camera_speed);
 	return (0);
 }
 
 int	look_left(t_data *data)
 {
 	t_player	player;
-	double		old_dir;
-	double		old_plane;
 
 	player = data->player;
-	old_dir = player.direction.x;
-	old_plane = player.plane.x;
-	player.angle -= player.camera_speed;
-	if (player.angle < 0)
-		player.angle += 2 * PI;
-	player.direction.x = player.direction.x * cos(player.camera_speed)
-		- player.direction.y * sin(player.camera_speed);
-	player.direction.y = old_dir * sin(player.camera_speed) + player.direction.y
-		* cos(player.camera_speed);
-	player.plane.x = player.plane.x * cos(player.camera_speed) - player.plane.y
-		* sin(player.camera_speed);
-	player.plane.y = old_plane * sin(player.camera_speed) + player.direction.y
-		* cos(player.camera_speed);
+	player.angle += player.camera_speed;
+	if (player.angle > 2 * PI)
+		player.angle -= 2 * PI;
 	data->player = player;
+	rotate_camera(data, player.camera_speed);
 	return (0);
 }

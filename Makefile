@@ -6,7 +6,7 @@
 #    By: theo <theo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 15:32:50 by inazaria          #+#    #+#              #
-#    Updated: 2025/01/31 03:42:59 by theo             ###   ########.fr        #
+#    Updated: 2025/02/03 02:28:16 by theo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,6 @@ SRC_FILES_NAMES += shapes/draw_shapes.c
 SRC_FILES_NAMES += player/player.c
 SRC_FILES_NAMES += player/player_move.c
 SRC_FILES_NAMES += player/camera_move.c
-SRC_FILES_NAMES += player/collision.c
 
 # RAYCASTING
 SRC_FILES_NAMES += raycasting/raycasting.c
@@ -51,6 +50,9 @@ SRC_FILES_NAMES += render/background.c
 
 # UTILS
 SRC_FILES_NAMES += utils/utils.c
+
+# TEXTURING
+SRC_FILES_NAMES += texturing/texture.c
 
 # to add for example src/map/map.c
 # SRC_FILES_NAMES += map/map.c

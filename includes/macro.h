@@ -6,7 +6,7 @@
 /*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:21:08 by ptheo             #+#    #+#             */
-/*   Updated: 2025/01/31 16:44:01 by theo             ###   ########.fr       */
+/*   Updated: 2025/02/03 02:26:44 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define END_TXT "\e[0m"
 
 # define WHITE_ARGB 0x00FFFFFF
+# define YELLOW_ARGB 0x00FFFF00
 # define RED_ARGB 0x00FF0000
 # define GREEN_ARGB 0x0000FF00
 # define BLUE_ARGB 0x000000FF

@@ -6,7 +6,7 @@
 /*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:31:08 by inazaria          #+#    #+#             */
-/*   Updated: 2025/01/31 17:07:24 by theo             ###   ########.fr       */
+/*   Updated: 2025/02/03 02:49:45 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void		print_map(t_data *data);
 int			init_player(t_data *data);
 void		draw_player(t_data *data);
 void		player_update(t_data *data);
-bool		touch_player(t_data *data);
+void		first_view_player(t_data *data, char d);
 
 /* PLAYER MOVE */
 int			player_movement(t_data *data);
@@ -53,6 +53,7 @@ int			move_right(t_data *data);
 int			camera_movement(t_data *data);
 int			look_right(t_data *data);
 int			look_left(t_data *data);
+void		rotate_camera(t_data *data, double angle);
 
 /* RAYCASTING */
 void		raycasting(t_data *data);
@@ -60,5 +61,8 @@ t_vect		init_length(t_vect *ray);
 void		cast_ray(t_data *data, t_ray *ray);
 void		dda_algo(t_data *data, t_ray *ray, t_vect *map_pos);
 void		draw_wall(t_data *data, t_ray *ray);
+
+/* TEXTURE */
+int			get_side_texture(t_ray *ray);
 
 #endif
