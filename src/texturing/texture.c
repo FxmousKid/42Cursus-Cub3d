@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 02:23:28 by theo              #+#    #+#             */
-/*   Updated: 2025/02/04 04:39:09 by theo             ###   ########.fr       */
+/*   Updated: 2025/02/04 12:03:18 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,23 +56,23 @@ void	draw_texture(t_data *data, t_img *texture, t_ray *ray)
 		wall_x = data->player.index.x + ray->proj * ray->ray.x;
 	wall_x -= floor((wall_x));
 	pos_x = (int)(wall_x * (double)(texture->width));
-	if (ray->w_side == 0 && ray->ray.x > 0)
+	if (ray->w_side == 0 && ray->ray.x < 0)
 		pos_x = texture->width - pos_x - 1;
 	if (ray->w_side == 1 && ray->ray.y < 0)
 		pos_x = texture->width - pos_x - 1;
-	step = (texture->height / ray->line_h);
-	tex_pos = ((ray->min_h - SCREEN_HEIGHT) / 2 + ray->line_h / 2) * step;
+	step = 1.0 * (texture->height / ray->line_h);
+	tex_pos = (ray->min_h - SCREEN_HEIGHT / 2 + ray->line_h / 2) * step;
 	y = ray->min_h;
-	color = 0;
 	while (y < ray->max_h)
 	{
-		pos_y = (int)tex_pos;
+		pos_y = (int)tex_pos & (texture->height - 1);
 		tex_pos += step;
-		color += texture->pixels[texture->height * pos_y + pos_x * 4] << 24;
-		color += texture->pixels[texture->height * pos_y + pos_x * 4] << 16;
-		color += texture->pixels[texture->height * pos_y + pos_x * 4] << 8;
-		color += texture->pixels[texture->height * pos_y + pos_x * 4];
-		put_pixel(data, ray->index, y, color);
+		if (texture->endian == 0)
+		{
+			color = pos_y * texture->line_size + pos_x
+				* (texture->bits_per_pixel / 8);
+		}
+		put_pixel(data, ray->index, y, *(int *)(texture->pixels + color));
 		y++;
 	}
 }

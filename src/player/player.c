@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 02:22:40 by theo              #+#    #+#             */
-/*   Updated: 2025/02/04 02:00:56 by theo             ###   ########.fr       */
+/*   Updated: 2025/02/04 10:07:17 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	init_player(t_data *data)
 
 	player.angle = 0;
 	player.speed = 0.2;
-	player.camera_speed = 0.007;
+	player.camera_speed = 0.07;
 	player.direction = get_vect(-1, 0, 0);
 	player.plane = get_vect(0, 0.66, 0);
 	data->player = player;

@@ -1,7 +1,7 @@
 NO ./ressource/wolftex/redbrick.xpm
 SO ./ressource/wolftex/bluestone.xpm
-WE ./ressource/wolftex/redbrick.xpm
-EA ./ressource/wolftex/bluestone.xpm
+WE ./ressource/wolftex/greystone.xpm
+EA ./ressource/wolftex/wood.xpm
 
 F 220,100,0
 C 225,30,0

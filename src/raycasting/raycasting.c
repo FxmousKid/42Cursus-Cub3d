@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 03:08:32 by theo              #+#    #+#             */
-/*   Updated: 2025/02/04 03:51:44 by theo             ###   ########.fr       */
+/*   Updated: 2025/02/04 10:46:40 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,12 @@ void	draw_wall(t_data *data, t_ray *ray)
 	if (ray->max_h >= SCREEN_HEIGHT)
 		ray->max_h = SCREEN_HEIGHT - 1;
 	draw_texture(data, get_side_texture(data, ray), ray);
-	// draw_line(data, get_vect(ray->index, ray->min_h, 0), get_vect(ray->index,
-	//		ray->max_h, 0), et_side_texture(ray)g);
+	/*
+	if (ray->w_side == 0)
+		draw_line(data, get_vect(ray->index, ray->min_h, 0),
+			get_vect(ray->index, ray->max_h, 0), RED_ARGB);
+	else
+		draw_line(data, get_vect(ray->index, ray->min_h, 0),
+			get_vect(ray->index, ray->max_h, 0), BLUE_ARGB);
+			*/
 }

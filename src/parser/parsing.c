@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:19:42 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/04 04:37:50 by theo             ###   ########.fr       */
+/*   Updated: 2025/02/04 10:45:18 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,25 +53,27 @@ int	parse_texture(t_data *data, int fd)
 	{
 		line = get_next_line(fd);
 		name = ft_split(line, ' ');
-		if (ft_strncmp(name[0], "NO", ft_strlen(name[0])))
+		if (ft_strncmp(name[0], "NO", ft_strlen(name[0])) == 0)
 		{
-			data->texture_north = get_texture(data, name[1]);
+			data->texture_north = get_texture(data, ft_strdup(name[1]));
 		}
-		else if (ft_strncmp(name[0], "SO", ft_strlen(name[0])))
+		else if (ft_strncmp(name[0], "SO", ft_strlen(name[0])) == 0)
 		{
-			data->texture_south = get_texture(data, name[1]);
+			data->texture_south = get_texture(data, ft_strdup(name[1]));
 		}
-		else if (ft_strncmp(name[0], "WE", ft_strlen(name[0])))
+		else if (ft_strncmp(name[0], "WE", ft_strlen(name[0])) == 0)
 		{
-			data->texture_west = get_texture(data, name[1]);
+			data->texture_west = get_texture(data, ft_strdup(name[1]));
 		}
-		else if (ft_strncmp(name[0], "EA", ft_strlen(name[0])))
+		else if (ft_strncmp(name[0], "EA", ft_strlen(name[0])) == 0)
 		{
-			data->texture_west = get_texture(data, name[1]);
+			data->texture_east = get_texture(data, ft_strdup(name[1]));
 		}
 		else
 			return (-1);
 		free(line);
+		free(name[0]);
+		free(name[1]);
 	}
 	for (int j = 0; j < 4; j++)
 	{
