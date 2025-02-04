@@ -6,7 +6,7 @@
 /*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:41:13 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/03 01:15:40 by theo             ###   ########.fr       */
+/*   Updated: 2025/02/04 01:40:06 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	render_loop(t_data *data)
 		data);
 	mlx_hook(data->win, KeyPress, KeyPressMask, &key_pressed, data);
 	mlx_hook(data->win, KeyRelease, KeyReleaseMask, &key_released, data);
+	mlx_hook(data->win, MotionNotify, PointerMotionMask, &mouse_motion, data);
 	mlx_loop(data->mlx);
 }
 

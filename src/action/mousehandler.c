@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   mousehandler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/30 18:04:04 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/04 03:28:07 by theo             ###   ########.fr       */
+/*   Created: 2025/02/04 01:38:03 by theo              #+#    #+#             */
+/*   Updated: 2025/02/04 01:59:15 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include "cub3d.h"
 
-# include "struct.h"
-
-int	check_file_name(char *file);
-int	parsing_map(t_data *data, char *file_map);
-int	parse_file(t_data *data, int fd);
-int	parse_texture(t_data *data, int fd);
-int	fill_map(t_data *data, int fd);
-
-#endif
+int	mouse_motion(int x, int y, t_data *data)
+{
+	(void)y;
+	if (data->last_pos_mouse - x > 0 || x <= 0)
+		look_left(data);
+	else if (data->last_pos_mouse - x < 0 || x >= SCREEN_WIDTH - 1)
+		look_right(data);
+	data->last_pos_mouse = x;
+	return (0);
+}

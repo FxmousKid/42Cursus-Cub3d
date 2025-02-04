@@ -6,7 +6,7 @@
 /*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 03:08:32 by theo              #+#    #+#             */
-/*   Updated: 2025/02/03 03:57:15 by theo             ###   ########.fr       */
+/*   Updated: 2025/02/04 03:51:44 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,13 @@ void	cast_ray(t_data *data, t_ray *ray)
 	ray->delta = init_length(&ray->ray);
 	if (ray->ray.x < 0)
 	{
-		ray->step.x = -1;
-		ray->side.x = ((data->player.index.x - map_pos.x)) * ray->delta.x;
+		ray->step.x = 1;
+		ray->side.x = (map_pos.x + 1.0 - (data->player.index.x)) * ray->delta.x;
 	}
 	else
 	{
-		ray->step.x = 1;
-		ray->side.x = (map_pos.x + 1.0 - (data->player.index.x)) * ray->delta.x;
+		ray->step.x = -1;
+		ray->side.x = ((data->player.index.x - map_pos.x)) * ray->delta.x;
 	}
 	if (ray->ray.y < 0)
 	{
@@ -114,22 +114,18 @@ void	dda_algo(t_data *data, t_ray *ray, t_vect *map_pos)
 
 void	draw_wall(t_data *data, t_ray *ray)
 {
-	int		line_h;
-	int		max_h;
-	int		min_h;
-	double	proj;
-
 	if (ray->w_side)
-		proj = ray->side.y - ray->delta.y;
+		ray->proj = ray->side.y - ray->delta.y;
 	else
-		proj = ray->side.x - ray->delta.x;
-	line_h = SCREEN_HEIGHT / proj;
-	min_h = SCREEN_HEIGHT / 2 - line_h / 2;
-	if (min_h < 0)
-		min_h = 0;
-	max_h = SCREEN_HEIGHT / 2 + line_h / 2;
-	if (max_h >= SCREEN_HEIGHT)
-		max_h = SCREEN_HEIGHT - 1;
-	draw_line(data, get_vect(ray->index, min_h, 0), get_vect(ray->index, max_h,
-			0), get_side_texture(ray));
+		ray->proj = ray->side.x - ray->delta.x;
+	ray->line_h = SCREEN_HEIGHT / ray->proj;
+	ray->min_h = SCREEN_HEIGHT / 2 - ray->line_h / 2;
+	if (ray->min_h < 0)
+		ray->min_h = 0;
+	ray->max_h = SCREEN_HEIGHT / 2 + ray->line_h / 2;
+	if (ray->max_h >= SCREEN_HEIGHT)
+		ray->max_h = SCREEN_HEIGHT - 1;
+	draw_texture(data, get_side_texture(data, ray), ray);
+	// draw_line(data, get_vect(ray->index, ray->min_h, 0), get_vect(ray->index,
+	//		ray->max_h, 0), et_side_texture(ray)g);
 }

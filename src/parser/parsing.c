@@ -6,7 +6,7 @@
 /*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:19:42 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/03 04:01:46 by theo             ###   ########.fr       */
+/*   Updated: 2025/02/04 04:37:50 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,47 @@ int	parsing_map(t_data *data, char *file_map)
 int	parse_file(t_data *data, int fd)
 {
 	ft_bzero(data->map, MAP_SIZE_MAX);
-	if (get_texture(data, fd) == -1)
+	if (parse_texture(data, fd) == -1)
 		return (-1);
 	if (fill_map(data, fd) == -1)
 		return (-1);
 	return (0);
 }
 
-int	get_texture(t_data *data, int fd)
+int	parse_texture(t_data *data, int fd)
 {
+	char	**name;
 	char	*line;
 
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < 4; i++)
+	{
+		line = get_next_line(fd);
+		name = ft_split(line, ' ');
+		if (ft_strncmp(name[0], "NO", ft_strlen(name[0])))
+		{
+			data->texture_north = get_texture(data, name[1]);
+		}
+		else if (ft_strncmp(name[0], "SO", ft_strlen(name[0])))
+		{
+			data->texture_south = get_texture(data, name[1]);
+		}
+		else if (ft_strncmp(name[0], "WE", ft_strlen(name[0])))
+		{
+			data->texture_west = get_texture(data, name[1]);
+		}
+		else if (ft_strncmp(name[0], "EA", ft_strlen(name[0])))
+		{
+			data->texture_west = get_texture(data, name[1]);
+		}
+		else
+			return (-1);
+		free(line);
+	}
+	for (int j = 0; j < 4; j++)
 	{
 		line = get_next_line(fd);
 		free(line);
 	}
-	(void)data;
 	return (0);
 }
 

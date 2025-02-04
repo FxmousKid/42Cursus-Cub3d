@@ -6,7 +6,7 @@
 #    By: theo <theo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 15:32:50 by inazaria          #+#    #+#              #
-#    Updated: 2025/02/03 02:28:16 by theo             ###   ########.fr        #
+#    Updated: 2025/02/04 01:42:43 by theo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRC_FILES_NAMES = main.c
 # ACTION
 SRC_FILES_NAMES += action/exit.c
 SRC_FILES_NAMES += action/keyhandler.c
+SRC_FILES_NAMES += action/mousehandler.c
 
 # SHAPES
 SRC_FILES_NAMES += shapes/pixel.c

@@ -6,7 +6,7 @@
 /*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:31:08 by inazaria          #+#    #+#             */
-/*   Updated: 2025/02/03 02:49:45 by theo             ###   ########.fr       */
+/*   Updated: 2025/02/04 04:39:12 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void		dda_algo(t_data *data, t_ray *ray, t_vect *map_pos);
 void		draw_wall(t_data *data, t_ray *ray);
 
 /* TEXTURE */
-int			get_side_texture(t_ray *ray);
+t_img		*get_side_texture(t_data *data, t_ray *ray);
+t_img		get_texture(t_data *data, char *path);
+void		draw_texture(t_data *data, t_img *texture, t_ray *ray);
 
 #endif

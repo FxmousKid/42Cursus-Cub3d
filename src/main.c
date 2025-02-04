@@ -6,7 +6,7 @@
 /*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:28:06 by inazaria          #+#    #+#             */
-/*   Updated: 2025/01/31 16:43:05 by theo             ###   ########.fr       */
+/*   Updated: 2025/02/04 01:45:17 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	init_data(t_data *data, char *argv[])
 	data->loop.last_time = get_current_time();
 	data->size = 10;
 	data->fov = 90;
+	data->last_pos_mouse = SCREEN_WIDTH / 2;
 	init_player(data);
 	parsing_map(data, argv[1]);
 	print_map(data);
