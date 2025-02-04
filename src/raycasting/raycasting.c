@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 03:08:32 by theo              #+#    #+#             */
-/*   Updated: 2025/02/04 10:46:40 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/02/04 16:20:29 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	draw_wall(t_data *data, t_ray *ray)
 		ray->proj = ray->side.y - ray->delta.y;
 	else
 		ray->proj = ray->side.x - ray->delta.x;
-	ray->line_h = SCREEN_HEIGHT / ray->proj;
+	ray->line_h = (double)SCREEN_HEIGHT / ray->proj;
 	ray->min_h = SCREEN_HEIGHT / 2 - ray->line_h / 2;
 	if (ray->min_h < 0)
 		ray->min_h = 0;
