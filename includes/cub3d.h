@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:31:08 by inazaria          #+#    #+#             */
-/*   Updated: 2025/02/04 10:38:04 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/02/05 02:13:02 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void		draw_wall(t_data *data, t_ray *ray);
 
 /* TEXTURE */
 t_img		*get_side_texture(t_data *data, t_ray *ray);
-t_img		get_texture(t_data *data, char *path);
+t_img		get_texture(t_data *data, char *p);
 void		draw_texture(t_data *data, t_img *texture, t_ray *ray);
 
 #endif

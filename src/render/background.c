@@ -6,7 +6,7 @@
 /*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 02:47:14 by theo              #+#    #+#             */
-/*   Updated: 2025/01/31 02:47:46 by theo             ###   ########.fr       */
+/*   Updated: 2025/02/05 01:56:08 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ void	draw_background(t_data *data)
 		x = 0;
 		while (x < SCREEN_WIDTH)
 		{
-			put_pixel(data, x, y, BLACK_ARGB);
+			if (y < SCREEN_HEIGHT / 2)
+				put_pixel(data, x, y, data->color_celling);
+			else
+				put_pixel(data, x, y, data->color_floor);
 			x++;
 		}
 		y++;

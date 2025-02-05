@@ -6,7 +6,7 @@
 /*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:41:41 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/03 02:31:45 by theo             ###   ########.fr       */
+/*   Updated: 2025/02/05 02:16:23 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 int	close_window(t_data *data)
 {
+	if (data->texture_north.img != NULL)
+		mlx_destroy_image(data->mlx, data->texture_north.img);
+	if (data->texture_south.img != NULL)
+		mlx_destroy_image(data->mlx, data->texture_south.img);
+	if (data->texture_west.img != NULL)
+		mlx_destroy_image(data->mlx, data->texture_west.img);
+	if (data->texture_east.img != NULL)
+		mlx_destroy_image(data->mlx, data->texture_east.img);
 	if (data->pixel.pixel != NULL)
 		mlx_destroy_image(data->mlx, data->pixel.pixel);
 	if (data->win != NULL)

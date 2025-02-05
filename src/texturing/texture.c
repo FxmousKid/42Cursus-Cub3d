@@ -3,23 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 02:23:28 by theo              #+#    #+#             */
-/*   Updated: 2025/02/04 16:26:32 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/02/05 02:12:49 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_img	get_texture(t_data *data, char *path)
+t_img	get_texture(t_data *data, char *p)
 {
+	char	*path;
 	t_img	img;
 
-	path = ft_strtrim(path, "\n");
+	path = ft_strtrim(p, "\n");
 	img.img = mlx_xpm_file_to_image(data->mlx, path, &img.width, &img.height);
 	img.pixels = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_size,
 			&img.endian);
+	free(path);
+	free(p);
 	return (img);
 }
 

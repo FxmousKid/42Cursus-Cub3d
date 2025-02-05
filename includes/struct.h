@@ -6,7 +6,7 @@
 /*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:25:20 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/04 03:58:00 by theo             ###   ########.fr       */
+/*   Updated: 2025/02/05 01:55:04 by theo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,8 @@ typedef struct s_data
 	t_img		texture_south;
 	t_img		texture_west;
 	t_img		texture_east;
-	t_img		texture_floor;
-	t_img		texture_celling;
+	int			color_floor;
+	int			color_celling;
 }				t_data;
 
 #endif

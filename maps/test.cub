@@ -3,8 +3,8 @@ SO ./ressource/wolftex/wood.xpm
 WE ./ressource/wolftex/bluestone.xpm
 EA ./ressource/wolftex/greystone.xpm
 
-F 220,100,0
-C 225,30,0
+F 121,121,121
+C 0,233,255
 
         1111111111111111111111111
         1000000000110000000000001
