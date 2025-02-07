@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: theo <theo@student.42.fr>                  +#+  +:+       +#+         #
+#    By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 15:32:50 by inazaria          #+#    #+#              #
-#    Updated: 2025/02/04 01:42:43 by theo             ###   ########.fr        #
+#    Updated: 2025/02/07 19:23:05 by ptheo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SRC_FILES_NAMES += player/camera_move.c
 
 # RAYCASTING
 SRC_FILES_NAMES += raycasting/raycasting.c
+SRC_FILES_NAMES += raycasting/floor_celling.c
 
 # PARSING
 SRC_FILES_NAMES += parser/parsing.c

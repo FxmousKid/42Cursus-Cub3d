@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:25:20 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/05 01:55:04 by theo             ###   ########.fr       */
+/*   Updated: 2025/02/07 19:20:07 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,16 @@ typedef struct s_img
 	int			endian;
 }				t_img;
 
+typedef struct s_floor
+{
+	t_vect		ray_dir0;
+	t_vect		ray_dir1;
+	int			p;
+	int			y;
+	float		posz;
+	float		row_distance;
+}				t_floor;
+
 typedef struct s_ray
 {
 	int			w_side;
@@ -121,6 +131,8 @@ typedef struct s_data
 	t_img		texture_south;
 	t_img		texture_west;
 	t_img		texture_east;
+	t_img		texture_celling;
+	t_img		texture_floor;
 	int			color_floor;
 	int			color_celling;
 }				t_data;

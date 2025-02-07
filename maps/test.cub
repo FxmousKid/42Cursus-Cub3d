@@ -1,10 +1,10 @@
-NO ./ressource/wolftex/redbrick.xpm
-SO ./ressource/wolftex/wood.xpm
-WE ./ressource/wolftex/bluestone.xpm
-EA ./ressource/wolftex/greystone.xpm
+NO ./ressource/iyan.xpm
+SO ./ressource/iyan.xpm
+WE ./ressource/iyan.xpm
+EA ./ressource/iyan.xpm
 
-F 121,121,121
-C 0,233,255
+F ./ressource/iyan.xpm
+C ./ressource/iyan.xpm
 
         1111111111111111111111111
         1000000000110000000000001

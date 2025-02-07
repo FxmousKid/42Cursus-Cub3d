@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:19:42 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/05 02:10:49 by theo             ###   ########.fr       */
+/*   Updated: 2025/02/07 19:26:53 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	parse_file(t_data *data, int fd)
 int	parse_texture(t_data *data, int fd)
 {
 	char	**name;
-	char	**color;
 	char	*line;
 
 	for (int i = 0; i < 4; i++)
@@ -85,25 +84,14 @@ int	parse_texture(t_data *data, int fd)
 		name = ft_split(line, ' ');
 		if (ft_strncmp(name[0], "F", ft_strlen(name[0])) == 0)
 		{
-			color = ft_split(name[1], ',');
-			data->color_floor = ft_atoi(color[0]) * 65536;
-			data->color_floor += ft_atoi(color[1]) * 256;
-			data->color_floor += ft_atoi(color[2]);
+			data->texture_floor = get_texture(data, name[1]);
 		}
 		else if (ft_strncmp(name[0], "C", ft_strlen(name[0])) == 0)
 		{
-			color = ft_split(name[1], ',');
-			data->color_celling = ft_atoi(color[0]) * 65536;
-			data->color_celling += ft_atoi(color[1]) * 256;
-			data->color_celling += ft_atoi(color[2]);
+			data->texture_celling = get_texture(data, name[1]);
 		}
 		free(line);
-		free(color[0]);
-		free(color[1]);
-		free(color[2]);
-		free(color);
 		free(name[0]);
-		free(name[1]);
 		free(name);
 	}
 	line = get_next_line(fd);

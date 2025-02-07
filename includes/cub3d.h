@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:31:08 by inazaria          #+#    #+#             */
-/*   Updated: 2025/02/05 02:13:02 by theo             ###   ########.fr       */
+/*   Updated: 2025/02/07 19:22:30 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ t_vect		init_length(t_vect *ray);
 void		cast_ray(t_data *data, t_ray *ray);
 void		dda_algo(t_data *data, t_ray *ray, t_vect *map_pos);
 void		draw_wall(t_data *data, t_ray *ray);
+void		floor_celling_raycasting(t_data *data);
+void		draw_floor_celling(t_data *data, t_floor *floor);
 
 /* TEXTURE */
 t_img		*get_side_texture(t_data *data, t_ray *ray);

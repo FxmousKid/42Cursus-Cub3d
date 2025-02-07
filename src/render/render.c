@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:41:13 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/04 10:34:49 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/02/07 19:23:40 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	render_next_frame(t_data *data)
 	{
 		update_frame(data);
 		draw_background(data);
+		floor_celling_raycasting(data);
 		raycasting(data);
 		// draw_map(data);
 		// draw_player(data);
