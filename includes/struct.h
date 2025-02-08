@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:25:20 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/07 19:20:07 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/02/08 18:40:37 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ typedef struct s_ray
 	int			max_h;
 	int			min_h;
 	double		proj;
+	double		wall_x;
+	t_vect		map_pos;
 	t_vect		ray;
 	t_vect		side;
 	t_vect		delta;

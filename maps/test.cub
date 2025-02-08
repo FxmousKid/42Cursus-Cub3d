@@ -1,6 +1,6 @@
-NO ./ressource/iyan.xpm
-SO ./ressource/iyan.xpm
-WE ./ressource/iyan.xpm
+NO ./ressource/wolftex/bluestone.xpm
+SO ./ressource/wolftex/greystone.xpm
+WE ./ressource/wolftex/wood.xpm
 EA ./ressource/iyan.xpm
 
 F ./ressource/iyan.xpm

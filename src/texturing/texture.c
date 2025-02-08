@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 02:23:28 by theo              #+#    #+#             */
-/*   Updated: 2025/02/05 02:12:49 by theo             ###   ########.fr       */
+/*   Updated: 2025/02/08 18:40:52 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	draw_texture(t_data *data, t_img *texture, t_ray *ray)
 	step = 1.0 * ((double)texture->height / (double)ray->line_h);
 	tex_pos = (ray->min_h - (SCREEN_HEIGHT / 2) + (ray->line_h / 2)) * step;
 	y = ray->min_h;
+	ray->wall_x = wall_x;
 	while (y < ray->max_h)
 	{
 		pos_y = (int)tex_pos;

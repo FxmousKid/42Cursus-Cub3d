@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 03:08:32 by theo              #+#    #+#             */
-/*   Updated: 2025/02/04 16:20:29 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/02/08 18:38:47 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	cast_ray(t_data *data, t_ray *ray)
 
 	map_pos.x = (int)(data->player.index.x);
 	map_pos.y = (int)(data->player.index.y);
+	ray->map_pos.x = map_pos.x;
+	ray->map_pos.y = map_pos.y;
 	// printf("px : %f py : %f\n", (data->player.index.x),
 	//	(data->player.index.y));
 	// printf("wx : %f wy : %f\n", map_pos.x, map_pos.y);
