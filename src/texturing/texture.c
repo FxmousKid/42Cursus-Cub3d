@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 02:23:28 by theo              #+#    #+#             */
-/*   Updated: 2025/02/08 18:40:52 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/02/09 19:30:13 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	draw_texture(t_data *data, t_img *texture, t_ray *ray)
 	step = 1.0 * ((double)texture->height / (double)ray->line_h);
 	tex_pos = (ray->min_h - (SCREEN_HEIGHT / 2) + (ray->line_h / 2)) * step;
 	y = ray->min_h;
-	ray->wall_x = wall_x;
+	ray->wall_x = wall_x - floor(wall_x);
 	while (y < ray->max_h)
 	{
 		pos_y = (int)tex_pos;
@@ -71,7 +71,26 @@ void	draw_texture(t_data *data, t_img *texture, t_ray *ray)
 			color = pos_y * texture->line_size + pos_x
 				* (texture->bits_per_pixel / 8);
 		}
-		put_pixel(data, ray->index, y, *(int *)(texture->pixels + color));
+		put_pixel(data, ray->index, y, dark_color(*(int *)(texture->pixels
+					+ color), ray->proj));
 		y++;
 	}
+}
+
+int	dark_color(int color, double dist)
+{
+	int	dark;
+	int	alpha;
+	int	red;
+	int	blue;
+	int	green;
+
+	dark = 100 - (100 * dist) / 10;
+	if (dark < 0)
+		dark = 0;
+	alpha = ((color >> 24) & 0xff);
+	red = ((double)((color >> 16) & 0xff) / 100) * dark;
+	green = ((double)((color >> 8) & 0xff) / 100) * dark;
+	blue = ((double)((color)&0xff) / 100) * dark;
+	return ((alpha << 24) + (red << 16) + (green << 8) + (blue));
 }

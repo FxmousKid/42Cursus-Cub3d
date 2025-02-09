@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:31:08 by inazaria          #+#    #+#             */
-/*   Updated: 2025/02/07 19:22:30 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/02/09 19:30:18 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,12 @@ void		dda_algo(t_data *data, t_ray *ray, t_vect *map_pos);
 void		draw_wall(t_data *data, t_ray *ray);
 void		floor_celling_raycasting(t_data *data);
 void		draw_floor_celling(t_data *data, t_floor *floor);
+void		floor_and_celling_casting(t_data *data, t_ray *ray);
 
 /* TEXTURE */
 t_img		*get_side_texture(t_data *data, t_ray *ray);
 t_img		get_texture(t_data *data, char *p);
 void		draw_texture(t_data *data, t_img *texture, t_ray *ray);
+int			dark_color(int color, double dist);
 
 #endif
