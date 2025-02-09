@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:31:08 by inazaria          #+#    #+#             */
-/*   Updated: 2025/02/09 19:30:18 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/02/09 23:10:49 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,13 @@ t_img		*get_side_texture(t_data *data, t_ray *ray);
 t_img		get_texture(t_data *data, char *p);
 void		draw_texture(t_data *data, t_img *texture, t_ray *ray);
 int			dark_color(int color, double dist);
+int			apply_shader(t_data *data, t_vect pos, int color, double dist);
+
+/* COLOR */
+t_argb		hex_to_argb(int color);
+int			argb_to_hex(t_argb argb);
+
+/* FLASHLIGHT */
+int			flashlight_shader(t_data *data, t_vect pos, int color, double dist);
 
 #endif

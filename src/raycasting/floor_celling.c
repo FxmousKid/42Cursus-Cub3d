@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 18:55:56 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/09 19:38:00 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/02/09 23:13:12 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,17 @@ void	draw_floor_celling(t_data *data, t_floor *side)
 	while (i < SCREEN_WIDTH)
 	{
 		texture_cor1 = get_vect((int)(((double)data->texture_floor.width
-						* (double)(floor_pos.x - floor(floor_pos.x))))
+						* (double)(floor_pos.x - (int)floor_pos.x)))
 				% (data->texture_floor.width - 1),
 				(int)((double)data->texture_floor.height * (double)(floor_pos.y
-						- floor(floor_pos.y))) % (data->texture_floor.height
-					- 1), 0);
+						- (int)floor_pos.y)) % (data->texture_floor.height - 1),
+				0);
 		texture_cor2 = get_vect((int)((double)data->texture_celling.width
 					* (floor_pos.x - (int)floor_pos.x))
 				% (data->texture_celling.width - 1),
 				(int)((double)data->texture_celling.height * (floor_pos.y
 						- (int)floor_pos.y)) % (data->texture_celling.height
 					- 1), 0);
-		// printf("diff : %f - %f\n", texture_cor1.x, texture_cor2.x);
 		dist_p = sqrt((fabs(data->player.index.x - floor_pos.x)
 					* fabs(data->player.index.x - floor_pos.x)
 					+ fabs(data->player.index.y - floor_pos.y)
@@ -79,8 +78,8 @@ void	draw_floor_celling(t_data *data, t_floor *side)
 		{
 			color = texture_cor1.y * data->texture_floor.line_size
 				+ texture_cor1.x * (data->texture_floor.bits_per_pixel / 8);
-			put_pixel(data, i, side->y,
-				dark_color(*(int *)(data->texture_floor.pixels + color),
+			put_pixel(data, i, side->y, apply_shader(data, get_vect(i, side->y,
+						0), *(int *)(data->texture_floor.pixels + color),
 					dist_p));
 		}
 		if (texture_cor2.x >= 0 && texture_cor2.x <= data->texture_celling.width
@@ -89,9 +88,9 @@ void	draw_floor_celling(t_data *data, t_floor *side)
 		{
 			color = texture_cor2.y * data->texture_celling.line_size
 				+ texture_cor2.x * (data->texture_celling.bits_per_pixel / 8);
-			put_pixel(data, i, SCREEN_HEIGHT - side->y - 1,
-				dark_color(*(int *)(data->texture_celling.pixels + color),
-					dist_p));
+			put_pixel(data, i, SCREEN_HEIGHT - side->y - 1, apply_shader(data,
+					get_vect(i, SCREEN_HEIGHT - side->y - 1, 0),
+					*(int *)(data->texture_celling.pixels + color), dist_p));
 		}
 		i++;
 	}
@@ -148,8 +147,9 @@ void	floor_and_celling_casting(t_data *data, t_ray *ray)
 				% data->texture_celling.height, 0);
 		color = text_pos.y * data->texture_floor.line_size + text_pos.x
 			* (data->texture_floor.bits_per_pixel / 8);
-		put_pixel(data, ray->index, y, *(int *)(data->texture_floor.pixels
-				+ color));
+		put_pixel(data, ray->index, y, apply_shader(data, get_vect(ray->index,
+					y, 0), *(int *)(data->texture_floor.pixels + color),
+				current_dist));
 		// put_pixel(data, ray->index, SCREEN_HEIGHT - y,
 		//	*(int *)(data->texture_celling.pixels + color));
 		y++;

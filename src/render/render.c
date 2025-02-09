@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:41:13 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/09 18:15:17 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/02/09 22:51:40 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,13 @@ int	render_next_frame(t_data *data)
 	data->loop.delta += (current_time - data->loop.last_time)
 		/ data->loop.interval;
 	data->loop.last_time = current_time;
+	if (data->loop.delta >= 0.5)
+	{
+	}
 	if (data->loop.delta >= 1)
 	{
+		// draw_background(data);
 		update_frame(data);
-		draw_background(data);
 		floor_celling_raycasting(data);
 		raycasting(data);
 		// draw_map(data);

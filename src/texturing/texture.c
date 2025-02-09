@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 02:23:28 by theo              #+#    #+#             */
-/*   Updated: 2025/02/09 19:30:13 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/02/09 23:30:54 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void	draw_texture(t_data *data, t_img *texture, t_ray *ray)
 			color = pos_y * texture->line_size + pos_x
 				* (texture->bits_per_pixel / 8);
 		}
-		put_pixel(data, ray->index, y, dark_color(*(int *)(texture->pixels
-					+ color), ray->proj));
+		put_pixel(data, ray->index, y, apply_shader(data, get_vect(ray->index,
+					y, 0), *(int *)(texture->pixels + color), ray->proj));
 		y++;
 	}
 }
@@ -89,8 +89,15 @@ int	dark_color(int color, double dist)
 	if (dark < 0)
 		dark = 0;
 	alpha = ((color >> 24) & 0xff);
-	red = ((double)((color >> 16) & 0xff) / 100) * dark;
-	green = ((double)((color >> 8) & 0xff) / 100) * dark;
-	blue = ((double)((color)&0xff) / 100) * dark;
+	red = ((double)((color >> 16) & 0xff) / 100) * dark * 0.1;
+	green = ((double)((color >> 8) & 0xff) / 100) * dark * 0.1;
+	blue = ((double)((color)&0xff) / 100) * dark * 0.1;
 	return ((alpha << 24) + (red << 16) + (green << 8) + (blue));
+}
+
+int	apply_shader(t_data *data, t_vect pos, int color, double dist)
+{
+	color = dark_color(color, dist);
+	color = flashlight_shader(data, pos, color, dist);
+	return (color);
 }

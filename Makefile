@@ -6,7 +6,7 @@
 #    By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 15:32:50 by inazaria          #+#    #+#              #
-#    Updated: 2025/02/07 19:23:05 by ptheo            ###   ########.fr        #
+#    Updated: 2025/02/09 23:02:37 by ptheo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,8 @@ SRC_FILES_NAMES += utils/utils.c
 
 # TEXTURING
 SRC_FILES_NAMES += texturing/texture.c
+SRC_FILES_NAMES += texturing/color_management.c
+SRC_FILES_NAMES += texturing/flashlight.c
 
 # to add for example src/map/map.c
 # SRC_FILES_NAMES += map/map.c

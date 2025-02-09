@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:25:20 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/08 18:40:37 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/02/09 22:58:29 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,16 @@ typedef struct s_move
 	bool		right;
 	bool		look_left;
 	bool		look_right;
+	bool		flash;
 }				t_move;
+
+typedef struct s_argb
+{
+	int			alpha;
+	int			red;
+	int			green;
+	int			blue;
+}				t_argb;
 
 typedef struct s_vect
 {

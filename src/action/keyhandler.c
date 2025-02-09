@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyhandler.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:34:35 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/03 02:59:30 by theo             ###   ########.fr       */
+/*   Updated: 2025/02/09 22:56:17 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,13 @@ int	key_pressed(int keycode, t_data *data)
 	if (keycode == XK_Escape)
 	{
 		close_window(data);
+	}
+	if (keycode == XK_f)
+	{
+		if (data->movement.flash == false)
+			data->movement.flash = true;
+		else
+			data->movement.flash = false;
 	}
 	return (0);
 }
