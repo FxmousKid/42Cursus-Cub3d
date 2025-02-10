@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 03:08:32 by theo              #+#    #+#             */
-/*   Updated: 2025/02/09 22:47:03 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/02/10 16:02:27 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	dda_algo(t_data *data, t_ray *ray, t_vect *map_pos)
 
 	wall = 0;
 	i = 0;
-	while (!wall && i < 15)
+	while (!wall && i < 50)
 	{
 		if (ray->side.x < ray->side.y)
 		{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macro.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:21:08 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/03 02:26:44 by theo             ###   ########.fr       */
+/*   Updated: 2025/02/10 17:31:48 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@
 # define GREY_ARGB 0x80808080
 # define BLACK_ARGB 0x00000000
 
-# define SCREEN_HEIGHT 1080
-# define SCREEN_WIDTH 1920
+# define SCREEN_HEIGHT 720
+# define SCREEN_WIDTH 1080
 
 # define PI 3.14159265359
 

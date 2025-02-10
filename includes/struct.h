@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:25:20 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/09 22:58:29 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/02/10 16:31:44 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,13 @@ typedef struct s_player
 typedef struct s_loop
 {
 	int			fps;
-	double		interval;
+	int			ups;
+	double		interval_frame;
+	double		interval_update;
 	long int	last_time;
-	double		delta;
+	double		delta_frame;
+	double		delta_update;
+
 }				t_loop;
 
 typedef struct s_img
@@ -101,6 +105,10 @@ typedef struct s_floor
 {
 	t_vect		ray_dir0;
 	t_vect		ray_dir1;
+	t_vect		floor_step;
+	t_vect		floor_pos;
+	t_vect		texture_cor1;
+	t_vect		texture_cor2;
 	int			p;
 	int			y;
 	float		posz;
@@ -133,6 +141,7 @@ typedef struct s_data
 	int			last_pos_mouse;
 	double		size;
 	double		fov;
+	int			**frame;
 	t_player	player;
 	t_pixel		pixel;
 	t_loop		loop;

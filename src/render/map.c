@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:59:37 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/03 02:19:05 by theo             ###   ########.fr       */
+/*   Updated: 2025/02/10 17:30:37 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,43 @@ void	draw_map(t_data *data)
 	int	y;
 	int	x;
 
-	y = 0;
-	while (y < data->map_height)
+	y = (int)data->player.index.y - 5;
+	if (y < 0)
+		y = 0;
+	while (y < data->map_height && y < (int)data->player.index.y + 5)
 	{
-		x = 0;
-		while (data->map[y][x].type != '\0')
+		x = data->player.index.x - 5;
+		if (x < 0)
+			x = 0;
+		while (data->map[y][x].type != '\0' && x < (int)data->player.index.x
+			+ 5)
 		{
+			if (data->map[y][x].type == '1')
+			{
+				draw_square(data, get_square(get_vect((SCREEN_WIDTH - data->size
+								* 11) + ((x - (data->player.index.x - 5)))
+							* data->size, data->size + ((y
+									- (data->player.index.y - 5))) * data->size,
+							0), get_vect((SCREEN_WIDTH - data->size * 11) + ((x
+									- (data->player.index.x - 5))) * data->size
+							+ data->size, (data->size) + ((y
+									- (data->player.index.y - 5))) * data->size,
+							0), get_vect((SCREEN_WIDTH - data->size * 11) + ((x
+									- (data->player.index.x - 5))) * data->size,
+							(data->size) + ((y - (data->player.index.y - 5)))
+							* data->size + data->size, 0),
+						get_vect((SCREEN_WIDTH - data->size * 11) + ((x
+									- (data->player.index.x - 5))) * data->size
+							+ data->size, (data->size) + ((y
+									- (data->player.index.y - 5))) * data->size
+							+ data->size, 0)), WHITE_ARGB);
+			}
+			x++;
 		}
-		x++;
+		y++;
 	}
-	y++;
+	draw_circle(data, get_vect(SCREEN_WIDTH - (data->size * 6), data->size * 6,
+			0), data->size / 4, RED_ARGB);
 }
 
 void	print_map(t_data *data)

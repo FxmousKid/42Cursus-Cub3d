@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:28:06 by inazaria          #+#    #+#             */
-/*   Updated: 2025/02/09 22:45:15 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/02/10 16:52:25 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 int	init_data(t_data *data, char *argv[])
 {
+	int	i;
+
+	i = 0;
 	data->mlx = mlx_init();
 	if (data->mlx == NULL)
 		return (-1);
@@ -22,11 +25,21 @@ int	init_data(t_data *data, char *argv[])
 		return (-1);
 	if (init_pixel(&data->pixel, data->mlx) == -1)
 		return (-1);
-	data->loop.delta = 0;
+	data->frame = (int **)malloc(sizeof(int *) * (SCREEN_HEIGHT));
+	while (i < SCREEN_HEIGHT)
+	{
+		data->frame[i] = (int *)malloc(sizeof(int) * SCREEN_WIDTH);
+		i++;
+	}
+	data->loop.delta_frame = 0;
+	data->loop.delta_update = 0;
 	data->loop.fps = 60;
-	data->loop.interval = 1000 / data->loop.fps;
+	data->loop.ups = 120;
+	data->loop.interval_frame = 1000 / data->loop.fps;
+	data->loop.interval_update = 1000 / data->loop.ups;
 	data->loop.last_time = get_current_time();
-	data->size = 10;
+	data->size = (SCREEN_HEIGHT + SCREEN_WIDTH) / 200;
+	printf("size : %f\n", data->size);
 	data->fov = 90;
 	data->last_pos_mouse = SCREEN_WIDTH / 2;
 	init_player(data);

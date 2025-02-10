@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:31:08 by inazaria          #+#    #+#             */
-/*   Updated: 2025/02/09 23:10:49 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/02/10 16:23:02 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int			init_data(t_data *data, char *argv[]);
 void		render_loop(t_data *data);
 int			render_next_frame(t_data *data);
 void		draw_background(t_data *data);
-
+void		draw_frame(t_data *data);
 /* UTILS */
 long int	get_current_time(void);
 

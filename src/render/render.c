@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:41:13 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/09 22:51:40 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/02/10 16:50:42 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,44 @@ int	render_next_frame(t_data *data)
 	long int	current_time;
 
 	current_time = get_current_time();
-	data->loop.delta += (current_time - data->loop.last_time)
-		/ data->loop.interval;
+	data->loop.delta_update += (current_time - data->loop.last_time)
+		/ data->loop.interval_update;
+	data->loop.delta_frame += (current_time - data->loop.last_time)
+		/ data->loop.interval_frame;
 	data->loop.last_time = current_time;
-	if (data->loop.delta >= 0.5)
+	if (data->loop.delta_update >= 1)
 	{
-	}
-	if (data->loop.delta >= 1)
-	{
-		// draw_background(data);
 		update_frame(data);
 		floor_celling_raycasting(data);
 		raycasting(data);
-		// draw_map(data);
+		data->loop.delta_update--;
+	}
+	if (data->loop.delta_frame >= 1)
+	{
+		// draw_background(data);
 		// draw_player(data);
+		draw_frame(data);
+		draw_map(data);
 		mlx_put_image_to_window(data->mlx, data->win, data->pixel.pixel, 0, 0);
-		data->loop.delta--;
+		data->loop.delta_frame--;
 	}
 	return (0);
+}
+
+void	draw_frame(t_data *data)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < SCREEN_HEIGHT - 1)
+	{
+		x = 0;
+		while (x < SCREEN_WIDTH)
+		{
+			put_pixel(data, x, y, data->frame[y][x]);
+			x++;
+		}
+		y++;
+	}
 }
