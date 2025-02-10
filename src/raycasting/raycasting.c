@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 03:08:32 by theo              #+#    #+#             */
-/*   Updated: 2025/02/10 16:02:27 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/02/10 21:06:18 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	raycasting(t_data *data)
 		ray->index = x;
 		ray->ray.x = data->player.direction.x + data->player.plane.x * camera;
 		ray->ray.y = data->player.direction.y + data->player.plane.y * camera;
+		ray->is_door = false;
 		cast_ray(data, ray);
 		free(ray);
 		x++;
@@ -106,9 +107,24 @@ void	dda_algo(t_data *data, t_ray *ray, t_vect *map_pos)
 		if (data->map[(int)map_pos->y][(int)map_pos->x].type == '1')
 		{
 			ray->wall = data->map[(int)map_pos->y][(int)map_pos->x];
+			ray->is_door = false;
+			ray->map_pos.x = map_pos->x;
+			ray->map_pos.y = map_pos->y;
 			wall = 1;
 			draw_wall(data, ray);
 			break ;
+		}
+		if (data->map[(int)map_pos->y][(int)map_pos->x].type == '2')
+		{
+			ray->wall = data->map[(int)map_pos->y][(int)map_pos->x];
+			ray->map_pos.x = map_pos->x;
+			ray->map_pos.y = map_pos->y;
+			if (ray->wall.door.open == false)
+			{
+				ray->is_door = true;
+				wall = 1;
+				draw_wall(data, ray);
+			}
 		}
 		i++;
 	}

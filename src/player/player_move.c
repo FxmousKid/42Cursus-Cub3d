@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 02:41:28 by theo              #+#    #+#             */
-/*   Updated: 2025/02/04 01:36:59 by theo             ###   ########.fr       */
+/*   Updated: 2025/02/10 19:41:52 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,12 @@ int	move_front(t_data *data)
 
 	p = data->player;
 	if (data->map[(int)(p.index.y + p.direction.y * p.speed)][(int)(p.index.x
-			- p.direction.x * p.speed)].type == '1')
+			- p.direction.x * p.speed)].type == '1'
+		|| (data->map[(int)(p.index.y + p.direction.y
+				* p.speed)][(int)(p.index.x - p.direction.x
+				* p.speed)].type == '2' && data->map[(int)(p.index.y
+				+ p.direction.y * p.speed)][(int)(p.index.x - p.direction.x
+				* p.speed)].door.open == false))
 	{
 		return (-1);
 	}
@@ -56,7 +61,12 @@ int	move_back(t_data *data)
 
 	p = data->player;
 	if (data->map[(int)(p.index.y - p.direction.y * p.speed)][(int)(p.index.x
-			+ p.direction.x * p.speed)].type == '1')
+			+ p.direction.x * p.speed)].type == '1'
+		|| (data->map[(int)(p.index.y - p.direction.y
+				* p.speed)][(int)(p.index.x + p.direction.x
+				* p.speed)].type == '2' && data->map[(int)(p.index.y
+				- p.direction.y * p.speed)][(int)(p.index.x + p.direction.x
+				* p.speed)].door.open == false))
 	{
 		return (-1);
 	}
@@ -74,7 +84,12 @@ int	move_left(t_data *data)
 	p = data->player;
 	if (data->map[(int)(p.index.y - sin(data->player.angle + PI / 2)
 			* p.speed)][(int)(p.index.x + cos(data->player.angle + PI / 2)
-			* p.speed)].type == '1')
+			* p.speed)].type == '1' || (data->map[(int)(p.index.y
+				- sin(data->player.angle + PI / 2) * p.speed)][(int)(p.index.x
+				+ cos(data->player.angle + PI / 2) * p.speed)].type == '2'
+			&& data->map[(int)(p.index.y - sin(data->player.angle + PI / 2)
+				* p.speed)][(int)(p.index.x + cos(data->player.angle + PI / 2)
+				* p.speed)].door.open == false))
 	{
 		return (-1);
 	}
@@ -96,7 +111,12 @@ int	move_right(t_data *data)
 	p = data->player;
 	if (data->map[(int)(p.index.y + sin(data->player.angle + PI / 2)
 			* p.speed)][(int)(p.index.x - cos(data->player.angle + PI / 2)
-			* p.speed)].type == '1')
+			* p.speed)].type == '1' || (data->map[(int)(p.index.y
+				+ sin(data->player.angle + PI / 2) * p.speed)][(int)(p.index.x
+				- cos(data->player.angle + PI / 2) * p.speed)].type == '2'
+			&& data->map[(int)(p.index.y + sin(data->player.angle + PI / 2)
+				* p.speed)][(int)(p.index.x - cos(data->player.angle + PI / 2)
+				* p.speed)].door.open == false))
 	{
 		return (-1);
 	}

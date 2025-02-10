@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 02:23:28 by theo              #+#    #+#             */
-/*   Updated: 2025/02/10 17:37:26 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/02/10 20:46:26 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ t_img	get_texture(t_data *data, char *p)
 
 t_img	*get_side_texture(t_data *data, t_ray *ray)
 {
+	if (ray->is_door)
+	{
+		return (&data->texture_door);
+	}
 	if (ray->w_side == 0)
 	{
 		if (ray->step.x == -1)

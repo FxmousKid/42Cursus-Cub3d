@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:19:42 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/10 16:12:14 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/02/10 20:37:37 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	parse_texture(t_data *data, int fd)
 	}
 	line = get_next_line(fd);
 	free(line);
-	for (int j = 0; j < 2; j++)
+	for (int j = 0; j < 3; j++)
 	{
 		line = get_next_line(fd);
 		name = ft_split(line, ' ');
@@ -89,6 +89,10 @@ int	parse_texture(t_data *data, int fd)
 		else if (ft_strncmp(name[0], "C", ft_strlen(name[0])) == 0)
 		{
 			data->texture_celling = get_texture(data, name[1]);
+		}
+		else if (ft_strncmp(name[0], "D", ft_strlen(name[0])) == 0)
+		{
+			data->texture_door = get_texture(data, name[1]);
 		}
 		free(line);
 		free(name[0]);
@@ -118,6 +122,10 @@ int	fill_map(t_data *data, int fd)
 			// data->map[y][len - x].pos = get_vect(x * data->size, y
 			//		* data->size,
 			//	0);
+			if (line[x] == '2')
+			{
+				data->map[y][x].door.open = false;
+			}
 			if (line[x] == 'N' || line[x] == 'E' || line[x] == 'S'
 				|| line[x] == 'W')
 			{

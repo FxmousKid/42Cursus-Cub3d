@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 18:55:56 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/10 16:26:51 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/02/10 21:03:12 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,16 +114,16 @@ void	floor_and_celling_casting(t_data *data, t_ray *ray)
 	double current_dist;
 	double weight;
 	unsigned int color;
-	double y;
+	int y;
 
-	if (ray->w_side == 0 && ray->ray.x > 0)
+	if (ray->w_side == 0 && ray->ray.x < 0)
 	{
 		floor_wpos.x = ray->map_pos.x;
 		floor_wpos.y = ray->map_pos.y + ray->wall_x;
 	}
-	else if (ray->w_side == 0 & ray->ray.x < 0)
+	else if (ray->w_side == 0 & ray->ray.x > 0)
 	{
-		floor_wpos.x = ray->map_pos.x - 1.0;
+		floor_wpos.x = ray->map_pos.x + 1.0;
 		floor_wpos.y = ray->map_pos.y + ray->wall_x;
 	}
 	else if (ray->w_side == 1 && ray->ray.y > 0)
@@ -139,7 +139,7 @@ void	floor_and_celling_casting(t_data *data, t_ray *ray)
 	dist_wall = ray->proj;
 	if (ray->max_h < 0)
 		ray->max_h = SCREEN_HEIGHT;
-	y = ray->max_h + 1;
+	y = ray->max_h;
 	while (y < SCREEN_HEIGHT)
 	{
 		current_dist = SCREEN_HEIGHT / (2.0 * y - SCREEN_HEIGHT);
@@ -154,9 +154,16 @@ void	floor_and_celling_casting(t_data *data, t_ray *ray)
 				% data->texture_celling.height, 0);
 		color = text_pos.y * data->texture_floor.line_size + text_pos.x
 			* (data->texture_floor.bits_per_pixel / 8);
-		put_pixel(data, ray->index, y, apply_shader(data, get_vect(ray->index,
-					y, 0), *(int *)(data->texture_floor.pixels + color),
-				current_dist));
+		// put_pixel(data, ray->index, y, apply_shader(data,
+		//		get_vect(ray->index,
+		//			y, 0), *(int *)(data->texture_floor.pixels + color),
+		//		current_dist));
+		data->frame[y][ray->index] = apply_shader(data, get_vect(ray->index, y,
+					0), *(int *)(data->texture_floor.pixels + color),
+				current_dist);
+		data->frame[SCREEN_HEIGHT - y][ray->index] = apply_shader(data,
+				get_vect(ray->index, SCREEN_HEIGHT - y, 0),
+				*(int *)(data->texture_celling.pixels + color), current_dist);
 		// put_pixel(data, ray->index, SCREEN_HEIGHT - y,
 		//	*(int *)(data->texture_celling.pixels + color));
 		y++;

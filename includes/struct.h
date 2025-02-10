@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:25:20 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/10 16:31:44 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/02/10 19:37:52 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,26 @@ typedef struct s_pixel
 	int			endian;
 }				t_pixel;
 
+typedef struct s_door
+{
+	bool		open;
+	int			timer;
+}				t_door;
+
 typedef struct s_tile
 {
 	char		type;
 	double		height;
+	t_door		door;
 	t_vect		index;
 	t_vect		pos;
 }				t_tile;
+
+typedef struct s_enemi
+{
+	t_vect		pos;
+	int			health;
+}				t_enemi;
 
 typedef struct s_player
 {
@@ -125,6 +138,8 @@ typedef struct s_ray
 	int			min_h;
 	double		proj;
 	double		wall_x;
+	bool		is_door;
+	t_door		door;
 	t_vect		map_pos;
 	t_vect		ray;
 	t_vect		side;
@@ -153,6 +168,7 @@ typedef struct s_data
 	t_img		texture_east;
 	t_img		texture_celling;
 	t_img		texture_floor;
+	t_img		texture_door;
 	int			color_floor;
 	int			color_celling;
 }				t_data;

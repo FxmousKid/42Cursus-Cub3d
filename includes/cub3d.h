@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:31:08 by inazaria          #+#    #+#             */
-/*   Updated: 2025/02/10 16:23:02 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/02/10 19:46:50 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,8 @@ int			argb_to_hex(t_argb argb);
 
 /* FLASHLIGHT */
 int			flashlight_shader(t_data *data, t_vect pos, int color, double dist);
+
+/* DOOR */
+void		open_door(t_data *data);
 
 #endif

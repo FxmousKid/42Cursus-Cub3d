@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:59:37 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/10 17:30:37 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/02/10 20:02:53 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	draw_map(t_data *data)
 {
+	int	color;
 	int	y;
 	int	x;
 
@@ -28,8 +29,17 @@ void	draw_map(t_data *data)
 		while (data->map[y][x].type != '\0' && x < (int)data->player.index.x
 			+ 5)
 		{
-			if (data->map[y][x].type == '1')
+			if (data->map[y][x].type == '1' || data->map[y][x].type == '2')
 			{
+				if (data->map[y][x].type == '1')
+					color = WHITE_ARGB;
+				if (data->map[y][x].type == '2')
+				{
+					if (data->map[y][x].door.open)
+						color = GREEN_ARGB;
+					else
+						color = RED_ARGB;
+				}
 				draw_square(data, get_square(get_vect((SCREEN_WIDTH - data->size
 								* 11) + ((x - (data->player.index.x - 5)))
 							* data->size, data->size + ((y
@@ -46,7 +56,7 @@ void	draw_map(t_data *data)
 									- (data->player.index.x - 5))) * data->size
 							+ data->size, (data->size) + ((y
 									- (data->player.index.y - 5))) * data->size
-							+ data->size, 0)), WHITE_ARGB);
+							+ data->size, 0)), color);
 			}
 			x++;
 		}

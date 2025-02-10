@@ -6,7 +6,7 @@
 #    By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 15:32:50 by inazaria          #+#    #+#              #
-#    Updated: 2025/02/09 23:02:37 by ptheo            ###   ########.fr        #
+#    Updated: 2025/02/10 19:47:10 by ptheo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRC_FILES_NAMES = main.c
 SRC_FILES_NAMES += action/exit.c
 SRC_FILES_NAMES += action/keyhandler.c
 SRC_FILES_NAMES += action/mousehandler.c
+SRC_FILES_NAMES += action/door.c
 
 # SHAPES
 SRC_FILES_NAMES += shapes/pixel.c

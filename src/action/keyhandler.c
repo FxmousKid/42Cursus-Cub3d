@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:34:35 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/09 22:56:17 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/02/10 19:43:05 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ int	key_pressed(int keycode, t_data *data)
 			data->movement.flash = true;
 		else
 			data->movement.flash = false;
+	}
+	if (keycode == XK_e)
+	{
+		open_door(data);
 	}
 	return (0);
 }
