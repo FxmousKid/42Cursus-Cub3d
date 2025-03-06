@@ -10,7 +10,7 @@ modeling/
 
 # build
 ./build/
-minishell
+cub3d
 
 #------------- template .gitignore file C projects. -------------
 
