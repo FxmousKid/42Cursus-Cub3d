@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 22:59:37 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/09 23:01:39 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/06 10:11:25 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_argb	hex_to_argb(int color)
 	argb.alpha = (color >> 24) & 0xff;
 	argb.red = ((color >> 16) & 0xff);
 	argb.green = ((color >> 8) & 0xff);
-	argb.blue = ((color)&0xff);
+	argb.blue = ((color) & 0xff);
 	return (argb);
 }
 

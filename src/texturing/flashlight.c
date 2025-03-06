@@ -6,13 +6,13 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 22:52:58 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/10 17:39:09 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/06 10:10:37 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	flashlight_shader(t_data *data, t_vect pos, int color, double dist)
+int	flashlight_shader(t_data *data, t_vect p, int color, double dist)
 {
 	int		a;
 	int		r;
@@ -20,13 +20,10 @@ int	flashlight_shader(t_data *data, t_vect pos, int color, double dist)
 	int		b;
 	double	brightness;
 
-	(void)pos;
-	(void)dist;
 	if (data->movement.flash == false)
 		return (color);
-	brightness = ((100 * SCREEN_WIDTH / 1920) / ((fabs(pos.x - SCREEN_WIDTH / 2)
-					+ 1) + (fabs(pos.y - SCREEN_HEIGHT / 2)))) / (dist * 2)
-		* 50;
+	brightness = ((100 * SCREEN_WIDTH / 1920) / ((fabs(p.x - SCREEN_WIDTH / 2)
+					+ 1) + (fabs(p.y - SCREEN_HEIGHT / 2)))) / (dist * 2) * 50;
 	if (brightness < 1)
 		brightness = 1;
 	if (brightness > 15)
@@ -38,7 +35,7 @@ int	flashlight_shader(t_data *data, t_vect pos, int color, double dist)
 	g = ((double)((color >> 8) & 0xff)) * brightness;
 	if (g > 255)
 		g = 255;
-	b = ((double)((color)&0xff)) * brightness;
+	b = ((double)((color) & 0xff)) * brightness;
 	if (b > 255)
 		b = 255;
 	return ((a << 24) + (r << 16) + (g << 8) + (b));
