@@ -6,11 +6,13 @@
 /*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:39:24 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/03 02:08:56 by theo             ###   ########.fr       */
+/*   Updated: 2025/03/06 10:33:57 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+ 
 
 void	draw_line(t_data *data, t_vect pos0, t_vect pos1, int color)
 {
@@ -79,35 +81,62 @@ void	fill_square(t_data *data, t_square square, int color)
 		color);
 }
 
+// void	draw_circle(t_data *data, t_vect pos, int rayon, int color)
+// {
+// 	int	x;
+// 	int	y;
+// 	int	d;
+
+// 	x = 0;
+// 	y = rayon;
+// 	d = 5 - 4 * rayon;
+// 	while (x <= y)
+// 	{
+// 		draw_line(data, pos, get_vect(x + pos.x, y + pos.y, 0), color);
+// 		draw_line(data, pos, get_vect(x + pos.x, y + pos.y, 0), color);
+// 		draw_line(data, pos, get_vect(y + pos.x, x + pos.y, 0), color);
+// 		draw_line(data, pos, get_vect(-x + pos.x, y + pos.y, 0), color);
+// 		draw_line(data, pos, get_vect(-y + pos.x, x + pos.y, 0), color);
+// 		draw_line(data, pos, get_vect(x + pos.x, -y + pos.y, 0), color);
+// 		draw_line(data, pos, get_vect(y + pos.x, -x + pos.y, 0), color);
+// 		draw_line(data, pos, get_vect(-x + pos.x, -y + pos.y, 0), color);
+// 		draw_line(data, pos, get_vect(-y + pos.x, -x + pos.y, 0), color);
+// 		if (d > 0)
+// 		{
+// 			y--;
+// 			d = d - 8 * y;
+// 		}
+// 		else
+// 		{
+// 			x++;
+// 			d = d + 8 * x + 4;
+// 		}
+// 	}
+// }
+//
+//
+void	draw_lines_for_circle(t_data *data, t_vect pos, int x_y[2], int color);
+						   
 void	draw_circle(t_data *data, t_vect pos, int rayon, int color)
 {
-	int	x;
-	int	y;
 	int	d;
 
-	x = 0;
-	y = rayon;
+	int x_y[2];
+	x_y[0] = 0;
+	x_y[1] = rayon;
 	d = 5 - 4 * rayon;
-	while (x <= y)
+	while (x_y[0] <= x_y[1])
 	{
-		draw_line(data, pos, get_vect(x + pos.x, y + pos.y, 0), color);
-		draw_line(data, pos, get_vect(x + pos.x, y + pos.y, 0), color);
-		draw_line(data, pos, get_vect(y + pos.x, x + pos.y, 0), color);
-		draw_line(data, pos, get_vect(-x + pos.x, y + pos.y, 0), color);
-		draw_line(data, pos, get_vect(-y + pos.x, x + pos.y, 0), color);
-		draw_line(data, pos, get_vect(x + pos.x, -y + pos.y, 0), color);
-		draw_line(data, pos, get_vect(y + pos.x, -x + pos.y, 0), color);
-		draw_line(data, pos, get_vect(-x + pos.x, -y + pos.y, 0), color);
-		draw_line(data, pos, get_vect(-y + pos.x, -x + pos.y, 0), color);
+		draw_lines_for_circle(data, pos, x_y, color);
 		if (d > 0)
 		{
-			y--;
-			d = d - 8 * y;
+			x_y[1]--;
+			d = d - 8 * x_y[1];
 		}
 		else
 		{
-			x++;
-			d = d + 8 * x + 4;
+			x_y[0]++;
+			d = d + 8 * x_y[0] + 4;
 		}
 	}
 }
