@@ -6,13 +6,12 @@
 /*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:39:24 by ptheo             #+#    #+#             */
-/*   Updated: 2025/03/06 10:33:57 by inazaria         ###   ########.fr       */
+/*   Updated: 2025/03/06 14:06:11 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
- 
+#include "struct.h"
 
 void	draw_line(t_data *data, t_vect pos0, t_vect pos1, int color)
 {
@@ -47,8 +46,7 @@ void	draw_square(t_data *data, t_square square, int color)
 	draw_line(data, square.bot_left, square.bot_right, color);
 }
 
-void	fill_half_square(t_data *data, t_vect pos0, t_vect pos1, t_vect pos3,
-		int color)
+void	fill_half_square(t_data *data, t_vect positions[3], int color)
 {
 	double	x;
 	double	y;
@@ -56,8 +54,8 @@ void	fill_half_square(t_data *data, t_vect pos0, t_vect pos1, t_vect pos3,
 	double	max;
 
 	n = 0;
-	x = pos1.x - pos0.x;
-	y = pos1.y - pos0.y;
+	x = positions[1].x - positions[0].x;
+	y = positions[1].y - positions[0].y;
 	max = sqrt(x * x + y * y);
 	if (max > 0)
 	{
@@ -66,55 +64,25 @@ void	fill_half_square(t_data *data, t_vect pos0, t_vect pos1, t_vect pos3,
 	}
 	while (n <= max)
 	{
-		draw_line(data, pos0, pos3, color);
-		pos0.x += x;
-		pos0.y += y;
+		draw_line(data, positions[0], positions[2], color);
+		positions[0].x += x;
+		positions[0].y += y;
 		n++;
 	}
 }
 
 void	fill_square(t_data *data, t_square square, int color)
 {
-	fill_half_square(data, square.top_left, square.bot_left, square.top_right,
-		color);
-	fill_half_square(data, square.bot_right, square.bot_left, square.top_right,
-		color);
+	t_vect	positions[3];
+
+	positions[0] = square.top_right;
+	positions[1] = square.bot_left;
+	positions[2] = square.top_right;
+	fill_half_square(data, positions, color);
+	positions[0] = square.bot_left;
+	fill_half_square(data, positions, color);
 }
 
-// void	draw_circle(t_data *data, t_vect pos, int rayon, int color)
-// {
-// 	int	x;
-// 	int	y;
-// 	int	d;
-
-// 	x = 0;
-// 	y = rayon;
-// 	d = 5 - 4 * rayon;
-// 	while (x <= y)
-// 	{
-// 		draw_line(data, pos, get_vect(x + pos.x, y + pos.y, 0), color);
-// 		draw_line(data, pos, get_vect(x + pos.x, y + pos.y, 0), color);
-// 		draw_line(data, pos, get_vect(y + pos.x, x + pos.y, 0), color);
-// 		draw_line(data, pos, get_vect(-x + pos.x, y + pos.y, 0), color);
-// 		draw_line(data, pos, get_vect(-y + pos.x, x + pos.y, 0), color);
-// 		draw_line(data, pos, get_vect(x + pos.x, -y + pos.y, 0), color);
-// 		draw_line(data, pos, get_vect(y + pos.x, -x + pos.y, 0), color);
-// 		draw_line(data, pos, get_vect(-x + pos.x, -y + pos.y, 0), color);
-// 		draw_line(data, pos, get_vect(-y + pos.x, -x + pos.y, 0), color);
-// 		if (d > 0)
-// 		{
-// 			y--;
-// 			d = d - 8 * y;
-// 		}
-// 		else
-// 		{
-// 			x++;
-// 			d = d + 8 * x + 4;
-// 		}
-// 	}
-// }
-//
-//
 void	draw_lines_for_circle(t_data *data, t_vect pos, int x_y[2], int color);
 						   
 void	draw_circle(t_data *data, t_vect pos, int rayon, int color)

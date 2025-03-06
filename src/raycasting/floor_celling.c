@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 18:55:56 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/10 21:03:12 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/06 14:57:21 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	floor_celling_raycasting(t_data *data)
 		floor->p = i - SCREEN_HEIGHT / 2;
 		floor->posz = 0.5 * SCREEN_HEIGHT;
 		draw_floor_celling(data, floor);
+		free(floor);
 		i++;
 	}
 }
