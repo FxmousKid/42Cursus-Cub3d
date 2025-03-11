@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:25:20 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/10 19:37:52 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/11 17:12:45 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_move
 	bool		look_left;
 	bool		look_right;
 	bool		flash;
+	bool		darklight;
 }				t_move;
 
 typedef struct s_argb
@@ -161,7 +162,7 @@ typedef struct s_data
 	t_pixel		pixel;
 	t_loop		loop;
 	t_move		movement;
-	t_tile		map[MAP_SIZE_MAX][MAP_SIZE_MAX];
+	t_tile		**map;
 	t_img		texture_north;
 	t_img		texture_south;
 	t_img		texture_west;
@@ -169,8 +170,8 @@ typedef struct s_data
 	t_img		texture_celling;
 	t_img		texture_floor;
 	t_img		texture_door;
-	int			color_floor;
-	int			color_celling;
+	t_img		flashlight_img;
+	t_vect		flash_img_pos;
 }				t_data;
 
 #endif

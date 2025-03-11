@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:31:08 by inazaria          #+#    #+#             */
-/*   Updated: 2025/03/06 10:09:51 by inazaria         ###   ########.fr       */
+/*   Updated: 2025/03/11 18:42:17 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ long int	get_current_time(void);
 
 /* MAP */
 void		draw_map(t_data *data);
+void		draw_square_map(t_data *data, int x, int y);
 void		print_map(t_data *data);
 
 /* PLAYER */
@@ -60,16 +61,22 @@ void		raycasting(t_data *data);
 t_vect		init_length(t_vect *ray);
 void		cast_ray(t_data *data, t_ray *ray);
 void		dda_algo(t_data *data, t_ray *ray, t_vect *map_pos);
+int			dda_algo_check(t_data *data, t_ray *ray, t_vect *map_pos);
 void		draw_wall(t_data *data, t_ray *ray);
+
+/* FLOOR CASTING */
 void		floor_celling_raycasting(t_data *data);
+void		floor_celling_texture(t_data *data, t_floor *side);
+void		draw_texture_floor_celling(t_data *data, t_floor *side, int i,
+				double dist_p);
 void		draw_floor_celling(t_data *data, t_floor *floor);
-void		floor_and_celling_casting(t_data *data, t_ray *ray);
 
 /* TEXTURE */
 t_img		*get_side_texture(t_data *data, t_ray *ray);
+void		get_wall_x(t_data *data, t_ray *ray);
 t_img		get_texture(t_data *data, char *p);
 void		draw_texture(t_data *data, t_img *texture, t_ray *ray);
-int			dark_color(int color, double dist);
+int			dark_color(int color, double dist, int active);
 int			apply_shader(t_data *data, t_vect pos, int color, double dist);
 
 /* COLOR */
@@ -78,6 +85,8 @@ int			argb_to_hex(t_argb argb);
 
 /* FLASHLIGHT */
 int			flashlight_shader(t_data *data, t_vect pos, int color, double dist);
+void		draw_flashlight_image(t_data *data);
+void		move_flash_light(t_data *data);
 
 /* DOOR */
 void		open_door(t_data *data);

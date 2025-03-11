@@ -6,15 +6,42 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:59:37 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/10 20:02:53 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/11 15:45:29 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_map(t_data *data)
+void	draw_square_map(t_data *data, int x, int y)
 {
 	int	color;
+
+	if (data->map[y][x].type == '1')
+		color = WHITE_ARGB;
+	if (data->map[y][x].type == '2')
+	{
+		if (data->map[y][x].door.open)
+			color = GREEN_ARGB;
+		else
+			color = RED_ARGB;
+	}
+	draw_square(data, get_square(get_vect((SCREEN_WIDTH - data->size * 11) + ((x
+						- (data->player.index.x - 5))) * data->size, data->size
+				+ ((y - (data->player.index.y - 5))) * data->size, 0),
+			get_vect((SCREEN_WIDTH - data->size * 11) + ((x
+						- (data->player.index.x - 5))) * data->size
+				+ data->size, (data->size) + ((y - (data->player.index.y - 5)))
+				* data->size, 0), get_vect((SCREEN_WIDTH - data->size * 11)
+				+ ((x - (data->player.index.x - 5))) * data->size, (data->size)
+				+ ((y - (data->player.index.y - 5))) * data->size + data->size,
+				0), get_vect((SCREEN_WIDTH - data->size * 11) + ((x
+						- (data->player.index.x - 5))) * data->size
+				+ data->size, (data->size) + ((y - (data->player.index.y - 5)))
+				* data->size + data->size, 0)), color);
+}
+
+void	draw_map(t_data *data)
+{
 	int	y;
 	int	x;
 
@@ -30,34 +57,7 @@ void	draw_map(t_data *data)
 			+ 5)
 		{
 			if (data->map[y][x].type == '1' || data->map[y][x].type == '2')
-			{
-				if (data->map[y][x].type == '1')
-					color = WHITE_ARGB;
-				if (data->map[y][x].type == '2')
-				{
-					if (data->map[y][x].door.open)
-						color = GREEN_ARGB;
-					else
-						color = RED_ARGB;
-				}
-				draw_square(data, get_square(get_vect((SCREEN_WIDTH - data->size
-								* 11) + ((x - (data->player.index.x - 5)))
-							* data->size, data->size + ((y
-									- (data->player.index.y - 5))) * data->size,
-							0), get_vect((SCREEN_WIDTH - data->size * 11) + ((x
-									- (data->player.index.x - 5))) * data->size
-							+ data->size, (data->size) + ((y
-									- (data->player.index.y - 5))) * data->size,
-							0), get_vect((SCREEN_WIDTH - data->size * 11) + ((x
-									- (data->player.index.x - 5))) * data->size,
-							(data->size) + ((y - (data->player.index.y - 5)))
-							* data->size + data->size, 0),
-						get_vect((SCREEN_WIDTH - data->size * 11) + ((x
-									- (data->player.index.x - 5))) * data->size
-							+ data->size, (data->size) + ((y
-									- (data->player.index.y - 5))) * data->size
-							+ data->size, 0)), color);
-			}
+				draw_square_map(data, x, y);
 			x++;
 		}
 		y++;

@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:40:28 by ptheo             #+#    #+#             */
-/*   Updated: 2025/03/06 14:03:27 by inazaria         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:13:18 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@
 /* SHAPES */
 void		draw_line(t_data *data, t_vect pos0, t_vect pos1, int color);
 void		draw_square(t_data *data, t_square square, int color);
-// void		fill_half_square(t_data *data, t_vect pos0, t_vect pos1,
-				// t_vect pos3, int color);
-void		fill_square(t_data *data, t_square square, int color);
 void		draw_circle(t_data *data, t_vect pos, int rayon, int color);
 
 /* VECTOR */

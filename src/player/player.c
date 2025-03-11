@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 02:22:40 by theo              #+#    #+#             */
-/*   Updated: 2025/02/09 22:56:37 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/11 15:59:36 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init_bool_move(t_data *data)
 	data->movement.look_left = false;
 	data->movement.look_right = false;
 	data->movement.flash = false;
+	data->movement.darklight = true;
 }
 
 int	init_player(t_data *data)

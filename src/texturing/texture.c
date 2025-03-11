@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 02:23:28 by theo              #+#    #+#             */
-/*   Updated: 2025/02/10 20:46:26 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/11 17:11:40 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,64 +47,39 @@ t_img	*get_side_texture(t_data *data, t_ray *ray)
 	return (&data->texture_north);
 }
 
+void	get_wall_x(t_data *data, t_ray *ray)
+{
+	if (ray->w_side == 0)
+		ray->wall_x = data->player.index.y + ray->proj * ray->ray.y;
+	else
+		ray->wall_x = data->player.index.x - ray->proj * ray->ray.x;
+}
+
 void	draw_texture(t_data *data, t_img *texture, t_ray *ray)
 {
 	unsigned int	color;
 	int				y;
-	double			wall_x;
 	double			step;
 	double			tex_pos;
-	int				pos_x;
-	int				pos_y;
+	t_vect			pos;
 
-	if (ray->w_side == 0)
-		wall_x = data->player.index.y + ray->proj * ray->ray.y;
-	else
-		wall_x = data->player.index.x - ray->proj * ray->ray.x;
-	pos_x = (int)((wall_x - floor(wall_x)) * texture->width);
+	get_wall_x(data, ray);
+	pos.x = (int)((ray->wall_x - floor(ray->wall_x)) * texture->width);
 	step = 1.0 * ((double)texture->height / (double)ray->line_h);
 	tex_pos = (ray->min_h - (SCREEN_HEIGHT / 2) + (ray->line_h / 2)) * step;
 	y = ray->min_h;
-	ray->wall_x = wall_x - floor(wall_x);
+	ray->wall_x = ray->wall_x - floor(ray->wall_x);
 	while (y < ray->max_h)
 	{
-		pos_y = (int)tex_pos;
+		pos.y = (int)tex_pos;
 		tex_pos += step;
 		if (texture->endian == 0)
 		{
-			color = pos_y * texture->line_size + pos_x
+			color = pos.y * texture->line_size + pos.x
 				* (texture->bits_per_pixel / 8);
 		}
-		// put_pixel(data, ray->index, y, apply_shader(data,
-		//		get_vect(ray->index,
-		//			y, 0), *(int *)(texture->pixels + color), ray->proj));
 		data->frame[y][ray->index] = apply_shader(data, get_vect(ray->index, y,
 					0), *(int *)(texture->pixels + color), ray->proj);
 		y++;
 	}
-}
-
-int	dark_color(int color, double dist)
-{
-	int	dark;
-	int	alpha;
-	int	red;
-	int	blue;
-	int	green;
-
-	dark = 100 - (100 * dist) / 10;
-	if (dark < 0)
-		dark = 0;
-	alpha = ((color >> 24) & 0xff);
-	red = ((double)((color >> 16) & 0xff) / 100) * dark * 0.1;
-	green = ((double)((color >> 8) & 0xff) / 100) * dark * 0.1;
-	blue = ((double)((color)&0xff) / 100) * dark * 0.1;
-	return ((alpha << 24) + (red << 16) + (green << 8) + (blue));
-}
-
-int	apply_shader(t_data *data, t_vect pos, int color, double dist)
-{
-	color = dark_color(color, dist);
-	color = flashlight_shader(data, pos, color, dist);
-	return (color);
 }

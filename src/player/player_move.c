@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 02:41:28 by theo              #+#    #+#             */
-/*   Updated: 2025/02/10 19:41:52 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/11 18:59:25 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	move_front(t_data *data)
 	data->player.pos.y += data->player.direction.y * data->player.speed * 10;
 	data->player.index.x -= data->player.direction.x * data->player.speed;
 	data->player.index.y += data->player.direction.y * data->player.speed;
+	move_flash_light(data);
 	return (0);
 }
 
@@ -74,6 +75,7 @@ int	move_back(t_data *data)
 	data->player.pos.y -= data->player.direction.y * data->player.speed * 10;
 	data->player.index.x += data->player.direction.x * data->player.speed;
 	data->player.index.y -= data->player.direction.y * data->player.speed;
+	move_flash_light(data);
 	return (0);
 }
 
@@ -101,6 +103,7 @@ int	move_left(t_data *data)
 		* data->player.speed;
 	data->player.index.y -= sin(data->player.angle + PI / 2)
 		* data->player.speed;
+	move_flash_light(data);
 	return (0);
 }
 
@@ -128,5 +131,6 @@ int	move_right(t_data *data)
 		* data->player.speed;
 	data->player.index.y += sin(data->player.angle + PI / 2)
 		* data->player.speed;
+	move_flash_light(data);
 	return (0);
 }

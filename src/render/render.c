@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:41:13 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/10 21:09:27 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/11 19:27:21 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,11 @@ int	render_next_frame(t_data *data)
 		update_frame(data);
 		floor_celling_raycasting(data);
 		raycasting(data);
+		draw_flashlight_image(data);
 		data->loop.delta_update--;
 	}
 	if (data->loop.delta_frame >= 1)
 	{
-		// draw_background(data);
-		// draw_player(data);
 		draw_frame(data);
 		draw_map(data);
 		mlx_put_image_to_window(data->mlx, data->win, data->pixel.pixel, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:28:06 by inazaria          #+#    #+#             */
-/*   Updated: 2025/03/07 23:58:53 by inazaria         ###   ########.fr       */
+/*   Updated: 2025/03/11 19:48:58 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,16 @@ void	init_data_aux(t_data *data)
 	data->size = (SCREEN_HEIGHT + SCREEN_WIDTH) / 200;
 	data->fov = 90;
 	data->last_pos_mouse = SCREEN_WIDTH / 2;
+	data->flashlight_img = get_texture(data,
+			ft_strdup("./ressource/flashlight.xpm"));
+	data->flash_img_pos = get_vect(SCREEN_WIDTH - 350, SCREEN_HEIGHT - 320, -5);
 }
 
 int	init_data(t_data *data, char *argv[])
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	data->mlx = mlx_init();
 	if (data->mlx == NULL)
 		return (-1);
@@ -42,10 +45,14 @@ int	init_data(t_data *data, char *argv[])
 	if (init_pixel(&data->pixel, data->mlx) == -1)
 		return (-1);
 	data->frame = (int **)malloc(sizeof(int *) * (SCREEN_HEIGHT));
-	while (i < SCREEN_HEIGHT)
+	if (data->frame == NULL)
+		return (-1);
+	ft_bzero(data->frame, SCREEN_HEIGHT);
+	while (++i < SCREEN_HEIGHT)
 	{
 		data->frame[i] = (int *)malloc(sizeof(int) * SCREEN_WIDTH);
-		i++;
+		if (data->frame[i] == NULL)
+			return (-1);
 	}
 	init_player(data);
 	init_data_aux(data);

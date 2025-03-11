@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_shapes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theo <theo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:39:24 by ptheo             #+#    #+#             */
-/*   Updated: 2025/03/06 14:06:11 by inazaria         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:46:54 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,50 +46,24 @@ void	draw_square(t_data *data, t_square square, int color)
 	draw_line(data, square.bot_left, square.bot_right, color);
 }
 
-void	fill_half_square(t_data *data, t_vect positions[3], int color)
+void	draw_lines_for_circle(t_data *data, t_vect pos, int x_y[2], int color)
 {
-	double	x;
-	double	y;
-	int		n;
-	double	max;
-
-	n = 0;
-	x = positions[1].x - positions[0].x;
-	y = positions[1].y - positions[0].y;
-	max = sqrt(x * x + y * y);
-	if (max > 0)
-	{
-		x /= max;
-		y /= max;
-	}
-	while (n <= max)
-	{
-		draw_line(data, positions[0], positions[2], color);
-		positions[0].x += x;
-		positions[0].y += y;
-		n++;
-	}
+	draw_line(data, pos, get_vect(x_y[0] + pos.x, x_y[1] + pos.y, 0), color);
+	draw_line(data, pos, get_vect(x_y[0] + pos.x, x_y[1] + pos.y, 0), color);
+	draw_line(data, pos, get_vect(x_y[1] + pos.x, x_y[0] + pos.y, 0), color);
+	draw_line(data, pos, get_vect(-x_y[0] + pos.x, x_y[1] + pos.y, 0), color);
+	draw_line(data, pos, get_vect(-x_y[1] + pos.x, x_y[0] + pos.y, 0), color);
+	draw_line(data, pos, get_vect(x_y[0] + pos.x, -x_y[1] + pos.y, 0), color);
+	draw_line(data, pos, get_vect(x_y[1] + pos.x, -x_y[0] + pos.y, 0), color);
+	draw_line(data, pos, get_vect(-x_y[0] + pos.x, -x_y[1] + pos.y, 0), color);
+	draw_line(data, pos, get_vect(-x_y[1] + pos.x, -x_y[0] + pos.y, 0), color);
 }
 
-void	fill_square(t_data *data, t_square square, int color)
-{
-	t_vect	positions[3];
-
-	positions[0] = square.top_right;
-	positions[1] = square.bot_left;
-	positions[2] = square.top_right;
-	fill_half_square(data, positions, color);
-	positions[0] = square.bot_left;
-	fill_half_square(data, positions, color);
-}
-
-void	draw_lines_for_circle(t_data *data, t_vect pos, int x_y[2], int color);
-						   
 void	draw_circle(t_data *data, t_vect pos, int rayon, int color)
 {
 	int	d;
+	int	x_y[2];
 
-	int x_y[2];
 	x_y[0] = 0;
 	x_y[1] = rayon;
 	d = 5 - 4 * rayon;

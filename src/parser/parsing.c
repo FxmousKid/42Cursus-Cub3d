@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:19:42 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/10 20:37:37 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/11 19:47:30 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	parsing_map(t_data *data, char *file_map)
 
 int	parse_file(t_data *data, int fd)
 {
-	ft_bzero(data->map, MAP_SIZE_MAX);
+	// ft_bzero(data->map, MAP_SIZE_MAX);
 	if (parse_texture(data, fd) == -1)
 		return (-1);
 	if (fill_map(data, fd) == -1)
@@ -111,17 +111,21 @@ int	fill_map(t_data *data, int fd)
 
 	line = get_next_line(fd);
 	y = 0;
+	data->map = (t_tile **)malloc(sizeof(t_tile *) * MAP_SIZE_MAX + 1);
+	if (data->map == NULL)
+		return (close_window(data), close(fd), -1);
+	ft_bzero(data->map, MAP_SIZE_MAX);
 	while (line)
 	{
 		x = 0;
+		data->map[y] = (t_tile *)malloc(sizeof(t_tile) * MAP_SIZE_MAX);
+		if (data->map[y] == NULL)
+			return (close_window(data), close(fd), -1);
 		while (line[x] != '\n' && line[x])
 		{
 			data->map[y][x].type = line[x];
 			data->map[y][x].index = get_vect(x, y, 0);
 			data->map[y][x].height = 100;
-			// data->map[y][len - x].pos = get_vect(x * data->size, y
-			//		* data->size,
-			//	0);
 			if (line[x] == '2')
 			{
 				data->map[y][x].door.open = false;
