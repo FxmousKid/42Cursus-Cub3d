@@ -6,23 +6,17 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 00:02:02 by inazaria          #+#    #+#             */
-/*   Updated: 2025/03/08 00:46:02 by inazaria         ###   ########.fr       */
+/*   Updated: 2025/03/11 23:01:22 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static bool	check_first_last_line(char *line, size_t len_line)
+static bool	check_first_last_line(char *line)
 {
 	int	i;
 
 	i = 0;
-	if (len_line != ft_strlen(line))
-	{
-		ft_printf("%sError: %s", RED_TXT, END_TXT);
-		ft_printf("Map must be a rectangle\n");
-		return (false);
-	}
 	while (line[i])
 	{
 		if (line[i] != '1' && line[i] != ' ')
@@ -43,12 +37,10 @@ bool	check_map_format(char map[1024][1024])
 
 	i = 0;
 	len_line = ft_strlen(map[0]);
-	if (!check_first_last_line(map[0], len_line))
+	if (!check_first_last_line(map[0]))
 		return (false);
 	while (map[i] && map[i + 1][0])
 	{
-		if (ft_strlen(map[i]) != len_line)
-			return (ft_printf("Map must be a rectangle\n"), false);
 		if (map[i][0] != '1' || map[i++][len_line - 1] != '1')
 		{
 			ft_printf("%sError: %s", RED_TXT, END_TXT);
@@ -56,7 +48,7 @@ bool	check_map_format(char map[1024][1024])
 			return (false);
 		}
 	}
-	if (!check_first_last_line(map[i], len_line))
+	if (!check_first_last_line(map[i]))
 		return (false);
 	return (true);
 }
