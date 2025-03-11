@@ -6,7 +6,7 @@
 #    By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 15:32:50 by inazaria          #+#    #+#              #
-#    Updated: 2025/02/10 19:47:10 by ptheo            ###   ########.fr        #
+#    Updated: 2025/03/08 00:02:30 by inazaria         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC_FILES_NAMES += action/door.c
 SRC_FILES_NAMES += shapes/pixel.c
 SRC_FILES_NAMES += shapes/vector.c
 SRC_FILES_NAMES += shapes/draw_shapes.c
+SRC_FILES_NAMES += shapes/draw_shapes_utils.c
 
 # PLAYER
 SRC_FILES_NAMES += player/player.c
@@ -45,6 +46,9 @@ SRC_FILES_NAMES += raycasting/floor_celling.c
 
 # PARSING
 SRC_FILES_NAMES += parser/parsing.c
+SRC_FILES_NAMES += parser/check_map.c
+SRC_FILES_NAMES += parser/check_config_file.c
+SRC_FILES_NAMES += parser/check_assets.c
 
 # RENDER
 SRC_FILES_NAMES += render/render.c
