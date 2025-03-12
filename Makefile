@@ -6,7 +6,7 @@
 #    By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 15:32:50 by inazaria          #+#    #+#              #
-#    Updated: 2025/03/12 12:01:56 by ptheo            ###   ########.fr        #
+#    Updated: 2025/03/12 15:22:02 by inazaria         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRC_FILES_NAMES += raycasting/floor_celling.c
 SRC_FILES_NAMES += parser/parsing.c
 SRC_FILES_NAMES += parser/parsing_utils.c
 SRC_FILES_NAMES += parser/check_map.c
+SRC_FILES_NAMES += parser/check_map_utils.c
 SRC_FILES_NAMES += parser/check_config_file.c
 SRC_FILES_NAMES += parser/check_assets.c
 

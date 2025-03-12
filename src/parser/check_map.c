@@ -6,11 +6,14 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 00:02:02 by inazaria          #+#    #+#             */
-/*   Updated: 2025/03/12 13:04:06 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/12 15:31:36 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "macro.h"
+
+bool	check_player_pos(t_map map);
 
 static bool	check_first_last_line(char *line)
 {
@@ -30,7 +33,7 @@ static bool	check_first_last_line(char *line)
 	return (true);
 }
 
-bool	check_map_format(char map[1024][1024])
+bool	check_map_format(t_map map)
 {
 	size_t	len_line;
 	size_t	i;
@@ -48,13 +51,14 @@ bool	check_map_format(char map[1024][1024])
 			ft_printf("Map must be surrounded by walls\n");
 			return (false);
 		}
+		i++;
 	}
-	if (!check_first_last_line(map[i]))
+	if (!check_first_last_line(map[i]) || !check_player_pos(map))
 		return (false);
 	return (true);
 }
 
-static void	get_map(char map[1024][1024], int fd, char *line)
+static void	get_map(t_map map, int fd, char *line)
 {
 	int	i;
 
@@ -72,9 +76,9 @@ static void	get_map(char map[1024][1024], int fd, char *line)
 
 bool	check_map(int fd)
 {
-	char	*line;
-	int		i;
-	char	map[1024][1024];
+	char			*line;
+	int				i;
+	static t_map	map;
 
 	i = 0;
 	line = get_next_line(fd);

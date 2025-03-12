@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:31:08 by inazaria          #+#    #+#             */
-/*   Updated: 2025/03/11 18:42:17 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/12 15:18:55 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include "macro.h"
 # include "parser.h"
 # include "struct.h"
+
+typedef char t_map[1024][1024];
 
 /* DATA */
 int			init_data(t_data *data, char *argv[]);
