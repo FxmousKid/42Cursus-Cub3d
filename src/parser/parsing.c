@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:19:42 by ptheo             #+#    #+#             */
-/*   Updated: 2025/03/12 12:33:06 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/12 21:36:23 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	parsing_map(t_data *data, char *file_map)
 	int	fd_map;
 
 	fd_map = open(file_map, O_RDONLY);
-	// print_file(fd_map);
 	if (check_file_name(file_map) == -1 || fd_map <= 0)
 		return (-1);
 	if (parse_file(data, fd_map) == -1)

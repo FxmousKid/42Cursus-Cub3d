@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:21:08 by ptheo             #+#    #+#             */
-/*   Updated: 2025/02/10 21:05:18 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/12 21:37:29 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,8 @@
 # define PI 3.14159265359
 
 # define MAP_SIZE_MAX 200
+
+# define MAP_WALL_ERR "Map must be surrounded by walls"
+# define FLOOR_ERR "Floor position error"
 
 #endif
