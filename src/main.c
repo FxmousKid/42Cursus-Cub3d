@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:28:06 by inazaria          #+#    #+#             */
-/*   Updated: 2025/03/11 19:48:58 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/12 12:34:39 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ int	init_data(t_data *data, char *argv[])
 		if (data->frame[i] == NULL)
 			return (-1);
 	}
-	init_player(data);
 	init_data_aux(data);
-	parsing_map(data, argv[1]);
+	if (init_player(data) == -1 || parsing_map(data, argv[1]) == -1)
+		return (-1);
 	return (0);
 }
 
@@ -73,7 +73,8 @@ int	main(int argc, char *argv[])
 	}
 	if (!check_config_file(argv[1]))
 		return (1);
-	init_data(&data, argv);
+	if (init_data(&data, argv) == -1)
+		return (close_window(&data), -1);
 	render_loop(&data);
 	return (0);
 }

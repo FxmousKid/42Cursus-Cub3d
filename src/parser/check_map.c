@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 00:02:02 by inazaria          #+#    #+#             */
-/*   Updated: 2025/03/11 23:01:22 by inazaria         ###   ########.fr       */
+/*   Updated: 2025/03/12 13:04:06 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ bool	check_map_format(char map[1024][1024])
 		return (false);
 	while (map[i] && map[i + 1][0])
 	{
-		if (map[i][0] != '1' || map[i++][len_line - 1] != '1')
+		if (map[i][0] != '1' || map[i][len_line - 1] != '1')
 		{
+			ft_printf("fail line : %s", map[i]);
 			ft_printf("%sError: %s", RED_TXT, END_TXT);
 			ft_printf("Map must be surrounded by walls\n");
 			return (false);
@@ -55,7 +56,7 @@ bool	check_map_format(char map[1024][1024])
 
 static void	get_map(char map[1024][1024], int fd, char *line)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (line)
@@ -72,13 +73,16 @@ static void	get_map(char map[1024][1024], int fd, char *line)
 bool	check_map(int fd)
 {
 	char	*line;
+	int		i;
 	char	map[1024][1024];
 
+	i = 0;
 	line = get_next_line(fd);
-	while (line && !ft_isdigit(*line))
+	while (line && i <= 8)
 	{
 		free(line);
 		line = get_next_line(fd);
+		i++;
 	}
 	if (!line)
 		return (ft_printf("%sError%s", RED_TXT, END_TXT), false);

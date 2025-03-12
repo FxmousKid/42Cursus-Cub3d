@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_config_file.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:26:47 by inazaria          #+#    #+#             */
-/*   Updated: 2025/03/08 00:44:56 by inazaria         ###   ########.fr       */
+/*   Updated: 2025/03/12 12:55:16 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,27 @@ bool	check_assets_file(int fd)
 	return (true);
 }
 
+void	print_file(int fd)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	while (line)
+	{
+		printf("line : %s", line);
+		free(line);
+		line = get_next_line(fd);
+	}
+	printf("\n");
+}
+
 bool	check_config_file(char *config_file_path)
 {
 	int	fds[3];
 
-	fds[0] = open(config_file_path, O_RDONLY);
-	fds[1] = open(config_file_path, O_RDONLY);
-	fds[2] = open(config_file_path, O_RDONLY);
+	fds[0] = open(config_file_path, O_RDONLY | __O_DSYNC);
+	fds[1] = open(config_file_path, O_RDONLY | __O_DSYNC);
+	fds[2] = open(config_file_path, O_RDONLY | __O_DSYNC);
 	if (fds[0] < 0 || fds[1] < 0 || fds[2] < 0)
 	{
 		ft_printf("%sUnable to open file: %s", RED_TXT, END_TXT);
