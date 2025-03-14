@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:34:35 by ptheo             #+#    #+#             */
-/*   Updated: 2025/03/11 15:59:04 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/14 16:27:03 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	key_pressed(int keycode, t_data *data)
 		data->movement.left = true;
 	if (keycode == XK_d)
 		data->movement.right = true;
+	if (keycode == XK_Shift_L)
+		data->player.speed *= 2;
 	else
 		key_pressed_utils(keycode, data);
 	return (0);
@@ -68,5 +70,7 @@ int	key_released(int keycode, t_data *data)
 		data->movement.look_left = false;
 	if (keycode == XK_Right)
 		data->movement.look_right = false;
+	if (keycode == XK_Shift_L)
+		data->player.speed /= 2;
 	return (0);
 }
