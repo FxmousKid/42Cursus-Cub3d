@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:00:04 by ptheo             #+#    #+#             */
-/*   Updated: 2025/03/14 16:49:09 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/14 17:00:57 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int	parse_texture_utils(t_data *data, char **name)
 	if (name == NULL || name[0] == NULL)
 		return (0);
 	if (ft_strncmp(name[0], "NO", ft_strlen(name[0])) == 0)
-		data->texture_north = get_texture(data, ft_strdup(name[1]));
+		data->texture_north = get_texture(data, name[1]);
 	else if (ft_strncmp(name[0], "SO", ft_strlen(name[0])) == 0)
-		data->texture_south = get_texture(data, ft_strdup(name[1]));
+		data->texture_south = get_texture(data, name[1]);
 	else if (ft_strncmp(name[0], "WE", ft_strlen(name[0])) == 0)
-		data->texture_west = get_texture(data, ft_strdup(name[1]));
+		data->texture_west = get_texture(data, name[1]);
 	else if (ft_strncmp(name[0], "EA", ft_strlen(name[0])) == 0)
-		data->texture_east = get_texture(data, ft_strdup(name[1]));
+		data->texture_east = get_texture(data, name[1]);
 	else if (ft_strncmp(name[0], "F", ft_strlen(name[0])) == 0)
 		data->texture_floor = get_texture(data, name[1]);
 	else if (ft_strncmp(name[0], "C", ft_strlen(name[0])) == 0)
