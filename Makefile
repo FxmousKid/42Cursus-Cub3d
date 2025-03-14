@@ -6,12 +6,13 @@
 #    By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 15:32:50 by inazaria          #+#    #+#              #
-#    Updated: 2025/03/14 23:58:38 by ptheo            ###   ########.fr        #
+#    Updated: 2025/03/15 00:09:27 by ptheo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #<><><><><><><> Files <><><><><><><><><><><><><><><><><><><>
 SRC_DIR 	= ./src/
+SRC_DIR_BONUS 	= ./src_bonus/
 
 BUILD_DIR 	= ./build/
 
@@ -102,15 +103,13 @@ NC		:= \e[0m
 #<><><><><><><> Recipes <><><><><><><><><><><><><><><><><><>
 
 # Modifying Implicit conversion rules to build in custom directory
-$(BUILD_DIR)%.o : $(SRC_DIR)%.c
+$(BUILD_DIR)%.o : $(SRC_DIR_BONUS)%.c
 	@$(MKDIR) $(dir $@)
 	@$(ECHO) "$(BLUE)[CMP] Compiling $<...$(NC)"
-	@$(CC) -c $(CFLAGS) $< -o $@ 
-
+	@$(CC) -c $(CFLAGS) $< -o $@
 
 # This is to add the .d files as dependencies for linking
--include $(DEP_FILES) $(DEBUG_BUILD_PATH).d
-
+-include $(DEP_FILES_BONUS) $(DEBUG_BUILD_PATH).d
 
 re : clean all
 
@@ -127,7 +126,22 @@ $(NAME) : $(OBJ_FILES)
 	@$(CC) $(CFLAGS) $^ $(DEBUG_BUILD_PATH).o -o $(NAME) $(LFLAGS)
 	@$(ECHO) "$(GREEN)[BLD] Executable built successfully.$(NC)"
 
-all : $(NAME) 
+all : $(NAME_BONUS) 
+
+$(NAME_BONUS) : $(OBJ_FILES_BONUS)
+	@$(ECHO) "$(BROWN)[BLD] Building libft static library...$(NC)"
+	@$(MAKE) --no-print-directory -s -C ./libft all
+	@$(ECHO) "$(GREEN)[BLD] successfully built libft.$(NC)"	
+	@$(ECHO) "$(BROWN)[BLD] Building mlx library...$(NC)"
+	@$(MAKE) --no-print-directory -s -C $(MLX_DIR)
+	@$(ECHO) "$(GREEN)[BLD] successfully built mlx.$(NC)"
+	@$(ECHO) "$(BROWN)[BLD] Building $(NAME_BONUS) executable...$(NC)"
+	@$(MKDIR) ./build/error_manager/
+	@$(CC) $(CFLAGS) -c $(DEBUG_FILE_PATH).c -o $(DEBUG_BUILD_PATH).o
+	@$(CC) $(CFLAGS) $^ $(DEBUG_BUILD_PATH).o -o $(NAME_BONUS) $(LFLAGS)
+	@$(ECHO) "$(GREEN)[BLD] Executable built successfully.$(NC)"
+
+bonus : $(NAME_BONUS)
 
 debug : $(OBJ_FILES)
 	@$(ECHO) "$(RED)[DBG] Making in DEBUG MODE...$(NC)"
@@ -154,7 +168,7 @@ force : $(OBJ_FILES)
 
 clean : 
 	@$(ECHO) "$(BROWN)[CLN] Cleaning object and dependency files...$(NC)"
-	@$(RM) $(DEP_FILES) $(OBJ_FILES) $(DEBUG_BUILD_PATH).[od]
+	@$(RM_RF) $(BUILD_DIR)
 	@$(MAKE) --no-print-directory -s -C ./libft clean
 	@$(MAKE) --no-print-directory -s -C ./mlx_linux clean
 	@$(ECHO) "$(GREEN)[CLN] Clean complete.$(NC)"
