@@ -6,13 +6,13 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 19:58:13 by inazaria          #+#    #+#             */
-/*   Updated: 2025/03/14 17:18:53 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/14 18:10:37 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	free_split(char **split);
+void		free_split(char **split);
 
 static void	get_assets(char *assets[7])
 {
@@ -38,9 +38,9 @@ static bool	is_asset_name_valid(char *line, char *real_asset)
 	return (true);
 }
 
-static bool	check_if_keys_valid(char *line, int line_pos, int *pos_map)
+static bool	check_if_keys_valid(char *line, int lookup[], int line_pos,
+		int *pos_map)
 {
-	static int	lookup[7];
 	static char	*assets[7];
 	int			i;
 
@@ -70,18 +70,29 @@ static bool	check_if_keys_valid(char *line, int line_pos, int *pos_map)
 // Will check the formats valdity (appears once, etc...) and file valdity
 bool	check_assets_format(int fd, int *pos_map)
 {
-	char	*line;
-	int		i;
+	static int	lookup[7];
+	char		*line;
+	int			i;
 
 	i = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (ft_isalpha(line[0]) && !check_if_keys_valid(line, i, pos_map))
+		if (ft_isalpha(line[0]) && !check_if_keys_valid(line, lookup, i,
+				pos_map))
 			return (free(line), false);
 		free(line);
 		line = get_next_line(fd);
 		i++;
+	}
+	i = 0;
+	while (i < 7)
+	{
+		if (lookup[i++] == 0)
+		{
+			ft_printf("%sError: %sKey is missing\n", RED_TXT, END_TXT);
+			return (false);
+		}
 	}
 	return (true);
 }
