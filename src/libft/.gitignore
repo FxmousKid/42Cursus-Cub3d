@@ -1,0 +1,31 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    .gitignore                                         :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: inazaria <inazaria@student.42.fr>                   +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/03/19 20:30:59 by inazaria          #+#    #+#              #
+#    Updated: 2024/09/13 17:31:49 by inazaria         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+
+# Files created by dev setup
+.cache
+.vscode/
+compile_commands.json 
+
+# Test executable for standard and bonus functions, respectively
+test_library
+test_library_bonus
+
+# Valrgrind files 
+vgcore* 
+
+# project-related files to ignore
+*.o
+**Test*.txt
+main.c
+a.out
+libft.a

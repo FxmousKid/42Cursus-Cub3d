@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_assets.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 19:58:13 by inazaria          #+#    #+#             */
-/*   Updated: 2025/03/11 05:55:00 by inazaria         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:18:53 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static bool	is_asset_name_valid(char *line, char *real_asset)
 	return (true);
 }
 
-static bool	check_if_keys_valid(char *line)
+static bool	check_if_keys_valid(char *line, int line_pos, int *pos_map)
 {
 	static int	lookup[7];
 	static char	*assets[7];
@@ -57,6 +57,7 @@ static bool	check_if_keys_valid(char *line)
 				return (false);
 			}
 			lookup[i] = 1;
+			*pos_map = line_pos;
 			return (true);
 		}
 		i++;
@@ -67,17 +68,20 @@ static bool	check_if_keys_valid(char *line)
 }
 
 // Will check the formats valdity (appears once, etc...) and file valdity
-bool	check_assets_format(int fd)
+bool	check_assets_format(int fd, int *pos_map)
 {
 	char	*line;
+	int		i;
 
+	i = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (ft_isalpha(line[0]) && !check_if_keys_valid(line))
+		if (ft_isalpha(line[0]) && !check_if_keys_valid(line, i, pos_map))
 			return (free(line), false);
 		free(line);
 		line = get_next_line(fd);
+		i++;
 	}
 	return (true);
 }

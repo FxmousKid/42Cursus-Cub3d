@@ -6,16 +6,16 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:26:47 by inazaria          #+#    #+#             */
-/*   Updated: 2025/03/12 12:55:16 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/14 17:56:07 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "macro.h"
 
-bool	check_assets_format(int fd);
+bool	check_assets_format(int fd, int *pos_map);
 bool	check_assets_file(int fd);
-bool	check_map(int fd);
+bool	check_map(int fd, int pos_map);
 
 void	free_split(char **tab)
 {
@@ -72,7 +72,11 @@ void	print_file(int fd)
 bool	check_config_file(char *config_file_path)
 {
 	int	fds[3];
+	int	pos_map;
 
+	if (ft_strncmp(config_file_path + ft_strlen(config_file_path) - 4, ".cub",
+			ft_strlen(config_file_path + ft_strlen(config_file_path) - 4)) != 0)
+		return (ft_printf("%sFile name wrong%s\n", RED_TXT, END_TXT), false);
 	fds[0] = open(config_file_path, O_RDONLY | __O_DSYNC);
 	fds[1] = open(config_file_path, O_RDONLY | __O_DSYNC);
 	fds[2] = open(config_file_path, O_RDONLY | __O_DSYNC);
@@ -82,13 +86,13 @@ bool	check_config_file(char *config_file_path)
 		perror("");
 		return (false);
 	}
-	if (!check_assets_format(fds[0]))
+	if (!check_assets_format(fds[0], &pos_map))
 		return (close(fds[0]), close(fds[1]), close(fds[2]), false);
 	close(fds[0]);
 	if (!check_assets_file(fds[1]))
 		return (close(fds[1]), close(fds[2]), false);
 	close(fds[1]);
-	if (!check_map(fds[2]))
+	if (!check_map(fds[2], pos_map))
 		return (close(fds[2]), false);
 	close(fds[2]);
 	return (true);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:21:39 by inazaria          #+#    #+#             */
-/*   Updated: 2025/03/12 21:37:41 by inazaria         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:46:17 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ bool	check_player_pos(t_map map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == 'N' || map[i][j] == 'W' || map[i][j] == 'E' \
-			|| map[i][j] == 'W')
+			if (map[i][j] == 'N' || map[i][j] == 'W' || map[i][j] == 'E'
+				|| map[i][j] == 'W')
 				player_count++;
 			j++;
 		}
@@ -77,6 +77,23 @@ bool	check_floor_positions(t_map map)
 	return (true);
 }
 
+bool	check_all_space_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	if (line[0] == '\0')
+		return (false);
+	while (line[i])
+	{
+		if (line[i] == 'N' || line[i] == 'W' || line[i] == 'E' || line[i] == 'S'
+			|| line[i] == '0' || line[i] == '1' || line[i] == '2')
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
 bool	check_invalid_tiles(t_map map)
 {
 	int	i;
@@ -88,12 +105,13 @@ bool	check_invalid_tiles(t_map map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == 'N' || map[i][j] == 'W' || map[i][j] == 'E' \
-				|| map[i][j] == 'S' || map[i][j] == '0' || map[i][j] == '1' \
-				|| map[i][j] == '2' || map[i][j] == ' ')
-				return (true);
-			ft_printf("%sError%s: Invalid Tile found", RED_TXT, END_TXT);
-			return (false);
+			if (!(map[i][j] == 'N' || map[i][j] == 'W' || map[i][j] == 'E'
+					|| map[i][j] == 'S' || map[i][j] == '0' || map[i][j] == '1'
+					|| map[i][j] == '2' || map[i][j] == ' '))
+			{
+				ft_printf("%sError%s: Invalid Tile found\n", RED_TXT, END_TXT);
+				return (false);
+			}
 			j++;
 		}
 		i++;

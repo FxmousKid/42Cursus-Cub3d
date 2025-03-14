@@ -6,14 +6,14 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 00:02:02 by inazaria          #+#    #+#             */
-/*   Updated: 2025/03/12 21:36:06 by inazaria         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:48:09 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "macro.h"
 
-bool	check_player_pos(t_map map);
+bool		check_player_pos(t_map map);
 
 static bool	check_first_last_line(char *line)
 {
@@ -33,8 +33,8 @@ static bool	check_first_last_line(char *line)
 	return (true);
 }
 
-bool	check_invalid_tiles(t_map map);
-bool	check_floor_positions(t_map map);
+bool		check_invalid_tiles(t_map map);
+bool		check_floor_positions(t_map map);
 
 bool	check_map_border(t_map map)
 {
@@ -77,7 +77,9 @@ bool	check_map_format(t_map map)
 	return (true);
 }
 
-static void	get_map(t_map map, int fd, char *line)
+bool		check_all_space_line(char *line);
+
+static bool	get_map(t_map map, int fd, char *line)
 {
 	int	i;
 
@@ -85,15 +87,21 @@ static void	get_map(t_map map, int fd, char *line)
 	while (line)
 	{
 		ft_strlcpy(map[i], line, ft_strlen(line));
+		if (!check_all_space_line(map[i]))
+		{
+			return (free(line), ft_printf("%sError%s: Empty line in map\n",
+					RED_TXT, END_TXT), false);
+		}
 		map[i][ft_strlen(line) - 1] = '\0';
 		free(line);
 		i++;
 		line = get_next_line(fd);
 	}
 	map[i][0] = '\0';
+	return (true);
 }
 
-bool	check_map(int fd)
+bool	check_map(int fd, int pos_map)
 {
 	char			*line;
 	int				i;
@@ -101,7 +109,7 @@ bool	check_map(int fd)
 
 	i = 0;
 	line = get_next_line(fd);
-	while (line && i <= 8)
+	while (line && i <= pos_map + 1)
 	{
 		free(line);
 		line = get_next_line(fd);
@@ -109,7 +117,8 @@ bool	check_map(int fd)
 	}
 	if (!line)
 		return (ft_printf("%sError%s", RED_TXT, END_TXT), false);
-	get_map(map, fd, line);
+	if (!get_map(map, fd, line))
+		return (false);
 	if (!check_map_format(map))
 		return (false);
 	return (true);
