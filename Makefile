@@ -6,7 +6,7 @@
 #    By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 15:32:50 by inazaria          #+#    #+#              #
-#    Updated: 2025/03/12 15:22:02 by inazaria         ###   ########.fr        #
+#    Updated: 2025/03/14 23:58:38 by ptheo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,67 +21,68 @@ DEBUG_FILE_PATH = ./src/error_manager/debugging_functions
 DEBUG_BUILD_PATH = ./build/error_manager/debugging_functions
 
 # .c files for source code
-SRC_FILES_NAMES = main.c
+SRC_FILES_NAMES_BONUS = main.c
 
 # ACTION
-SRC_FILES_NAMES += action/exit.c
-SRC_FILES_NAMES += action/keyhandler.c
-SRC_FILES_NAMES += action/mousehandler.c
-SRC_FILES_NAMES += action/door.c
+SRC_FILES_NAMES_BONUS += action/exit.c
+SRC_FILES_NAMES_BONUS += action/keyhandler.c
+SRC_FILES_NAMES_BONUS += action/mousehandler.c
+SRC_FILES_NAMES_BONUS += action/door.c
 
 # SHAPES
-SRC_FILES_NAMES += shapes/pixel.c
-SRC_FILES_NAMES += shapes/vector.c
-SRC_FILES_NAMES += shapes/draw_shapes.c
+SRC_FILES_NAMES_BONUS += shapes/pixel.c
+SRC_FILES_NAMES_BONUS += shapes/vector.c
+SRC_FILES_NAMES_BONUS += shapes/draw_shapes.c
 
 # PLAYER
-SRC_FILES_NAMES += player/player.c
-SRC_FILES_NAMES += player/player_move.c
-SRC_FILES_NAMES += player/camera_move.c
+SRC_FILES_NAMES_BONUS += player/player.c
+SRC_FILES_NAMES_BONUS += player/player_move.c
+SRC_FILES_NAMES_BONUS += player/camera_move.c
 
 # RAYCASTING
-SRC_FILES_NAMES += raycasting/raycasting.c
-SRC_FILES_NAMES += raycasting/raycasting_utils.c
-SRC_FILES_NAMES += raycasting/floor_celling.c
+SRC_FILES_NAMES_BONUS += raycasting/raycasting.c
+SRC_FILES_NAMES_BONUS += raycasting/raycasting_utils.c
+SRC_FILES_NAMES_BONUS += raycasting/floor_celling.c
 
 # PARSING
-SRC_FILES_NAMES += parser/parsing.c
-SRC_FILES_NAMES += parser/parsing_utils.c
-SRC_FILES_NAMES += parser/check_map.c
-SRC_FILES_NAMES += parser/check_map_utils.c
-SRC_FILES_NAMES += parser/check_config_file.c
-SRC_FILES_NAMES += parser/check_assets.c
+SRC_FILES_NAMES_BONUS += parser/parsing.c
+SRC_FILES_NAMES_BONUS += parser/parsing_utils.c
+SRC_FILES_NAMES_BONUS += parser/check_map.c
+SRC_FILES_NAMES_BONUS += parser/check_map_utils.c
+SRC_FILES_NAMES_BONUS += parser/check_config_file.c
+SRC_FILES_NAMES_BONUS += parser/check_assets.c
 
 # RENDER
-SRC_FILES_NAMES += render/render.c
-SRC_FILES_NAMES += render/map.c
-SRC_FILES_NAMES += render/background.c
+SRC_FILES_NAMES_BONUS += render/render.c
+SRC_FILES_NAMES_BONUS += render/map.c
+SRC_FILES_NAMES_BONUS += render/background.c
 
 # UTILS
-SRC_FILES_NAMES += utils/utils.c
+SRC_FILES_NAMES_BONUS += utils/utils.c
 
 # TEXTURING
-SRC_FILES_NAMES += texturing/texture.c
-SRC_FILES_NAMES += texturing/color_management.c
-SRC_FILES_NAMES += texturing/flashlight.c
+SRC_FILES_NAMES_BONUS += texturing/texture.c
+SRC_FILES_NAMES_BONUS += texturing/color_management.c
+SRC_FILES_NAMES_BONUS += texturing/flashlight.c
 
 # to add for example src/map/map.c
 # SRC_FILES_NAMES += map/map.c
 
 
 # Full path to .c files
-SRC_FILES = $(addprefix $(SRC_DIR), $(SRC_FILES_NAMES))
+SRC_FILES_BONUS = $(addprefix $(SRC_DIR_BONUS), $(SRC_FILES_NAMES_BONUS))
 
 # .o files for compilation
-OBJ_FILES = $(patsubst $(SRC_DIR)%.c, $(BUILD_DIR)%.o, $(SRC_FILES))
+OBJ_FILES_BONUS = $(patsubst $(SRC_DIR_BONUS)%.c, $(BUILD_DIR)%.o, $(SRC_FILE_BONUSS))
 
 # .d files for header dependency
-DEP_FILES = $(patsubst $(SRC_DIR)%.c, $(BUILD_DIR)%.d, $(SRC_FILES))
+DEP_FILES_BONUS = $(patsubst $(SRC_DIR_BONUS)%.c, $(BUILD_DIR)%.d, $(SRC_FILES_BONUS))
 
 
 #<><><><><><><> Variables <><><><><><><><><><><><><><><><><>
 
-NAME := cub3d
+NAME := cub3D
+NAME_BONUS := cub3D_bonus
 CC := clang
 CFLAGS := -gdwarf-4 -Wall -Wextra -Werror -I $(INC_DIR) -MMD -MP
 LFLAGS := libft/libft.a -Lmlx_linux -lmlx -lXext -lX11 -lm -lz
@@ -112,7 +113,6 @@ $(BUILD_DIR)%.o : $(SRC_DIR)%.c
 
 
 re : clean all
-
 
 $(NAME) : $(OBJ_FILES)
 	@$(ECHO) "$(BROWN)[BLD] Building libft static library...$(NC)"

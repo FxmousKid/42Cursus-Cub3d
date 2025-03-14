@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 00:02:02 by inazaria          #+#    #+#             */
-/*   Updated: 2025/03/14 17:48:09 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/14 23:50:59 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,10 @@ bool	check_map_format(t_map map)
 		return (false);
 	if (!check_player_pos(map))
 		return (false);
-	if (!check_player_pos(map))
-		return (false);
 	if (!check_floor_positions(map))
 		return (false);
-	if (!check_map_border(map))
-		return (false);
+	// if (!check_map_border(map))
+	//	return (false);
 	return (true);
 }
 

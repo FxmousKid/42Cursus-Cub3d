@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 22:52:58 by ptheo             #+#    #+#             */
-/*   Updated: 2025/03/11 19:48:15 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/14 23:03:14 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	draw_flashlight_image(t_data *data)
 			color = y * data->flashlight_img.line_size + x
 				* (data->flashlight_img.bits_per_pixel / 8);
 			if ((*(int *)(data->flashlight_img.pixels
-					+ color) & 0x00FFFFFF) != 0)
+						+ color) & 0x00FFFFFF) != 0)
 			{
 				if ((int)data->flash_img_pos.y + y < SCREEN_HEIGHT
 					&& (int)data->flash_img_pos.x + x < SCREEN_WIDTH)

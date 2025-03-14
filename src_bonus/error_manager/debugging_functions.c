@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   debugging_functions.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/30 18:04:04 by ptheo             #+#    #+#             */
-/*   Updated: 2025/03/14 16:45:11 by ptheo            ###   ########.fr       */
+/*   Created: 2024/09/29 16:06:11 by inazaria          #+#    #+#             */
+/*   Updated: 2025/03/14 23:53:49 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include "cub3d.h"
 
-# include "struct.h"
+/* Function used to debug errors flow, will only trigger when building
+ * project with 'make debug'*/
+#ifdef DEBUG
 
-int		check_file_name(char *file);
-int		parsing_map(t_data *data, char *file_map);
-int		parse_file(t_data *data, int fd);
-int		parse_texture(t_data *data, int fd);
-int		fill_map(t_data *data, int fd);
-int		parse_texture_line(t_data *data, char **name);
-int		fill_map_row(t_data *data, char *line, int x, int y);
-void	print_file(int fd);
+void	debug(char *str)
+{
+	printf("%s==%d== %s%s", RED_TXT, getpid(), str, END_TXT);
+}
 
+#else
+
+void	debug(char *str)
+{
+	(void)str;
+}
 #endif
+
+void	ft_err(char *str)
+{
+	ft_putstr_fd(str, STDERR_FILENO);
+}

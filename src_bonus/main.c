@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:28:06 by inazaria          #+#    #+#             */
-/*   Updated: 2025/03/14 17:01:25 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/14 23:31:16 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "macro.h"
 #include <stdbool.h>
 
-void	init_data_aux(t_data *data)
+int	init_data_aux(t_data *data)
 {
 	data->loop.delta_frame = 0;
 	data->loop.delta_update = 0;
@@ -26,9 +26,20 @@ void	init_data_aux(t_data *data)
 	data->size = (SCREEN_HEIGHT + SCREEN_WIDTH) / 200;
 	data->fov = 90;
 	data->last_pos_mouse = SCREEN_WIDTH / 2;
-	data->flashlight_img = get_texture(data,
-			ft_strdup("./ressource/flashlight.xpm"));
+	data->texture_celling.img = NULL;
+	data->texture_door.img = NULL;
+	data->texture_east.img = NULL;
+	data->texture_floor.img = NULL;
+	data->texture_north.img = NULL;
+	data->texture_south.img = NULL;
+	data->texture_west.img = NULL;
+	data->flashlight_img.img = NULL;
+	data->map = NULL;
+	if (get_texture(data, &data->flashlight_img,
+			ft_strdup("./ressource/flashlight.xpm")) == -1)
+		return (-1);
 	data->flash_img_pos = get_vect(SCREEN_WIDTH - 350, SCREEN_HEIGHT - 320, -5);
+	return (0);
 }
 
 int	init_data(t_data *data, char *argv[])
@@ -54,8 +65,8 @@ int	init_data(t_data *data, char *argv[])
 		if (data->frame[i] == NULL)
 			return (-1);
 	}
-	init_data_aux(data);
-	if (init_player(data) == -1 || parsing_map(data, argv[1]) == -1)
+	if (init_data_aux(data) == -1 || init_player(data) == -1
+		|| parsing_map(data, argv[1]) == -1)
 		return (-1);
 	return (0);
 }
