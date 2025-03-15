@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:21:39 by inazaria          #+#    #+#             */
-/*   Updated: 2025/03/14 23:50:05 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/15 18:31:52 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,6 @@ bool	check_player_pos(t_map map)
 		ft_printf("%sError%s: Must have 1 player only\n", RED_TXT, END_TXT);
 		return (false);
 	}
-	return (true);
-}
-
-bool	valid_neighbour_floor(char c)
-{
-	return (c == 'N' || c == 'W' || c == 'E' || c == 'S' || c == '1' || c == '2'
-		|| c == '0');
-}
-
-bool	check_single_floor_pos(int i, int j, t_map map)
-{
-	if ((i == 0) || (i > 0 && !valid_neighbour_floor(map[i - 1][j])))
-		return (false);
-	if ((j == 0) || (j > 0 && !valid_neighbour_floor(map[i][j - 1])))
-		return (false);
-	if ((j == 1023) || (j < 1024 && !valid_neighbour_floor(map[i][j + 1])))
-		return (false);
-	if ((i == 1023) || (i < 1024 && !valid_neighbour_floor(map[i + 1][j])))
-		return (false);
 	return (true);
 }
 

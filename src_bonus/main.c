@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:28:06 by inazaria          #+#    #+#             */
-/*   Updated: 2025/03/14 23:31:16 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/15 15:59:31 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	init_data_aux(t_data *data)
 			ft_strdup("./ressource/flashlight.xpm")) == -1)
 		return (-1);
 	data->flash_img_pos = get_vect(SCREEN_WIDTH - 350, SCREEN_HEIGHT - 320, -5);
+	data->no_door = true;
 	return (0);
 }
 

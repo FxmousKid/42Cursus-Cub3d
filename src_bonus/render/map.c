@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:59:37 by ptheo             #+#    #+#             */
-/*   Updated: 2025/03/11 15:45:29 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/15 18:43:43 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	draw_square_map(t_data *data, int x, int y)
 	int	color;
 
 	if (data->map[y][x].type == '1')
-		color = WHITE_ARGB;
+		color = DARK_GREEN_ARGB;
 	if (data->map[y][x].type == '2')
 	{
 		if (data->map[y][x].door.open)
@@ -40,21 +40,31 @@ void	draw_square_map(t_data *data, int x, int y)
 				* data->size + data->size, 0)), color);
 }
 
+void	draw_cross_and_player(t_data *data)
+{
+	draw_circle(data, get_vect(SCREEN_WIDTH - (data->size * 6), data->size * 6,
+			0), data->size / 4, RED_ARGB);
+	draw_circle(data, get_vect(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0),
+		data->size / 7, WHITE_ARGB);
+}
+
 void	draw_map(t_data *data)
 {
 	int	y;
 	int	x;
 
-	y = (int)data->player.index.y - 5;
+	draw_circle(data, get_vect(SCREEN_WIDTH - (data->size * 6), data->size * 6,
+			0), data->size * 6, VERY_DARK_GREEN_ARGB);
+	y = (int)data->player.index.y - 4;
 	if (y < 0)
 		y = 0;
-	while (y < data->map_height && y < (int)data->player.index.y + 5)
+	while (y < data->map_height && y < (int)data->player.index.y + 4)
 	{
-		x = data->player.index.x - 5;
+		x = data->player.index.x - 4;
 		if (x < 0)
 			x = 0;
 		while (data->map[y][x].type != '\0' && x < (int)data->player.index.x
-			+ 5)
+			+ 4)
 		{
 			if (data->map[y][x].type == '1' || data->map[y][x].type == '2')
 				draw_square_map(data, x, y);
@@ -62,8 +72,7 @@ void	draw_map(t_data *data)
 		}
 		y++;
 	}
-	draw_circle(data, get_vect(SCREEN_WIDTH - (data->size * 6), data->size * 6,
-			0), data->size / 4, RED_ARGB);
+	draw_cross_and_player(data);
 }
 
 void	print_map(t_data *data)

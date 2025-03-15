@@ -6,31 +6,11 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 22:52:58 by ptheo             #+#    #+#             */
-/*   Updated: 2025/03/14 23:03:14 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/15 18:47:57 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	dark_color(int color, double dist, int active)
-{
-	int	dark;
-	int	alpha;
-	int	red;
-	int	blue;
-	int	green;
-
-	if (active == 0)
-		return (color);
-	dark = 100 - (100 * dist) / 10;
-	if (dark < 0)
-		dark = 0;
-	alpha = ((color >> 24) & 0xff);
-	red = ((double)((color >> 16) & 0xff) / 100) * dark * 0.1;
-	green = ((double)((color >> 8) & 0xff) / 100) * dark * 0.1;
-	blue = ((double)(color & 0xff) / 100) * dark * 0.1;
-	return ((alpha << 24) + (red << 16) + (green << 8) + (blue));
-}
 
 int	apply_shader(t_data *data, t_vect pos, int color, double dist)
 {
@@ -69,6 +49,21 @@ int	flashlight_shader(t_data *data, t_vect p, int color, double dist)
 	return ((a << 24) + (r << 16) + (g << 8) + (b));
 }
 
+void	draw_flashlight_image_utils(t_data *data, int x, int y,
+		unsigned int color)
+{
+	int	dark;
+
+	dark = 0;
+	if (data->movement.flash == true)
+		dark = -10;
+	if ((int)data->flash_img_pos.y + y < SCREEN_HEIGHT
+		&& (int)data->flash_img_pos.x + x < SCREEN_WIDTH)
+		data->frame[(int)data->flash_img_pos.y + y][(int)data->flash_img_pos.x
+			+ x] = dark_color(*(int *)(data->flashlight_img.pixels + color),
+				dark, data->movement.darklight);
+}
+
 void	draw_flashlight_image(t_data *data)
 {
 	unsigned int	color;
@@ -84,14 +79,9 @@ void	draw_flashlight_image(t_data *data)
 			color = y * data->flashlight_img.line_size + x
 				* (data->flashlight_img.bits_per_pixel / 8);
 			if ((*(int *)(data->flashlight_img.pixels
-						+ color) & 0x00FFFFFF) != 0)
+					+ color) & 0x00FFFFFF) != 0)
 			{
-				if ((int)data->flash_img_pos.y + y < SCREEN_HEIGHT
-					&& (int)data->flash_img_pos.x + x < SCREEN_WIDTH)
-					data->frame[(int)data->flash_img_pos.y
-						+ y][(int)data->flash_img_pos.x
-						+ x] = dark_color(*(int *)(data->flashlight_img.pixels
-								+ color), 0, data->movement.darklight);
+				draw_flashlight_image_utils(data, x, y, color);
 			}
 		}
 	}

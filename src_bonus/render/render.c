@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:41:13 by ptheo             #+#    #+#             */
-/*   Updated: 2025/03/11 19:27:21 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/15 16:36:39 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	render_loop(t_data *data)
 {
+	mlx_mouse_hide(data->mlx, data->win);
 	mlx_loop_hook(data->mlx, &render_next_frame, data);
 	mlx_hook(data->win, DestroyNotify, SubstructureNotifyMask, &close_window,
 		data);

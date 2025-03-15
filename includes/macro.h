@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:21:08 by ptheo             #+#    #+#             */
-/*   Updated: 2025/03/14 16:26:07 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/15 16:45:56 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # define COLOR_MAX 0xFFFFFFFF
 # define GREY_ARGB 0x80808080
 # define BLACK_ARGB 0x00000000
+# define DARK_GREEN_ARGB 0x0000822E
+# define VERY_DARK_GREEN_ARGB 0x00004017
 
 # define SCREEN_HEIGHT 720
 # define SCREEN_WIDTH 1080

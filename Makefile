@@ -6,7 +6,7 @@
 #    By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 15:32:50 by inazaria          #+#    #+#              #
-#    Updated: 2025/03/15 00:09:27 by ptheo            ###   ########.fr        #
+#    Updated: 2025/03/15 18:39:23 by ptheo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,54 @@ INC_DIR 	= ./includes/
 
 DEBUG_FILE_PATH = ./src/error_manager/debugging_functions
 DEBUG_BUILD_PATH = ./build/error_manager/debugging_functions
+
+# .c files for source code
+SRC_FILES_NAMES = main.c
+
+# ACTION
+SRC_FILES_NAMES += action/exit.c
+SRC_FILES_NAMES += action/keyhandler.c
+SRC_FILES_NAMES += action/mousehandler.c
+SRC_FILES_NAMES += action/door.c
+
+# SHAPES
+SRC_FILES_NAMES += shapes/pixel.c
+SRC_FILES_NAMES += shapes/vector.c
+SRC_FILES_NAMES += shapes/draw_shapes.c
+
+# PLAYER
+SRC_FILES_NAMES += player/player.c
+SRC_FILES_NAMES += player/player_move.c
+SRC_FILES_NAMES += player/camera_move.c
+
+# RAYCASTING
+SRC_FILES_NAMES += raycasting/raycasting.c
+SRC_FILES_NAMES += raycasting/raycasting_utils.c
+SRC_FILES_NAMES += raycasting/floor_celling.c
+
+# PARSING
+SRC_FILES_NAMES += parser/parsing.c
+SRC_FILES_NAMES += parser/parsing_utils.c
+SRC_FILES_NAMES += parser/parsing_texture.c
+SRC_FILES_NAMES += parser/check_map.c
+SRC_FILES_NAMES += parser/check_map_utils.c
+SRC_FILES_NAMES += parser/check_config_file.c
+SRC_FILES_NAMES += parser/check_assets.c
+SRC_FILES_NAMES += parser/check_map_tools.c
+
+
+# RENDER
+SRC_FILES_NAMES += render/render.c
+SRC_FILES_NAMES += render/map.c
+SRC_FILES_NAMES += render/background.c
+
+# UTILS
+SRC_FILES_NAMES += utils/utils.c
+
+# TEXTURING
+SRC_FILES_NAMES += texturing/texture.c
+SRC_FILES_NAMES += texturing/color_management.c
+SRC_FILES_NAMES += texturing/flashlight.c
 
 # .c files for source code
 SRC_FILES_NAMES_BONUS = main.c
@@ -48,10 +96,12 @@ SRC_FILES_NAMES_BONUS += raycasting/floor_celling.c
 # PARSING
 SRC_FILES_NAMES_BONUS += parser/parsing.c
 SRC_FILES_NAMES_BONUS += parser/parsing_utils.c
+SRC_FILES_NAMES_BONUS += parser/parsing_texture.c
 SRC_FILES_NAMES_BONUS += parser/check_map.c
 SRC_FILES_NAMES_BONUS += parser/check_map_utils.c
 SRC_FILES_NAMES_BONUS += parser/check_config_file.c
 SRC_FILES_NAMES_BONUS += parser/check_assets.c
+SRC_FILES_NAMES_BONUS += parser/check_map_tools.c
 
 # RENDER
 SRC_FILES_NAMES_BONUS += render/render.c
@@ -69,15 +119,23 @@ SRC_FILES_NAMES_BONUS += texturing/flashlight.c
 # to add for example src/map/map.c
 # SRC_FILES_NAMES += map/map.c
 
+SRC_FILES = $(addprefix $(SRC_DIR), $(SRC_FILES_NAMES))
+
+# .o files for compilation
+OBJ_FILES = $(patsubst $(SRC_DIR)%.c, $(BUILD_DIR)%.o, $(SRC_FILES))
+
+# .d files for header dependency
+DEP_FILES = $(patsubst $(SRC_DIR)%.c, $(BUILD_DIR)%.d, $(SRC_FILES))
 
 # Full path to .c files
 SRC_FILES_BONUS = $(addprefix $(SRC_DIR_BONUS), $(SRC_FILES_NAMES_BONUS))
 
 # .o files for compilation
-OBJ_FILES_BONUS = $(patsubst $(SRC_DIR_BONUS)%.c, $(BUILD_DIR)%.o, $(SRC_FILE_BONUSS))
+OBJ_FILES_BONUS = $(patsubst $(SRC_DIR_BONUS)%.c, $(BUILD_DIR)%.o, $(SRC_FILES_BONUS))
 
 # .d files for header dependency
 DEP_FILES_BONUS = $(patsubst $(SRC_DIR_BONUS)%.c, $(BUILD_DIR)%.d, $(SRC_FILES_BONUS))
+
 
 
 #<><><><><><><> Variables <><><><><><><><><><><><><><><><><>
@@ -109,7 +167,7 @@ $(BUILD_DIR)%.o : $(SRC_DIR_BONUS)%.c
 	@$(CC) -c $(CFLAGS) $< -o $@
 
 # This is to add the .d files as dependencies for linking
--include $(DEP_FILES_BONUS) $(DEBUG_BUILD_PATH).d
+-include $(DEP_FILES) $(DEBUG_BUILD_PATH).d
 
 re : clean all
 
@@ -126,7 +184,7 @@ $(NAME) : $(OBJ_FILES)
 	@$(CC) $(CFLAGS) $^ $(DEBUG_BUILD_PATH).o -o $(NAME) $(LFLAGS)
 	@$(ECHO) "$(GREEN)[BLD] Executable built successfully.$(NC)"
 
-all : $(NAME_BONUS) 
+all : $(NAME)
 
 $(NAME_BONUS) : $(OBJ_FILES_BONUS)
 	@$(ECHO) "$(BROWN)[BLD] Building libft static library...$(NC)"
@@ -135,10 +193,10 @@ $(NAME_BONUS) : $(OBJ_FILES_BONUS)
 	@$(ECHO) "$(BROWN)[BLD] Building mlx library...$(NC)"
 	@$(MAKE) --no-print-directory -s -C $(MLX_DIR)
 	@$(ECHO) "$(GREEN)[BLD] successfully built mlx.$(NC)"
-	@$(ECHO) "$(BROWN)[BLD] Building $(NAME_BONUS) executable...$(NC)"
+	@$(ECHO) "$(BROWN)[BLD] Building $(NAME) executable...$(NC)"
 	@$(MKDIR) ./build/error_manager/
 	@$(CC) $(CFLAGS) -c $(DEBUG_FILE_PATH).c -o $(DEBUG_BUILD_PATH).o
-	@$(CC) $(CFLAGS) $^ $(DEBUG_BUILD_PATH).o -o $(NAME_BONUS) $(LFLAGS)
+	@$(CC) $(CFLAGS) $^ $(DEBUG_BUILD_PATH).o -o $(NAME) $(LFLAGS)
 	@$(ECHO) "$(GREEN)[BLD] Executable built successfully.$(NC)"
 
 bonus : $(NAME_BONUS)

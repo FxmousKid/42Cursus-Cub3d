@@ -6,84 +6,54 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:00:04 by ptheo             #+#    #+#             */
-/*   Updated: 2025/03/14 23:32:31 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/15 18:38:54 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	parse_texture_utils(t_data *data, char **name)
+void	fill_normal_tile(t_data *data, int x, int y, char type)
 {
-	int	result;
-
-	if (name == NULL || name[0] == NULL)
-		return (0);
-	if (ft_strncmp(name[0], "NO", ft_strlen(name[0])) == 0)
-		result = get_texture(data, &data->texture_north, name[1]);
-	else if (ft_strncmp(name[0], "SO", ft_strlen(name[0])) == 0)
-		result = get_texture(data, &data->texture_south, name[1]);
-	else if (ft_strncmp(name[0], "WE", ft_strlen(name[0])) == 0)
-		result = get_texture(data, &data->texture_west, name[1]);
-	else if (ft_strncmp(name[0], "EA", ft_strlen(name[0])) == 0)
-		result = get_texture(data, &data->texture_east, name[1]);
-	else if (ft_strncmp(name[0], "F", ft_strlen(name[0])) == 0)
-		result = get_texture(data, &data->texture_floor, name[1]);
-	else if (ft_strncmp(name[0], "C", ft_strlen(name[0])) == 0)
-		result = get_texture(data, &data->texture_celling, name[1]);
-	else if (ft_strncmp(name[0], "D", ft_strlen(name[0])) == 0)
-		result = get_texture(data, &data->texture_door, name[1]);
-	else
-		return (0);
-	return (result);
-}
-
-int	parse_texture(t_data *data, int fd)
-{
-	int		i;
-	int		result;
-	char	**name;
-	char	*line;
-
-	i = 0;
-	while (i < 7)
+	data->map[y][x].type = type;
+	data->map[y][x].index = get_vect(x, y, 0);
+	data->map[y][x].height = 100;
+	if (type == '2')
 	{
-		line = get_next_line(fd);
-		name = ft_split(line, ' ');
-		result = parse_texture_utils(data, name);
-		if (result == -1)
-		{
-			if (name[0])
-				free(name[0]);
-			return (free(line), free(name), -1);
-		}
-		i += result;
-		free(line);
-		if (name != NULL)
-			free(name[0]);
-		free(name);
+		data->map[y][x].door.open = false;
+		data->no_door = false;
 	}
-	line = get_next_line(fd);
-	free(line);
-	return (0);
+	if (type == 'N' || type == 'E' || type == 'S' || type == 'W')
+	{
+		data->player.index = get_vect(x + 0.5, y + 0.5, 0);
+		first_view_player(data, type);
+		rotate_camera(data, data->player.angle);
+	}
 }
 
 int	fill_map_row(t_data *data, char *line, int x, int y)
 {
-	while (line[x] != '\n' && line[x])
+	int	i;
+	int	j;
+
+	i = 0;
+	while (line[i] != '\n' && line[i])
 	{
-		data->map[y][x].type = line[x];
-		data->map[y][x].index = get_vect(x, y, 0);
-		data->map[y][x].height = 100;
-		if (line[x] == '2')
-			data->map[y][x].door.open = false;
-		if (line[x] == 'N' || line[x] == 'E' || line[x] == 'S'
-			|| line[x] == 'W')
+		if (line[i] == '\t')
 		{
-			data->player.index = get_vect(x + 0.5, y + 0.5, 0);
-			first_view_player(data, line[x]);
-			rotate_camera(data, data->player.angle);
+			j = 0;
+			while (j++ < 4)
+			{
+				data->map[y][x].type = ' ';
+				data->map[y][x].index = get_vect(x, y, 0);
+				data->map[y][x++].height = 100;
+			}
 		}
-		x++;
+		else
+		{
+			fill_normal_tile(data, x, y, line[i]);
+			x++;
+		}
+		i++;
 	}
 	data->map[y][x].type = '\0';
 	return (0);

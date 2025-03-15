@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 02:42:22 by theo              #+#    #+#             */
-/*   Updated: 2025/02/09 22:34:00 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/15 16:33:22 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ int	camera_movement(t_data *data)
 {
 	if (data->movement.look_right)
 	{
-		look_right(data);
+		look_right(data, data->player.camera_speed);
 	}
 	if (data->movement.look_left)
 	{
-		look_left(data);
+		look_left(data, data->player.camera_speed);
 	}
 	return (0);
 }
@@ -38,28 +38,28 @@ void	rotate_camera(t_data *data, double angle)
 	data->player.plane.y = p.x * sin(angle) + p.y * cos(angle);
 }
 
-int	look_right(t_data *data)
+int	look_right(t_data *data, double speed)
 {
 	t_player	player;
 
 	player = data->player;
-	player.angle -= player.camera_speed;
+	player.angle -= speed;
 	if (player.angle < 0)
 		player.angle += 2 * PI;
 	data->player = player;
-	rotate_camera(data, -player.camera_speed);
+	rotate_camera(data, -speed);
 	return (0);
 }
 
-int	look_left(t_data *data)
+int	look_left(t_data *data, double speed)
 {
 	t_player	player;
 
 	player = data->player;
-	player.angle += player.camera_speed;
+	player.angle += speed;
 	if (player.angle > 2 * PI)
 		player.angle -= 2 * PI;
 	data->player = player;
-	rotate_camera(data, player.camera_speed);
+	rotate_camera(data, speed);
 	return (0);
 }

@@ -3,12 +3,11 @@ SO ./ressource/iyan.xpm
 WE ./ressource/iyan.xpm
 EA ./ressource/iyan.xpm
 
-F ./ressource/iyan.xpm
-C ./ressource/iyan.xpm
-D ./ressource/iyan.xpm
+F 255,0,0
+C 0,255,0
 
 11111
 10001
-10201
+10001
 100N1
 11111

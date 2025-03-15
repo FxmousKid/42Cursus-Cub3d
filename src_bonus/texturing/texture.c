@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 02:23:28 by theo              #+#    #+#             */
-/*   Updated: 2025/03/14 23:26:16 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/15 18:47:33 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int	get_texture(t_data *data, t_img *img, char *p)
 	img->img = mlx_xpm_file_to_image(data->mlx, path, &img->width,
 			&img->height);
 	if (img->img == NULL)
-		return (free(path), free(p), -1);
+		return (ft_printf("%sEnable to open file:%s %s", RED_TXT, END_TXT, p),
+			free(path), free(p), -1);
 	img->pixels = mlx_get_data_addr(img->img, &img->bits_per_pixel,
 			&img->line_size, &img->endian);
 	free(path);

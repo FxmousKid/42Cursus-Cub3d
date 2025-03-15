@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:19:42 by ptheo             #+#    #+#             */
-/*   Updated: 2025/03/12 21:36:23 by inazaria         ###   ########.fr       */
+/*   Updated: 2025/03/15 16:20:49 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	check_file_name(char *file)
 
 	len = ft_strlen(file);
 	if (len <= 4 || ft_strncmp(file + len - 4, ".cub", 4) != 0)
-		return (-1);
+		return (ft_printf("Error: file format wrong\n"), -1);
 	return (0);
 }
 

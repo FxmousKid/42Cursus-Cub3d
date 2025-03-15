@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 00:02:02 by inazaria          #+#    #+#             */
-/*   Updated: 2025/03/14 23:50:59 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/15 18:31:53 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ bool	check_map_format(t_map map)
 		return (false);
 	if (!check_floor_positions(map))
 		return (false);
-	// if (!check_map_border(map))
-	//	return (false);
 	return (true);
 }
 
@@ -84,13 +82,15 @@ static bool	get_map(t_map map, int fd, char *line)
 	i = 0;
 	while (line)
 	{
-		ft_strlcpy(map[i], line, ft_strlen(line));
+		ft_strlcpy(map[i], line, ft_strlen(line) + 1);
 		if (!check_all_space_line(map[i]))
 		{
 			return (free(line), ft_printf("%sError%s: Empty line in map\n",
 					RED_TXT, END_TXT), false);
 		}
-		map[i][ft_strlen(line) - 1] = '\0';
+		if (map[i][ft_strlen(line) - 1] == '\n')
+			map[i][ft_strlen(line) - 1] = '\0';
+		replace_tab_by_space(map[i]);
 		free(line);
 		i++;
 		line = get_next_line(fd);
