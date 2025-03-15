@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 18:30:43 by ptheo             #+#    #+#             */
-/*   Updated: 2025/03/15 22:05:20 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/15 23:28:20 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool	check_color_format_utils(char **split1)
 	{
 		if (ft_isnumbers(split2[i]) == false || ft_atoi(split2[i]) > 255)
 		{
-			return (free_tab((void **)split2, i), free(split2), false);
+			return (free_tab((void **)split2, 3), false);
 		}
 		i++;
 	}
@@ -61,7 +61,8 @@ bool	check_color_format(char *line)
 		i++;
 	}
 	if (count != 2)
-		return (ft_printf("Wrong color argument: need R,G,B\n"), false);
+		return (ft_printf("Wrong color argument: need R,G,B \n"),
+			free_tab((void **)split1, len_tab((void **)split1)), false);
 	split1[1][ft_strlen(split1[1]) - 1] = '\0';
 	return (check_color_format_utils(split1));
 }
@@ -107,7 +108,9 @@ void	replace_tab_by_space(char *line)
 				line[i++] = ' ';
 				j++;
 			}
+			i -= 1;
 		}
 		i++;
 	}
+	printf("%s\n", line);
 }
