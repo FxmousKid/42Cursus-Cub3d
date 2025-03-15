@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 02:23:28 by theo              #+#    #+#             */
-/*   Updated: 2025/03/15 21:56:23 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/15 21:55:51 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,7 @@ void	draw_texture(t_data *data, t_img *texture, t_ray *ray)
 			color = pos.y * texture->line_size + pos.x
 				* (texture->bits_per_pixel / 8);
 		}
-		data->frame[y][ray->index] = apply_shader(data, get_vect(ray->index, y,
-					0), *(int *)(texture->pixels + color), ray->proj);
+		data->frame[y][ray->index] = *(int *)(texture->pixels + color);
 		y++;
 	}
 }

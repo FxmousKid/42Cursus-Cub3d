@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 18:25:20 by ptheo             #+#    #+#             */
-/*   Updated: 2025/03/15 15:52:14 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/15 20:41:17 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,8 @@ typedef struct s_data
 	double		fov;
 	int			**frame;
 	bool		no_door;
+	int			floor_color;
+	int			celling_color;
 	t_player	player;
 	t_pixel		pixel;
 	t_loop		loop;

@@ -3,8 +3,8 @@ SO ./ressource/wolftex/greystone.xpm
 WE ./ressource/wolftex/mossy.xpm
 EA ./ressource/wolftex/redbrick.xpm
 
-F 255,0,0
-C 0,255,0
+F 40,40,40
+C 150,40,5
 
         1111111111111111111111111
         1000000000110000000000001

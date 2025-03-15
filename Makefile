@@ -6,7 +6,7 @@
 #    By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 15:32:50 by inazaria          #+#    #+#              #
-#    Updated: 2025/03/15 18:39:23 by ptheo            ###   ########.fr        #
+#    Updated: 2025/03/15 22:04:12 by ptheo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -161,7 +161,7 @@ NC		:= \e[0m
 #<><><><><><><> Recipes <><><><><><><><><><><><><><><><><><>
 
 # Modifying Implicit conversion rules to build in custom directory
-$(BUILD_DIR)%.o : $(SRC_DIR_BONUS)%.c
+$(BUILD_DIR)%.o : $(SRC_DIR)%.c
 	@$(MKDIR) $(dir $@)
 	@$(ECHO) "$(BLUE)[CMP] Compiling $<...$(NC)"
 	@$(CC) -c $(CFLAGS) $< -o $@

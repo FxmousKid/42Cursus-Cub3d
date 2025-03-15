@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:31:08 by inazaria          #+#    #+#             */
-/*   Updated: 2025/03/15 18:33:32 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/15 22:03:09 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void		draw_background(t_data *data);
 void		draw_frame(t_data *data);
 /* UTILS */
 long int	get_current_time(void);
+void		free_tab(void **tab, size_t size);
 
 /* MAP */
 void		draw_map(t_data *data);
