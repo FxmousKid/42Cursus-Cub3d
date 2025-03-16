@@ -6,12 +6,13 @@
 #    By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 15:32:50 by inazaria          #+#    #+#              #
-#    Updated: 2025/03/15 22:04:12 by ptheo            ###   ########.fr        #
+#    Updated: 2025/03/16 10:18:56 by inazaria         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #<><><><><><><> Files <><><><><><><><><><><><><><><><><><><>
-SRC_DIR 	= ./src/
+
+SRC_DIR 		= ./src/
 SRC_DIR_BONUS 	= ./src_bonus/
 
 BUILD_DIR 	= ./build/
@@ -120,29 +121,26 @@ SRC_FILES_NAMES_BONUS += texturing/flashlight.c
 # SRC_FILES_NAMES += map/map.c
 
 SRC_FILES = $(addprefix $(SRC_DIR), $(SRC_FILES_NAMES))
-
 # .o files for compilation
 OBJ_FILES = $(patsubst $(SRC_DIR)%.c, $(BUILD_DIR)%.o, $(SRC_FILES))
-
 # .d files for header dependency
 DEP_FILES = $(patsubst $(SRC_DIR)%.c, $(BUILD_DIR)%.d, $(SRC_FILES))
 
+
 # Full path to .c files
 SRC_FILES_BONUS = $(addprefix $(SRC_DIR_BONUS), $(SRC_FILES_NAMES_BONUS))
-
 # .o files for compilation
 OBJ_FILES_BONUS = $(patsubst $(SRC_DIR_BONUS)%.c, $(BUILD_DIR)%.o, $(SRC_FILES_BONUS))
-
 # .d files for header dependency
 DEP_FILES_BONUS = $(patsubst $(SRC_DIR_BONUS)%.c, $(BUILD_DIR)%.d, $(SRC_FILES_BONUS))
 
 
-
 #<><><><><><><> Variables <><><><><><><><><><><><><><><><><>
+
 
 NAME := cub3D
 NAME_BONUS := cub3D_bonus
-CC := clang
+CC := cc
 CFLAGS := -gdwarf-4 -Wall -Wextra -Werror -I $(INC_DIR) -MMD -MP
 LFLAGS := libft/libft.a -Lmlx_linux -lmlx -lXext -lX11 -lm -lz
 MLX_DIR := ./mlx_linux/
@@ -150,18 +148,19 @@ MKDIR := mkdir -p
 RM_RF := rm -rf
 ECHO  := echo -e
 
-
 BLUE	:= \e[34m
 BROWN	:= \e[33m
 GREEN	:= \e[32m
 RED		:= \e[31m
 NC		:= \e[0m
 
-
 #<><><><><><><> Recipes <><><><><><><><><><><><><><><><><><>
 
+vpath %.c $(SRC_DIR) $(SRC_DIR_BONUS)
+
+
 # Modifying Implicit conversion rules to build in custom directory
-$(BUILD_DIR)%.o : $(SRC_DIR)%.c
+$(BUILD_DIR)%.o : %.c
 	@$(MKDIR) $(dir $@)
 	@$(ECHO) "$(BLUE)[CMP] Compiling $<...$(NC)"
 	@$(CC) -c $(CFLAGS) $< -o $@
@@ -193,11 +192,9 @@ $(NAME_BONUS) : $(OBJ_FILES_BONUS)
 	@$(ECHO) "$(BROWN)[BLD] Building mlx library...$(NC)"
 	@$(MAKE) --no-print-directory -s -C $(MLX_DIR)
 	@$(ECHO) "$(GREEN)[BLD] successfully built mlx.$(NC)"
-	@$(ECHO) "$(BROWN)[BLD] Building $(NAME) executable...$(NC)"
-	@$(MKDIR) ./build/error_manager/
-	@$(CC) $(CFLAGS) -c $(DEBUG_FILE_PATH).c -o $(DEBUG_BUILD_PATH).o
-	@$(CC) $(CFLAGS) $^ $(DEBUG_BUILD_PATH).o -o $(NAME) $(LFLAGS)
-	@$(ECHO) "$(GREEN)[BLD] Executable built successfully.$(NC)"
+	@$(ECHO) "$(BROWN)[BLD] Building bonus executable executable...$(NC)"
+	@$(CC) $(CFLAGS) $(OBJ_FILES_BONUS) -o $(NAME_BONUS) $(LFLAGS)
+	@$(ECHO) "$(GREEN)[BLD] Bonus Executable built successfully.$(NC)"
 
 bonus : $(NAME_BONUS)
 
@@ -209,19 +206,27 @@ debug : $(OBJ_FILES)
 	@$(CC) $(CFLAGS) $(OBJ_FILES) $(DEBUG_BUILD_PATH).o -o $(NAME) $(LFLAGS)
 	@$(ECHO) "$(GREEN)[BLD] Executable built successfully.$(NC)"
 
-force : $(OBJ_FILES)
-	@$(ECHO) "$(RED)[DBG] Making in FORCED mode...$(NC)"
-	@$(ECHO) "$(BROWN)[BLD] Building libft static library...$(NC)"
-	@$(MAKE) --no-print-directory -s -C ./libft all
-	@$(ECHO) "$(GREEN)[BLD] successfully built libft.$(NC)"	
-	@$(ECHO) "$(BROWN)[BLD] Building mlx library...$(NC)"
-	@$(MAKE) --no-print-directory -s -C $(MLX_DIR)
-	@$(ECHO) "$(GREEN)[BLD] successfully built mlx.$(NC)"
-	@$(ECHO) "$(BROWN)[BLD] Building $(NAME) executable...$(NC)"
+debug_bonus : $(OBJ_FILES_BONUS)
+	@$(ECHO) "$(RED)[DBG] Making bonus in DEBUG MODE...$(NC)"
 	@$(MKDIR) ./build/error_manager/
-	@$(CC) $(CFLAGS) -c $(DEBUG_FILE_PATH).c -o $(DEBUG_BUILD_PATH).o
-	@$(CC) $(CFLAGS) $^ $(DEBUG_BUILD_PATH).o -o $(NAME) $(LFLAGS)
-	@$(ECHO) "$(GREEN)[BLD] Executable built in FORCED mode successfully.$(NC)"
+	@$(CC) $(CFLAGS) -D DEBUG -c $(DEBUG_FILE_PATH).c -o $(DEBUG_BUILD_PATH).o
+	@$(ECHO) "$(BROWN)[BLD] Building bonus executable...$(NC)"
+	@$(CC) $(CFLAGS) $(OBJ_FILES_BONUS) $(DEBUG_BUILD_PATH).o -o $(NAME) $(LFLAGS)
+	@$(ECHO) "$(GREEN)[BLD] Bonus executable built successfully.$(NC)"
+
+# force : $(OBJ_FILES)
+# 	@$(ECHO) "$(RED)[DBG] Making in FORCED mode...$(NC)"
+# 	@$(ECHO) "$(BROWN)[BLD] Building libft static library...$(NC)"
+# 	@$(MAKE) --no-print-directory -s -C ./libft all
+# 	@$(ECHO) "$(GREEN)[BLD] successfully built libft.$(NC)"	
+# 	@$(ECHO) "$(BROWN)[BLD] Building mlx library...$(NC)"
+# 	@$(MAKE) --no-print-directory -s -C $(MLX_DIR)
+# 	@$(ECHO) "$(GREEN)[BLD] successfully built mlx.$(NC)"
+# 	@$(ECHO) "$(BROWN)[BLD] Building $(NAME) executable...$(NC)"
+# 	@$(MKDIR) ./build/error_manager/
+# 	@$(CC) $(CFLAGS) -c $(DEBUG_FILE_PATH).c -o $(DEBUG_BUILD_PATH).o
+# 	@$(CC) $(CFLAGS) $^ $(DEBUG_BUILD_PATH).o -o $(NAME) $(LFLAGS)
+# 	@$(ECHO) "$(GREEN)[BLD] Executable built in FORCED mode successfully.$(NC)"
 
 
 clean : 
@@ -232,11 +237,11 @@ clean :
 	@$(ECHO) "$(GREEN)[CLN] Clean complete.$(NC)"
 
 fclean : 
-	@$(ECHO) "$(BROWN)[CLN] Cleaning object, dependency files, and executable...$(NC)"
-	@$(RM_RF) $(BUILD_DIR) $(NAME)
+	@$(ECHO) "$(BROWN)[CLN] Cleaning object, dependency files, and executables...$(NC)"
+	@$(RM_RF) $(BUILD_DIR) $(NAME) $(NAME_BONUS)
 	@$(MAKE) --no-print-directory -s -C ./libft fclean
 	@$(MAKE) --no-print-directory -s -C ./mlx_linux clean
-	@$(ECHO) "$(GREEN)[CLN] Clean complete.$(NC)"
+	@$(ECHO) "$(GREEN)[CLN] Full clean complete.$(NC)"
 
 
 .DEFAULT_GOAL := all

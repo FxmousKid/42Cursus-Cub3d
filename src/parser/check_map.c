@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 00:02:02 by inazaria          #+#    #+#             */
-/*   Updated: 2025/03/15 23:14:53 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/16 10:10:44 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ bool	check_map_border(t_map map)
 	if (!check_first_last_line(map[0]))
 		return (false);
 	i = 0;
-	while (map[i] && map[i + 1][0])
+	// while (map[i] && map[i + 1][0]) <- map[i] tjrs vraie car c'est char[1024] != char*
+	while (map[i + 1][0])
 	{
 		j = 0;
 		while (map[i][j++] == ' ')
