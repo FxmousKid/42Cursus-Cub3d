@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player.c                                           :+:      :+:    :+:   */
+/*   player_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 02:22:40 by theo              #+#    #+#             */
-/*   Updated: 2025/03/11 15:59:36 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/16 20:15:19 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	first_view_player(t_data *data, char d)
 {
 	if (d == 'N')
 		data->player.angle = PI / 2;
-	else if (d == 'E')
+	else if (d == 'W')
 		data->player.angle = PI;
 	else if (d == 'S')
 		data->player.angle = -PI / 2;

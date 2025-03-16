@@ -1,11 +1,11 @@
-NO ./ressource/wolsftex/bluestone.xpm
-SO ./ressource/wolftex/greystone.xpm
-WE ./ressource/wolftex/mossy.xpm
-EA ./ressource/wolftex/redbrick.xpm
+NO ./ressource/scary/s_wall.xpm
+SO ./ressource/scary/s_wall.xpm
+WE ./ressource/scary/s_wall.xpm
+EA ./ressource/scary/s_wall.xpm
 
-F ./ressource/wolftex/colorstone.xpm
-C ./ressource/wolftex/wood.xpm
-D ./ressource/wolftex/eagle.xpm
+F ./ressource/scary/s_floor.xpm
+C ./ressource/scary/s_celling.xpm
+D ./ressource/scary/s_door.xpm
 
         1111111111111111111111111
         1000000000110000000000001
