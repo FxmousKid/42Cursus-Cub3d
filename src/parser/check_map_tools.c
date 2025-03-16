@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 18:30:43 by ptheo             #+#    #+#             */
-/*   Updated: 2025/03/15 23:28:20 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/16 16:15:36 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool	check_color_format_utils(char **split1)
 	int		i;
 	char	**split2;
 
-	split2 = ft_split(split1[1], ',');
+	split2 = ft_split(split1[1], ", ");
 	free_tab((void **)split1, 3);
 	if (split2 == NULL)
 		return (false);
@@ -47,7 +47,7 @@ bool	check_color_format(char *line)
 	int		count;
 	char	**split1;
 
-	split1 = ft_split(line, ' ');
+	split1 = ft_split(line, " \t");
 	if (split1 == NULL)
 		return (false);
 	if (split1[1] == NULL)
@@ -112,5 +112,4 @@ void	replace_tab_by_space(char *line)
 		}
 		i++;
 	}
-	printf("%s\n", line);
 }

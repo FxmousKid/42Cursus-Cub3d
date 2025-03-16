@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_texture.c                                  :+:      :+:    :+:   */
+/*   parsing_texture_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 18:36:52 by ptheo             #+#    #+#             */
-/*   Updated: 2025/03/15 18:39:42 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/16 16:16:07 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,16 @@ int	parse_texture(t_data *data, int fd)
 	while (i < 7)
 	{
 		line = get_next_line(fd);
-		name = ft_split(line, ' ');
+		name = ft_split(line, " \t");
 		result = parse_texture_utils(data, name);
 		if (result == -1)
 		{
-			if (name[0])
-				free(name[0]);
+			free_tab((void **)name, len_tab((void **)name));
 			return (free(line), free(name), -1);
 		}
 		i += result;
 		free(line);
-		if (name != NULL)
-			free(name[0]);
-		free(name);
+		free_tab((void **)name, len_tab((void **)name));
 	}
 	line = get_next_line(fd);
 	return (free(line), 0);

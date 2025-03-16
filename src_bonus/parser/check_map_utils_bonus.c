@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map_utils.c                                  :+:      :+:    :+:   */
+/*   check_map_utils_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:21:39 by inazaria          #+#    #+#             */
-/*   Updated: 2025/03/15 18:31:52 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/16 15:33:20 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ bool	check_floor_positions(t_map map)
 		j = 0;
 		while (map[i][j])
 		{
-			if ((map[i][j] == '0' || map[i][j] == '2')
+			if ((map[i][j] == '0' || map[i][j] == '2' || map[i][j] == 'N'
+					|| map[i][j] == 'W' || map[i][j] == 'S' || map[i][j] == 'E')
 				&& !check_single_floor_pos(i, j, map))
 			{
 				ft_printf("%sError%s: %s\n", RED_TXT, END_TXT, FLOOR_ERR);

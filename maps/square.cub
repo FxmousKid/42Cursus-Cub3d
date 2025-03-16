@@ -1,7 +1,7 @@
 NO ./ressource/iyan.xpm
 SO ./ressource/iyan.xpm
 WE ./ressource/iyan.xpm
-EA ./ressource/iyan.xpm
+EA 				./ressource/iyan.xpm
 
 F 255,255,255
 C 255,255,255
@@ -9,5 +9,5 @@ C 255,255,255
 11111
 10001
 10001
-100N1
+10N01
 11111

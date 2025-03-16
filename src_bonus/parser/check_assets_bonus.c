@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_assets.c                                     :+:      :+:    :+:   */
+/*   check_assets_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 19:58:13 by inazaria          #+#    #+#             */
-/*   Updated: 2025/03/15 16:18:39 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/16 16:15:59 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static bool	is_asset_name_valid(char *line, char *real_asset)
 {
 	char	**split;
 
-	split = ft_split(line, ' ');
+	split = ft_split(line, " \t");
 	if (!split)
 		return (free_split(split), false);
 	if (ft_strncmp(real_asset, split[0], ft_strlen(split[0])))

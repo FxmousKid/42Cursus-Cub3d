@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 18:36:52 by ptheo             #+#    #+#             */
-/*   Updated: 2025/03/15 22:05:38 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/16 16:15:52 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	get_color(int *color, char *str)
 	t_argb	argb;
 	char	**colors;
 
-	colors = ft_split(str, ',');
+	colors = ft_split(str, ", ");
 	if (colors == NULL)
 		return (-1);
 	argb.alpha = 0;
@@ -25,11 +25,7 @@ int	get_color(int *color, char *str)
 	argb.green = ft_atoi(colors[1]);
 	argb.blue = ft_atoi(colors[2]);
 	*color = argb_to_hex(argb);
-	free(colors[0]);
-	free(colors[1]);
-	free(colors[2]);
-	free(colors);
-	free(str);
+	free_tab((void **)colors, len_tab((void **)colors));
 	return (1);
 }
 
@@ -67,19 +63,16 @@ int	parse_texture(t_data *data, int fd)
 	while (i < 6)
 	{
 		line = get_next_line(fd);
-		name = ft_split(line, ' ');
+		name = ft_split(line, " \t");
 		result = parse_texture_utils(data, name);
 		if (result == -1)
 		{
-			if (name[0])
-				free(name[0]);
-			return (free(line), free(name), -1);
+			free_tab((void **)name, len_tab((void **)name));
+			return (free(line), -1);
 		}
 		i += result;
 		free(line);
-		if (name != NULL)
-			free(name[0]);
-		free(name);
+		free_tab((void **)name, len_tab((void **)name));
 	}
 	line = get_next_line(fd);
 	return (free(line), 0);
