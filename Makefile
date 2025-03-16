@@ -6,7 +6,7 @@
 #    By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/20 15:32:50 by inazaria          #+#    #+#              #
-#    Updated: 2025/03/16 10:18:56 by inazaria         ###   ########.fr        #
+#    Updated: 2025/03/16 10:31:40 by inazaria         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,51 +71,51 @@ SRC_FILES_NAMES += texturing/color_management.c
 SRC_FILES_NAMES += texturing/flashlight.c
 
 # .c files for source code
-SRC_FILES_NAMES_BONUS = main.c
+SRC_FILES_NAMES_BONUS = main_bonus.c
 
 # ACTION
-SRC_FILES_NAMES_BONUS += action/exit.c
-SRC_FILES_NAMES_BONUS += action/keyhandler.c
-SRC_FILES_NAMES_BONUS += action/mousehandler.c
-SRC_FILES_NAMES_BONUS += action/door.c
+SRC_FILES_NAMES_BONUS += action/exit_bonus.c
+SRC_FILES_NAMES_BONUS += action/keyhandler_bonus.c
+SRC_FILES_NAMES_BONUS += action/mousehandler_bonus.c
+SRC_FILES_NAMES_BONUS += action/door_bonus.c
 
 # SHAPES
-SRC_FILES_NAMES_BONUS += shapes/pixel.c
-SRC_FILES_NAMES_BONUS += shapes/vector.c
-SRC_FILES_NAMES_BONUS += shapes/draw_shapes.c
+SRC_FILES_NAMES_BONUS += shapes/pixel_bonus.c
+SRC_FILES_NAMES_BONUS += shapes/vector_bonus.c
+SRC_FILES_NAMES_BONUS += shapes/draw_shapes_bonus.c
 
 # PLAYER
-SRC_FILES_NAMES_BONUS += player/player.c
-SRC_FILES_NAMES_BONUS += player/player_move.c
-SRC_FILES_NAMES_BONUS += player/camera_move.c
+SRC_FILES_NAMES_BONUS += player/player_bonus.c
+SRC_FILES_NAMES_BONUS += player/player_move_bonus.c
+SRC_FILES_NAMES_BONUS += player/camera_move_bonus.c
 
 # RAYCASTING
-SRC_FILES_NAMES_BONUS += raycasting/raycasting.c
-SRC_FILES_NAMES_BONUS += raycasting/raycasting_utils.c
-SRC_FILES_NAMES_BONUS += raycasting/floor_celling.c
+SRC_FILES_NAMES_BONUS += raycasting/raycasting_bonus.c
+SRC_FILES_NAMES_BONUS += raycasting/raycasting_utils_bonus.c
+SRC_FILES_NAMES_BONUS += raycasting/floor_celling_bonus.c
 
 # PARSING
-SRC_FILES_NAMES_BONUS += parser/parsing.c
-SRC_FILES_NAMES_BONUS += parser/parsing_utils.c
-SRC_FILES_NAMES_BONUS += parser/parsing_texture.c
-SRC_FILES_NAMES_BONUS += parser/check_map.c
-SRC_FILES_NAMES_BONUS += parser/check_map_utils.c
-SRC_FILES_NAMES_BONUS += parser/check_config_file.c
-SRC_FILES_NAMES_BONUS += parser/check_assets.c
-SRC_FILES_NAMES_BONUS += parser/check_map_tools.c
+SRC_FILES_NAMES_BONUS += parser/parsing_bonus.c
+SRC_FILES_NAMES_BONUS += parser/parsing_utils_bonus.c
+SRC_FILES_NAMES_BONUS += parser/parsing_texture_bonus.c
+SRC_FILES_NAMES_BONUS += parser/check_map_bonus.c
+SRC_FILES_NAMES_BONUS += parser/check_map_utils_bonus.c
+SRC_FILES_NAMES_BONUS += parser/check_config_file_bonus.c
+SRC_FILES_NAMES_BONUS += parser/check_assets_bonus.c
+SRC_FILES_NAMES_BONUS += parser/check_map_tools_bonus.c
 
 # RENDER
-SRC_FILES_NAMES_BONUS += render/render.c
-SRC_FILES_NAMES_BONUS += render/map.c
-SRC_FILES_NAMES_BONUS += render/background.c
+SRC_FILES_NAMES_BONUS += render/render_bonus.c
+SRC_FILES_NAMES_BONUS += render/map_bonus.c
+SRC_FILES_NAMES_BONUS += render/background_bonus.c
 
 # UTILS
-SRC_FILES_NAMES_BONUS += utils/utils.c
+SRC_FILES_NAMES_BONUS += utils/utils_bonus.c
 
 # TEXTURING
-SRC_FILES_NAMES_BONUS += texturing/texture.c
-SRC_FILES_NAMES_BONUS += texturing/color_management.c
-SRC_FILES_NAMES_BONUS += texturing/flashlight.c
+SRC_FILES_NAMES_BONUS += texturing/texture_bonus.c
+SRC_FILES_NAMES_BONUS += texturing/color_management_bonus.c
+SRC_FILES_NAMES_BONUS += texturing/flashlight_bonus.c
 
 # to add for example src/map/map.c
 # SRC_FILES_NAMES += map/map.c
