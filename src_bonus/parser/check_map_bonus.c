@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 00:02:02 by inazaria          #+#    #+#             */
-/*   Updated: 2025/03/16 10:33:03 by inazaria         ###   ########.fr       */
+/*   Updated: 2025/03/17 18:16:57 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,12 @@ bool	check_map(int fd, int pos_map)
 	i = 0;
 	line = get_next_line(fd);
 	while (line && i <= pos_map + 1)
+	{
+		free(line);
+		line = get_next_line(fd);
+		i++;
+	}
+	while (check_all_space_line(line) == false)
 	{
 		free(line);
 		line = get_next_line(fd);

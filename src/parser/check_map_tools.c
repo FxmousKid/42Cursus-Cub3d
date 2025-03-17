@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 18:30:43 by ptheo             #+#    #+#             */
-/*   Updated: 2025/03/16 16:15:36 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/17 18:13:30 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ bool	check_color_format_utils(char **split1)
 	{
 		if (ft_isnumbers(split2[i]) == false || ft_atoi(split2[i]) > 255)
 		{
+			ft_printf("%sWrong number argument\n%s", RED_TXT, END_TXT);
 			return (free_tab((void **)split2, 3), false);
 		}
 		i++;
