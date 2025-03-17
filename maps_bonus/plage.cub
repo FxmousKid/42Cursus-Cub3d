@@ -4,7 +4,7 @@ WE ./ressource/plage/p_wall.xpm
 EA ./ressource/plage/p_wall.xpm
 
 F ./ressource/plage/p_floor.xpm
-C ./ressource/plage/p_celling.xpm
+C ./ressource/plage/p_ceing.xpm
 D ./ressource/scary/s_door.xpm
 
 1111111111111111111111111111111111111111111111111111111111111111111

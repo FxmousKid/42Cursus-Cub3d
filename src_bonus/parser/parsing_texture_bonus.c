@@ -6,7 +6,7 @@
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 18:36:52 by ptheo             #+#    #+#             */
-/*   Updated: 2025/03/16 16:16:07 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/17 18:00:18 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	parse_texture(t_data *data, int fd)
 		if (result == -1)
 		{
 			free_tab((void **)name, len_tab((void **)name));
-			return (free(line), free(name), -1);
+			return (free(line), -1);
 		}
 		i += result;
 		free(line);
