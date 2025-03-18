@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debugging_functions.c                              :+:      :+:    :+:   */
+/*   background.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/29 16:06:11 by inazaria          #+#    #+#             */
-/*   Updated: 2025/03/14 23:53:49 by ptheo            ###   ########.fr       */
+/*   Created: 2025/01/31 02:47:14 by theo              #+#    #+#             */
+/*   Updated: 2025/03/11 15:57:25 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/* Function used to debug errors flow, will only trigger when building
- * project with 'make debug'*/
-#ifdef DEBUG
-
-void	debug(char *str)
+void	draw_background(t_data *data)
 {
-	printf("%s==%d== %s%s", RED_TXT, getpid(), str, END_TXT);
-}
+	int	x;
+	int	y;
 
-#else
-
-void	debug(char *str)
-{
-	(void)str;
-}
-#endif
-
-void	ft_err(char *str)
-{
-	ft_putstr_fd(str, STDERR_FILENO);
+	y = 0;
+	while (y < SCREEN_HEIGHT)
+	{
+		x = 0;
+		while (x < SCREEN_WIDTH)
+		{
+			put_pixel(data, x, y, BLACK_ARGB);
+			x++;
+		}
+		y++;
+	}
 }

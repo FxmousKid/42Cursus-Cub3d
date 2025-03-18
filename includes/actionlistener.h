@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debugging_functions.c                              :+:      :+:    :+:   */
+/*   actionlistener.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/29 16:06:11 by inazaria          #+#    #+#             */
-/*   Updated: 2025/03/14 23:53:49 by ptheo            ###   ########.fr       */
+/*   Created: 2025/01/30 17:35:28 by ptheo             #+#    #+#             */
+/*   Updated: 2025/03/15 16:57:21 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#ifndef ACTIONLISTENER_H
+# define ACTIONLISTENER_H
 
-/* Function used to debug errors flow, will only trigger when building
- * project with 'make debug'*/
-#ifdef DEBUG
+# include "struct.h"
 
-void	debug(char *str)
-{
-	printf("%s==%d== %s%s", RED_TXT, getpid(), str, END_TXT);
-}
+int	key_pressed(int keycode, t_data *data);
+int	close_window(t_data *data);
+int	key_released(int keycode, t_data *data);
+int	mouse_motion(int x, int y, t_data *data);
 
-#else
-
-void	debug(char *str)
-{
-	(void)str;
-}
 #endif
-
-void	ft_err(char *str)
-{
-	ft_putstr_fd(str, STDERR_FILENO);
-}

@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debugging_functions.c                              :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/29 16:06:11 by inazaria          #+#    #+#             */
-/*   Updated: 2025/03/14 23:53:49 by ptheo            ###   ########.fr       */
+/*   Created: 2025/01/30 18:27:39 by ptheo             #+#    #+#             */
+/*   Updated: 2025/03/15 23:29:47 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/* Function used to debug errors flow, will only trigger when building
- * project with 'make debug'*/
-#ifdef DEBUG
-
-void	debug(char *str)
+long int	get_current_time(void)
 {
-	printf("%s==%d== %s%s", RED_TXT, getpid(), str, END_TXT);
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
-#else
-
-void	debug(char *str)
+size_t	len_tab(void **t)
 {
-	(void)str;
-}
-#endif
+	int	i;
 
-void	ft_err(char *str)
-{
-	ft_putstr_fd(str, STDERR_FILENO);
+	i = 0;
+	while (t[i])
+		i++;
+	return (i);
 }

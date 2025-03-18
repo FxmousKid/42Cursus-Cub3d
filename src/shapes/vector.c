@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debugging_functions.c                              :+:      :+:    :+:   */
+/*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/29 16:06:11 by inazaria          #+#    #+#             */
-/*   Updated: 2025/03/14 23:53:49 by ptheo            ###   ########.fr       */
+/*   Created: 2025/01/30 17:46:59 by ptheo             #+#    #+#             */
+/*   Updated: 2025/02/04 10:07:08 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/* Function used to debug errors flow, will only trigger when building
- * project with 'make debug'*/
-#ifdef DEBUG
-
-void	debug(char *str)
+t_vect	get_vect(double x, double y, double z)
 {
-	printf("%s==%d== %s%s", RED_TXT, getpid(), str, END_TXT);
+	t_vect	vec;
+
+	vec.x = x;
+	vec.y = y;
+	vec.z = z;
+	return (vec);
 }
 
-#else
-
-void	debug(char *str)
+t_square	get_square(t_vect v1, t_vect v2, t_vect v3, t_vect v4)
 {
-	(void)str;
-}
-#endif
+	t_square	s;
 
-void	ft_err(char *str)
-{
-	ft_putstr_fd(str, STDERR_FILENO);
+	s.top_left = v1;
+	s.top_right = v2;
+	s.bot_left = v3;
+	s.bot_right = v4;
+	return (s);
 }

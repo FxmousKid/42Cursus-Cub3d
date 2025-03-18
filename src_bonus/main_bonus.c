@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ptheo <ptheo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:28:06 by inazaria          #+#    #+#             */
-/*   Updated: 2025/03/15 20:58:27 by ptheo            ###   ########.fr       */
+/*   Updated: 2025/03/17 18:01:13 by ptheo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,21 @@ int	init_data_aux(t_data *data)
 	data->loop.last_time = get_current_time();
 	data->size = (SCREEN_HEIGHT + SCREEN_WIDTH) / 200;
 	data->fov = 90;
+	data->last_pos_mouse = SCREEN_WIDTH / 2;
+	data->texture_celling.img = NULL;
+	data->texture_door.img = NULL;
 	data->texture_east.img = NULL;
+	data->texture_floor.img = NULL;
 	data->texture_north.img = NULL;
 	data->texture_south.img = NULL;
 	data->texture_west.img = NULL;
+	data->flashlight_img.img = NULL;
 	data->map = NULL;
+	if (get_texture(data, &data->flashlight_img,
+			"./ressource/flashlight.xpm") == -1)
+		return (-1);
+	data->flash_img_pos = get_vect(SCREEN_WIDTH - 350, SCREEN_HEIGHT - 320, -5);
+	data->no_door = true;
 	return (0);
 }
 
